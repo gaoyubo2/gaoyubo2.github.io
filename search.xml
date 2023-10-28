@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>JVM学习-自动内存管理</title>
+      <link href="/blogs/6997cf1f.html"/>
+      <url>/blogs/6997cf1f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、运行时数据区"><a href="#一、运行时数据区" class="headerlink" title="一、运行时数据区"></a>一、运行时数据区</h1><img src="file://D:\Git\GitRepos\understanding-the-jvm\Ch1-Java内存管理机制\00-Java内存区域详解\JVM运行时的数据区域.png?lastModify=1698507471" alt="JVM运行时的数据区域.png" style="zoom:80%;"><img src="/blogs/6997cf1f/undefined/image-20231028234357509.png" class title="image-20231028234357509">]]></content>
+      
+      
+      <categories>
+          
+          <category> JVM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JVM笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Golang实现JAVA虚拟机</title>
       <link href="/blogs/de1bedad.html"/>
       <url>/blogs/de1bedad.html</url>
@@ -12,6 +37,8 @@
       
       
       <categories>
+          
+          <category> JVM </category>
           
           <category> JAVA </category>
           
