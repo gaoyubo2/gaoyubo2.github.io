@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760">
 <meta property="article:published_time" content="2023-10-28T15:31:47.000Z">
-<meta property="article:modified_time" content="2023-10-29T15:37:39.825Z">
+<meta property="article:modified_time" content="2023-10-29T15:48:28.730Z">
 <meta property="article:author" content="郜宇博">
 <meta property="article:tag" content="JVM笔记">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-10-29 23:37:39'
+  postUpdate: '2023-10-29 23:48:28'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -153,7 +153,7 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/timeline/"><i class="fa-fw fa fa-bell"></i><span> 日志</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about"><i class="fa-fw /about/"></i><span> 0</span></a></li><li><a class="site-page child" href="/myself"><i class="fa-fw /myself/"></i><span> 1</span></a></li><li><a class="site-page child" href="/butterfly"><i class="fa-fw https://github.com/jerryc127/hexo-theme-butterfly/"></i><span> 2</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760')"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/timeline/"><i class="fa-fw fa fa-bell"></i><span> 日志</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about"><i class="fa-fw /about/"></i><span> 0</span></a></li><li><a class="site-page child" href="/myself"><i class="fa-fw /myself/"></i><span> 1</span></a></li><li><a class="site-page child" href="/butterfly"><i class="fa-fw https://github.com/jerryc127/hexo-theme-butterfly/"></i><span> 2</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JVM学习-自动内存管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-28T15:31:47.000Z" title="发表于 2023-10-28 23:31:47">2023-10-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-29T15:37:39.825Z" title="更新于 2023-10-29 23:37:39">2023-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习-自动内存管理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、运行时数据区"><a href="#一、运行时数据区" class="headerlink" title="一、运行时数据区"></a>一、运行时数据区</h1><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域 有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而一直存在，有些区域则是 依赖用户线程的启动和结束而建立和销毁。根据《Java虚拟机规范》的规定，Java虚拟机所管理的内存将会包括以下几个运行时数据区域</p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/timeline/"><i class="fa-fw fa fa-bell"></i><span> 日志</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about"><i class="fa-fw /about/"></i><span> 0</span></a></li><li><a class="site-page child" href="/myself"><i class="fa-fw /myself/"></i><span> 1</span></a></li><li><a class="site-page child" href="/butterfly"><i class="fa-fw https://github.com/jerryc127/hexo-theme-butterfly/"></i><span> 2</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760')"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/timeline/"><i class="fa-fw fa fa-bell"></i><span> 日志</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about"><i class="fa-fw /about/"></i><span> 0</span></a></li><li><a class="site-page child" href="/myself"><i class="fa-fw /myself/"></i><span> 1</span></a></li><li><a class="site-page child" href="/butterfly"><i class="fa-fw https://github.com/jerryc127/hexo-theme-butterfly/"></i><span> 2</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JVM学习-自动内存管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-28T15:31:47.000Z" title="发表于 2023-10-28 23:31:47">2023-10-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-29T15:48:28.730Z" title="更新于 2023-10-29 23:48:28">2023-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习-自动内存管理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、运行时数据区"><a href="#一、运行时数据区" class="headerlink" title="一、运行时数据区"></a>一、运行时数据区</h1><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域 有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而一直存在，有些区域则是 依赖用户线程的启动和结束而建立和销毁。根据《Java虚拟机规范》的规定，Java虚拟机所管理的内存将会包括以下几个运行时数据区域</p>
 <img src="/blogs/6997cf1f/image-20231029140510184.png" alt="image-20231029140510184" style="zoom:80%;">
 
 <img src="/blogs/6997cf1f/image-20231029233012225.png" alt="image-20231029233012225" style="zoom:80%;">
@@ -309,7 +309,7 @@
 </ul>
 </li>
 <li>填充数据：<ul>
-<li>HotSpot VM要求对象的起始地址必须是8字节的整数倍，所以不够要补齐。</li>
+<li><code>HotSpot VM</code>要求对象的起始地址必须是8字节的整数倍，所以不够要补齐。</li>
 </ul>
 </li>
 </ul>
@@ -318,7 +318,7 @@
 <p>优势：对象移动的时候（这在垃圾回收时十分常见）只需改变句柄池中对象实例数据的指针，不需要修改reference本身。</p>
 <img src="/blogs/6997cf1f/image-20231029155643690.png" alt="image-20231029155643690" style="zoom:80%;">
 
-<h4 id="直接指针访问"><a href="#直接指针访问" class="headerlink" title="直接指针访问"></a>直接指针访问</h4><p>直接指针访问方式在 Java 堆对象的实例数据中<strong>存放了一个指向对象类型数据的指针</strong>，在 HotSpot 中，这个指针会被存<strong>放在对象头</strong>中。</p>
+<h4 id="直接指针访问"><a href="#直接指针访问" class="headerlink" title="直接指针访问"></a>直接指针访问</h4><p>直接指针访问方式在 Java 堆对象的实例数据中<strong>存放了一个指向对象类型数据的指针</strong>，在 <code>HotSpot </code>中，这个指针会被存<strong>放在对象头</strong>中。</p>
 <p>优势：减少了一次指针定位对象实例数据的开销，速度更快。</p>
 <img src="/blogs/6997cf1f/image-20231029155746893.png" alt="image-20231029155746893" style="zoom:80%;">
 
@@ -327,7 +327,7 @@
 <li>解决方法：<ul>
 <li>先通过内存映像分析工具分析 Dump 出来的堆转储快照，确认内存中的对象是否是必要的，即分清楚是出现了内存泄漏还是内存溢出；</li>
 <li>如果是内存泄漏，通过工具查看泄漏对象到 GC Root 的引用链，定位出泄漏的位置；</li>
-<li>如果不存在泄漏，检查虚拟机堆参数（-Xmx 和 -Xms）是否可以调大，检查代码中是否有哪些对象的生命周期过长，尝试减少程序运行期的内存消耗。</li>
+<li>如果不存在泄漏，检查虚拟机堆参数（<code>-Xmx </code>和 <code>-Xms</code>）是否可以调大，检查代码中是否有哪些对象的生命周期过长，尝试减少程序运行期的内存消耗。</li>
 </ul>
 </li>
 <li>虚拟机参数：<ul>
@@ -336,15 +336,15 @@
 </li>
 </ul>
 <h2 id="3-2Java-虚拟机栈和本地方法栈溢出"><a href="#3-2Java-虚拟机栈和本地方法栈溢出" class="headerlink" title="3.2Java 虚拟机栈和本地方法栈溢出"></a>3.2Java 虚拟机栈和本地方法栈溢出</h2><ul>
-<li>单线程下，栈帧过大、虚拟机容量过小都不会导致 OutOfMemoryError，只会导致 StackOverflowError（栈会比内存先爆掉），一般多线程才会出现 OutOfMemoryError，因为线程本身要占用内存；</li>
-<li>如果是多线程导致的 OutOfMemoryError，在不能减少线程数或更换 64 位虚拟机的情况，只能通过减少最大堆和减少栈容量来换取更多的线程；<ul>
+<li>单线程下，栈帧过大、虚拟机容量过小都不会导致 <code>OutOfMemoryError</code>，只会导致<code> StackOverflowError</code>（栈会比内存先爆掉），一般多线程才会出现 <code>OutOfMemoryError</code>，因为线程本身要占用内存；</li>
+<li>如果是多线程导致的 <code>OutOfMemoryError</code>，在不能减少线程数或更换 64 位虚拟机的情况，只能通过减少最大堆和减少栈容量来换取更多的线程；<ul>
 <li>这个调节思路和 Java 堆出现 OOM 正好相反，Java 堆出现 OOM 要调大堆内存的设置值，而栈出现 OOM 反而要调小。</li>
 </ul>
 </li>
 </ul>
 <h2 id="3-3方法区和运行时常量池溢出"><a href="#3-3方法区和运行时常量池溢出" class="headerlink" title="3.3方法区和运行时常量池溢出"></a>3.3方法区和运行时常量池溢出</h2><ul>
 <li>测试思路：产生大量的类去填满方法区，直到溢出；</li>
-<li>在经常动态生成大量 Class 的应用中，如 Spring 框架（使用 CGLib 字节码技术），方法区溢出是一种常见的内存溢出，要特别注意类的回收状况。</li>
+<li>在经常动态生成大量 Class 的应用中，如<code> Spring 框架</code>（使用 <code>CGLib </code>字节码技术），方法区溢出是一种常见的内存溢出，要特别注意类的回收状况。</li>
 </ul>
 <h2 id="3-4直接内存溢出"><a href="#3-4直接内存溢出" class="headerlink" title="3.4直接内存溢出"></a>3.4直接内存溢出</h2><ul>
 <li>出现特征：Heap Dump 文件中看不见明显异常，程序中直接或间接用了 NIO；</li>
@@ -612,7 +612,7 @@
 </blockquote>
 <h3 id="Garbage-First-G1-收集器"><a href="#Garbage-First-G1-收集器" class="headerlink" title="Garbage First(G1)收集器"></a>Garbage First(G1)收集器</h3><img src="/blogs/6997cf1f/image-20231029212015528.png" alt="image-20231029212015528" style="zoom:80%;">
 
-<img src="/blogs/6997cf1f/6997cf1f/image-20231029212024404.png" class title="image-20231029212024404">
+<img src="/blogs/6997cf1f/image-20231029212024404.png" alt="image-20231029212024404" style="zoom:50%;">
 
 <p>在G1收集器出现之前的所有 其他收集器，包括CMS在内，垃圾收集的目标范围要么是整个新生代<code>（Minor GC）</code>，要么就是整个老年代<code>（Major GC）</code>，再要么就是整个Java堆<code>（Full GC）</code>。</p>
 <p>而G1跳出了这个樊笼，它可以面向堆内存任何部分来组成回收集（Collection Set，一般简称CSet）进行回收，衡量标准不再是它属于哪个分代，而<strong>是哪块内存中存放的垃圾数量最多，回收收益最大，这就是G1收集器的Mixed GC模式。</strong></p>
@@ -644,7 +644,7 @@
 <h4 id="里程碑"><a href="#里程碑" class="headerlink" title="里程碑"></a>里程碑</h4><p>从G1开始，最先进的垃圾收集器的设计导向都不约而同地变为追求能够应付应用的内存分配速率 （Allocation Rate），而不追求一次把整个Java堆全部清理干净。</p>
 <p>这样，应用在分配，同时收集器在收集，<strong>只要收集的速度能跟得上对象分配的速度，那一切就能运作得很完美。</strong></p>
 <p>这种新的收集器设计思路 从工程实现上看是从G1开始兴起的，所以说G1是收集器技术发展的一个里程碑。</p>
-<h4 id="GC-日志解读"><a href="#GC-日志解读" class="headerlink" title="GC 日志解读"></a>GC 日志解读</h4><img src="/blogs/6997cf1f/6997cf1f/image-20231029212257717.png" class title="image-20231029212257717">
+<h4 id="GC-日志解读"><a href="#GC-日志解读" class="headerlink" title="GC 日志解读"></a>GC 日志解读</h4><img src="/blogs/6997cf1f/image-20231029212257717.png" alt="image-20231029212257717" style="zoom:50%;">
 
 <h3 id="低延迟收集器"><a href="#低延迟收集器" class="headerlink" title="低延迟收集器"></a>低延迟收集器</h3><p>Shenandoah和ZGC是两种在Java平台上开发的具有低停顿时间目标的垃圾收集器。它们的目标是减少长时间停顿（Full GC）的发生，以提高Java应用程序的响应性和性能。以下是关于Shenandoah和ZGC的一些关键特点：</p>
 <h4 id="Shenandoah-Garbage-Collector"><a href="#Shenandoah-Garbage-Collector" class="headerlink" title="Shenandoah Garbage Collector:"></a>Shenandoah Garbage Collector:</h4><ol>
@@ -671,7 +671,7 @@
 <p>Epsilon垃圾收集器是Java 11中引入的，可以通过命令行参数 <code>-XX:+UseEpsilonGC</code> 启用。但大多数Java应用程序仍然使用其他垃圾收集器，例如G1、ZGC或Shenandoah，以满足它们的垃圾收集需求。</p>
 <h3 id="收集器的权衡"><a href="#收集器的权衡" class="headerlink" title="收集器的权衡"></a>收集器的权衡</h3><h4 id="出发点"><a href="#出发点" class="headerlink" title="出发点"></a>出发点</h4><p><strong>应用程序的主要关注点是什么？</strong></p>
 <p>如果是数据分析、科学计算类的任务，目标是能尽快算出结果， 那吞吐量就是主要关注点；</p>
-<p>如果是<code>SLA</code>应用，那停顿时间直接影响服务质量，严重的甚至会导致事务 超时，这样延迟就是主要关注点；而如果是客户端应用或者嵌入式应用，那垃圾收集的内存占用则是不可忽视的。</p>
+<p>如果是<code>SLA</code>应用，那停顿时间直接影响服务质量，严重的甚至会导致事务超时，这样延迟就是主要关注点；而如果是客户端应用或者嵌入式应用，那垃圾收集的内存占用则是不可忽视的。</p>
 <blockquote>
 <p>SLA（Service Level Agreement，服务级别协议）应用通常是指在服务提供者和服务使用者之间制定和遵守的一种协议，其中规定了服务的质量、性能、可用性等方面的标准和承诺。SLA应用通常与服务提供者和客户之间的服务交付和接受有关，特别是在云计算、网络服务、托管服务和其他IT服务领域。</p>
 <p>以下是一些SLA应用的示例：</p>
@@ -685,7 +685,7 @@
 </blockquote>
 <p><strong>运行应用的基础设施如何？</strong></p>
 <p>譬如硬件规格，要涉及的系统架构是x86-32&#x2F;64、SPARC还是 ARM&#x2F;Aarch64；</p>
-<p>处理器的数量多少，分配内存的大小；选择的操作系统是Linux、Solaris还是Windows 等</p>
+<p>处理器的数量多少，分配内存的大小；选择的操作系统是<code>Linux</code>、<code>Solaris</code>还是<code>Windows </code>等</p>
 <p><strong>使用JDK的发行商是什么？版本号是多少？</strong></p>
 <p>是<code>ZingJDK/Zulu</code>、<code>OracleJDK</code>、<code>Open-JDK</code>、<code>OpenJ9</code>或是其他公司的发行版？<br>该JDK对应了《Java虚拟机规范》的哪个版本？</p>
 <h4 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h4><p>一般来说，收集器的选择就从以上这几点出发来考虑。举个例子，假设某个直接面向用户提供服 务的B&#x2F;S系统准备选择垃圾收集器，一般来说延迟时间是这类应用的主要关注点，那么：</p>
@@ -721,13 +721,13 @@
 
 <p><strong>新生代和老年代的 GC 操作</strong></p>
 <ul>
-<li>新生代 GC 操作：Minor GC<ul>
+<li>新生代 GC 操作：<code>Minor GC</code><ul>
 <li>发生的非常频繁，速度较块。</li>
 </ul>
 </li>
-<li>老年代 GC 操作：Full GC &#x2F; Major GC<ul>
-<li>经常伴随着至少一次的 Minor GC；</li>
-<li>速度一般比 Minor GC 慢上 10 倍以上。</li>
+<li>老年代 GC 操作：<code>Full GC / Major GC</code><ul>
+<li>经常伴随着至少一次的<code> Minor GC</code>；</li>
+<li>速度一般比<code> Minor GC</code> 慢上 10 倍以上。</li>
 </ul>
 </li>
 </ul>
@@ -739,7 +739,7 @@
 <li>然后将伊甸园中<strong>剩余的对象</strong>（存活的）<strong>移动到幸存者0区</strong>。</li>
 <li>当<strong>再次垃圾回收</strong>时，还是先销毁对象并将存活对象移动到幸存者1区，然后<strong>将处在幸存者0区的也移动到幸存者1区</strong>（这些对**象的年龄++**）。</li>
 <li>接下来重复，每次放入幸存者区时<strong>，放入空的那个</strong>（to区）</li>
-<li>当再次垃圾回收时， 且当幸存者区中的对象的<strong>年龄有到达15的</strong>（可以更改-XX:MaxTenuringThreshold&#x3D;），则将此对象<strong>移动到老年区</strong>。</li>
+<li>当再次垃圾回收时， 且当幸存者区中的对象的<strong>年龄有到达15的</strong>（可以更改<code>-XX:MaxTenuringThreshold=?</code>），则将此对象<strong>移动到老年区</strong>。</li>
 <li>老年区相对悠闲，当老年区内存不足时，触发<strong>Major GC</strong>,进行老年区的清理。</li>
 <li>若老年区<strong>执行了Major GC之后发现依然无法进行对象的保存，就会产生OOM异常</strong>。</li>
 </ol>
@@ -756,7 +756,7 @@
 <li><strong>大对象定义：</strong> 需要大量连续内存空间的 Java 对象。例如那种很长的字符串或者数组。</li>
 <li><strong>设置对象直接进入老年代大小限制：</strong><ul>
 <li><code>-XX:PretenureSizeThreshold</code>：单位是字节；<ul>
-<li>只对 Serial 和 ParNew 两款收集器有效。</li>
+<li>只对 <code>Serial </code>和<code>ParNew</code>两款收集器有效。</li>
 </ul>
 </li>
 <li><strong>目的：</strong> 因为新生代采用的是复制算法收集垃圾，大对象直接进入老年代可以避免在 Eden 区和 Survivor 区发生大量的内存复制。</li>
@@ -772,32 +772,32 @@
 <ul>
 <li>发生 Minor GC 前，虚拟机先检查老年代的最大可用连续空间是否大于新生代所有对象的总空间；<ul>
 <li>如果大于，Minor GC 一定是安全的；</li>
-<li>如果小于，虚拟机会查看 HandlePromotionFailure 参数，看看是否允许担保失败；<ul>
-<li>允许失败：尝试着进行一次 Minor GC；</li>
-<li>不允许失败：进行一次 Full GC；</li>
+<li>如果小于，虚拟机会查看 <code>HandlePromotionFailure </code>参数，看看是否允许担保失败；<ul>
+<li>允许失败：尝试着进行一次 <code>Minor GC</code>；</li>
+<li>不允许失败：进行一次 <code>Full GC</code>；</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>不过 JDK 6 Update 24 后，HandlePromotionFailure 参数就没有用了，规则变为只要老年代的连续空间大于新生代对象总大小或者历次晋升的平均大小就会进行 Minor GC，否则将进行 Full GC。</li>
+<li>不过 JDK 6 Update 24 后，<code>HandlePromotionFailure </code>参数就没有用了，规则变为只要老年代的连续空间大于新生代对象总大小或者历次晋升的平均大小就会进行 Minor GC，否则将进行 Full GC。</li>
 </ul>
-<h2 id="5-5etaspace-元空间与-PermGen-永久代"><a href="#5-5etaspace-元空间与-PermGen-永久代" class="headerlink" title="5.5etaspace 元空间与 PermGen 永久代"></a>5.5etaspace 元空间与 PermGen 永久代</h2><p>Java 8 彻底将永久代 (PermGen) 移除出了 HotSpot JVM，将其原有的数据迁移至 Java Heap 或 Metaspace。</p>
+<h2 id="5-5etaspace-元空间与-PermGen-永久代"><a href="#5-5etaspace-元空间与-PermGen-永久代" class="headerlink" title="5.5etaspace 元空间与 PermGen 永久代"></a>5.5etaspace 元空间与 PermGen 永久代</h2><p>Java 8 彻底将永久代 (PermGen) 移除出了 <code>HotSpot JVM</code>，将其原有的数据迁移至 Java Heap 或 Metaspace。</p>
 <p><strong>移除 PermGen 的原因：</strong></p>
 <ul>
-<li>PermGen 内存经常会溢出，引发恼人的 java.lang.OutOfMemoryError: PermGen，因此 JVM 的开发者希望这一块内存可以更灵活地被管理，不要再经常出现这样的 OOM；</li>
-<li>移除 PermGen 可以促进 HotSpot JVM 与 JRockit VM 的融合，因为 JRockit 没有永久代。</li>
+<li><code>PermGen </code>内存经常会溢出，引发恼人的 <code>java.lang.OutOfMemoryError: PermGen</code>，因此 JVM 的开发者希望这一块内存可以更灵活地被管理，不要再经常出现这样的<code>OOM</code>；</li>
+<li>移除 <code>PermGen </code>可以促进<code>HotSpot JVM</code>与<code>JRockit VM</code>的融合，因为 <code>JRockit </code>没有永久代。</li>
 </ul>
 <p><strong>移除 PermGen 后，方法区和字符串常量的位置：</strong></p>
 <ul>
-<li>方法区：移至 Metaspace；</li>
-<li>字符串常量：移至 Java Heap。</li>
+<li>方法区：移至 <code>Metaspace</code>；</li>
+<li>字符串常量：移至<code> Java Heap</code>。</li>
 </ul>
 <p><strong>Metaspace 的位置：</strong> 本地堆内存(native heap)。</p>
-<p><strong>Metaspace 的优点：</strong> 永久代 OOM 问题将不复存在，因为默认的类的元数据分配只受本地内存大小的限制，也就是说本地内存剩余多少，理论上 Metaspace 就可以有多大；</p>
+<p><strong>Metaspace 的优点：</strong> 永久代 OOM 问题将不复存在，因为默认的类的元数据分配只受本地内存大小的限制，也就是说本地内存剩余多少，理论上 <code>Metaspace </code>就可以有多大；</p>
 <p><strong>JVM参数：</strong></p>
 <ul>
-<li><code>-XX:MetaspaceSize</code>：分配给类元数据空间（以字节计）的初始大小，为估计值。MetaspaceSize的值设置的过大会延长垃圾回收时间。垃圾回收过后，引起下一次垃圾回收的类元数据空间的大小可能会变大。</li>
-<li><code>-XX:MaxMetaspaceSize</code>：分配给类元数据空间的最大值，超过此值就会触发Full GC，取决于系统内存的大小。JVM会动态地改变此值。</li>
+<li><code>-XX:MetaspaceSize</code>：分配给类元数据空间（以字节计）的初始大小，为估计值。<code>MetaspaceSize</code>的值设置的过大会延长垃圾回收时间。垃圾回收过后，引起下一次垃圾回收的类元数据空间的大小可能会变大。</li>
+<li><code>-XX:MaxMetaspaceSize</code>：分配给类元数据空间的最大值，超过此值就会触发<code>Full GC</code>，取决于系统内存的大小。JVM会动态地改变此值。</li>
 <li><code>-XX:MinMetaspaceFreeRatio</code>：一次GC以后，为了避免增加元数据空间的大小，空闲的类元数据的容量的最小比例，不够就会导致垃圾回收。</li>
 <li><code>-XX:MaxMetaspaceFreeRatio</code>：一次GC以后，为了避免增加元数据空间的大小，空闲的类元数据的容量的最大比例，不够就会导致垃圾回收。</li>
 </ul>
