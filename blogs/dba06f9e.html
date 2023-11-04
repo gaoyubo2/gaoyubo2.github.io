@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>国科大-区块链技术作业2 | 疼了也不哭</title><meta name="author" content="郜宇博"><meta name="copyright" content="郜宇博"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="以太币以太币（Ethereum）的挖矿方案：  基于工作量证明（Proof of Work，PoW）共识机制，采用的是Ethash算法。 随着以太坊2.0的实施，以太币的挖矿方式将发生变化，逐渐过渡到权益证明（PoS）机制，从而减少对PoW挖矿的依赖。  以下是Ethash算法基本设计原理： Ethash是以太坊（Ethereum）区块链网络所使用的挖矿算法，它是一种基于Keccak哈希函数的Et">
+<meta property="og:type" content="article">
+<meta property="og:title" content="国科大-区块链技术作业2">
+<meta property="og:url" content="https://gaoyubo.cn/blogs/dba06f9e.html">
+<meta property="og:site_name" content="疼了也不哭">
+<meta property="og:description" content="以太币以太币（Ethereum）的挖矿方案：  基于工作量证明（Proof of Work，PoW）共识机制，采用的是Ethash算法。 随着以太坊2.0的实施，以太币的挖矿方式将发生变化，逐渐过渡到权益证明（PoS）机制，从而减少对PoW挖矿的依赖。  以下是Ethash算法基本设计原理： Ethash是以太坊（Ethereum）区块链网络所使用的挖矿算法，它是一种基于Keccak哈希函数的Et">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&fm=253&fmt=auto&app=138&f=JPEG">
+<meta property="article:published_time" content="2023-11-04T07:51:27.000Z">
+<meta property="article:modified_time" content="2023-11-04T07:53:10.638Z">
+<meta property="article:author" content="郜宇博">
+<meta property="article:tag" content="作业">
+<meta property="article:tag" content="以太币">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&fm=253&fmt=auto&app=138&f=JPEG"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gaoyubo.cn/blogs/dba06f9e.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '国科大-区块链技术作业2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-04 15:53:10'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">国科大-区块链技术作业2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-04T07:51:27.000Z" title="发表于 2023-11-04 15:51:27">2023-11-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-04T07:53:10.638Z" title="更新于 2023-11-04 15:53:10">2023-11-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/">国科大课程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="国科大-区块链技术作业2"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="以太币"><a href="#以太币" class="headerlink" title="以太币"></a>以太币</h1><p>以太币（Ethereum）的挖矿方案：</p>
+<ul>
+<li>基于工作量证明（Proof of Work，PoW）共识机制，采用的是<code>Ethash算法</code>。</li>
+<li>随着以太坊2.0的实施，以太币的挖矿方式将发生变化，逐渐过渡到权益证明（PoS）机制，从而减少对PoW挖矿的依赖。</li>
+</ul>
+<p>以下是<code>Ethash算法</code>基本设计原理：</p>
+<p><code>Ethash</code>是以太坊（Ethereum）区块链网络所使用的挖矿算法，它是一种基于<code>Keccak</code>哈希函数的<code>Ethash</code>哈希算法。<code>Ethash</code>的设计目标是确保网络的安全性、分散化，以及防止ASIC硬件的集中化。以下是<code>Ethash</code>算法的主要特点和工作原理：</p>
+<h2 id="一、PoW共识机制-Ethash算法"><a href="#一、PoW共识机制-Ethash算法" class="headerlink" title="一、PoW共识机制-Ethash算法"></a>一、PoW共识机制-Ethash算法</h2><h3 id="1、工作原理"><a href="#1、工作原理" class="headerlink" title="1、工作原理"></a>1、工作原理</h3><p><code>Ethash</code>的工作原理基于难题解决，挖矿矿工需要找到一个符合条件的数值，使得区块头的哈希值满足一定的要求。</p>
+<h3 id="2、难题参数"><a href="#2、难题参数" class="headerlink" title="2、难题参数"></a>2、难题参数</h3><p><code>Ethash</code>的难题参数包括：</p>
+<ol>
+<li><strong>DAG（Directed Acyclic Graph）大小</strong>：DAG是<code>Ethash算法</code>的核心数据结构，它由以太坊网络中的每个区块头部和交易信息构成。DAG的大小是一个重要的难题参数，会随着以太坊网络的区块高度逐渐增大。DAG的大小对挖矿难度产生直接影响，矿工需要不断访问DAG来计算区块的哈希值。</li>
+<li><strong>网络难度</strong>：网络难度是一个表示挖矿难度的数值，它根据全网矿工的总算力和DAG的大小来动态调整。网络难度越高，挖矿越困难，要求更多的计算能力和内存。</li>
+<li><strong>区块奖励</strong>：每个区块的挖矿奖励也是<code>Ethash算法</code>中的一个重要参数。这是矿工获得的以太币奖励，区块奖励数量会在以太坊网络上定期进行“减半”。</li>
+<li><strong>挖矿难度</strong>：挖矿难度是一个表示矿工需要解决的数学问题的复杂程度的参数。难度越高，挖矿越困难，需要更多的计算资源来解决。</li>
+<li><strong>区块时间</strong>：以太坊的目标区块生成时间通常约为<code>15秒</code>，这也是算法的一个重要参数。算法的设计目标是使区块生成时间保持在这个水平。</li>
+</ol>
+<blockquote>
+<p>这些参数共同影响了以太币挖矿的难度和效率，以及矿工可以获得的奖励。以太坊网络会周期性地进行硬分叉来调整这些参数，以确保网络的安全性和稳定性，并适应不断变化的挖矿环境。</p>
+</blockquote>
+<h3 id="3-随机性"><a href="#3-随机性" class="headerlink" title="3.随机性"></a>3.随机性</h3><p><code>Ethash</code>算法中包含一些随机性元素，这是为了增加算法的不可预测性和抵抗攻击。以下是<code>Ethash</code>算法中的一些随机性元素：</p>
+<ol>
+<li><strong>Nonce</strong>：<code>Ethash</code>算法使用一个称为”nonce”的随机数，它包含在区块头部数据中。矿工需要不断尝试不同的nonce来计算区块的哈希，以寻找符合网络难度要求的哈希值。Nonce的随机性使得挖矿过程不可预测，矿工需要进行大量的尝试才能找到有效的区块。</li>
+<li><strong>Mix Hash</strong>：<code>Ethash</code>算法中还包含一个称为”mix hash”的元素，它与区块头和nonce一起用于计算区块的最终哈希。Mix hash的值也是不断变化的，它取决于先前区块的状态。这增加了挖矿过程的不确定性。</li>
+<li><strong>DAG数据集</strong>：DAG是<code>Ethash</code>算法的另一个随机性元素。DAG的构建依赖于区块链上之前区块的数据，因此它是随机的，不可预测的。每个新的DAG都会根据网络中的上一个DAG数据集来构建，这增加了挖矿的不确定性。</li>
+</ol>
+<blockquote>
+<p>这些随机性元素共同影响了<code>Ethash</code>挖矿的过程，使其变得不可预测，需要大量的计算和尝试来找到有效的区块。这增加了挖矿的公平性和分散性，因为没有简单的方法可以提前预测或优化挖矿过程。这也有助于抵抗攻击，因为攻击者难以准确预测挖矿成功的概率。</p>
+</blockquote>
+<h3 id="4-抗ASIC特性"><a href="#4-抗ASIC特性" class="headerlink" title="4.抗ASIC特性"></a>4.抗ASIC特性</h3><p><code>Ethash算法</code>被设计为具有抗ASIC（Application-Specific Integrated Circuit，专用集成电路）的特性，旨在降低专用硬件在以太坊挖矿中的优势，从而鼓励更多的矿工使用通用计算设备（如GPU）参与挖矿。以下是<code>Ethash算法</code>的一些抗ASIC特性：</p>
+<ol>
+<li><strong>内存硬度证明</strong>：<code>Ethash算法</code>强调内存硬度证明，即挖矿过程需要大量内存。这是通过DAG（Directed Acyclic Graph）实现的，DAG是一个庞大的内存数据结构，需要大量内存来进行计算。ASIC通常专注于提高计算能力而忽视内存，因此内存要求较高的<code>Ethash算法</code>限制了ASIC的效益。</li>
+<li><strong>DAG的大小增长</strong>：DAG是一个动态数据集，每个新区块都包含一个新的DAG。DAG的大小逐渐增长，这要求矿工拥有越来越大的内存来处理每个新DAG。这增加了ASIC开发者面临的挑战，因为他们需要不断升级硬件以适应不断增长的内存需求。</li>
+<li><strong>难题随机性</strong>：<code>Ethash算法</code>中的难题参数是随机生成的，包括nonce和mix hash。这种随机性增加了挖矿过程的不可预测性，不利于ASIC的优化。ASIC通常需要特定硬件来处理确定性的工作负载，而随机性会使其难以优化。</li>
+<li><strong>硬分叉更新</strong>：以太坊社区实施了硬分叉来更新<code>Ethash算法</code>的参数，以增加抗ASIC性能。这种更新包括改变DAG的大小和其他参数，使ASIC矿机变得不再有效。这样的硬分叉使ASIC矿机需要不断适应算法的变化。</li>
+</ol>
+<blockquote>
+<p>尽管<code>Ethash算法</code>具有抗ASIC特性，但并不能完全防止ASIC的出现。一些ASIC制造商仍然尝试设计适应<code>Ethash</code>的专用硬件。然而，<code>Ethash算法</code>的设计目标是增加ASIC的难度，并鼓励更多的矿工使用通用计算设备，以维护挖矿的分布性和公平性。</p>
+</blockquote>
+<h3 id="5-挖矿池"><a href="#5-挖矿池" class="headerlink" title="5.挖矿池"></a>5.挖矿池</h3><p>挖矿池是一种合作模式，其中多个矿工联合起来共同挖矿，共享挖矿奖励。这种合作方式对于分散矿工的算力、降低挖矿的方差和提高挖矿效率非常有用。</p>
+<ol>
+<li><strong>合作挖矿</strong>：在<code>Ethash算法</code>下，矿工可以选择独立挖矿或加入挖矿池。加入挖矿池意味着他们将与其他矿工一起工作，合并他们的算力以增加找到有效区块的机会。</li>
+<li><strong>挖矿奖励分配</strong>：挖矿池会根据每个矿工的算力贡献来分配挖矿奖励。通常，矿工在挖矿池中贡献的算力越大，他们获得的奖励份额也越多。这有助于减少挖矿的方差，因为独立挖矿的矿工可能会经历不连续的奖励周期，而挖矿池中的矿工可以获得更稳定的奖励。</li>
+<li><strong>挖矿效率</strong>：挖矿池通常能够提高挖矿效率。这是因为它们可以将多个矿工的算力合并在一起，以增加找到有效区块的机会。这对于<code>Ethash算法</code>中的高度竞争的挖矿环境非常重要，因为只有第一个找到有效哈希的矿工才会获得区块奖励。</li>
+<li><strong>通信协议</strong>：挖矿池使用特定的通信协议来与参与者交互。这包括提交工作证明、接收区块奖励和查看挖矿状态等功能。一些流行的挖矿池协议包括<code>Stratum</code>和<code>getwork</code>。</li>
+<li><strong>费用</strong>：挖矿池通常会收取一定的手续费，以支付运营和维护成本。这些费用通常是从矿工的奖励中扣除的，而矿工会收到净奖励。</li>
+<li><strong>选择挖矿池</strong>：矿工可以自由选择要加入的挖矿池。他们可以选择根据挖矿池的声誉、费率、服务质量和其他因素来做出决定。不同的挖矿池可能适合不同类型的矿工。</li>
+</ol>
+<blockquote>
+<p>总的来说，<code>Ethash算法</code>中的挖矿池为矿工提供了一种更加稳定和可预测的挖矿方式。它们使矿工能够共同合作，共享挖矿奖励，并降低挖矿的风险和方差。这种合作模式在以太币挖矿中非常普遍，因为它可以增加挖矿的效率和盈利能力。</p>
+</blockquote>
+<h2 id="二、Pos共识机制"><a href="#二、Pos共识机制" class="headerlink" title="二、Pos共识机制"></a>二、Pos共识机制</h2><p>以太币的<code>PoS共识机制</code>被设计为解决<code>PoW共识机制</code>存在的一些问题，包括高能源消耗、中心化挖矿池的问题以及对ASIC矿机的依赖。</p>
+<p><code>PoS</code>旨在提高网络的可扩展性、降低环境影响并改善网络的去中心化程度。</p>
+<ol>
+<li><strong>验证者</strong>：在<code>PoS机制</code>中，参与者被称为验证者，他们需要锁定一定数量的以太币作为抵押（也称为“质押”），以获得验证和创建新区块的权限。抵押的数量通常与验证者的权益成正比。</li>
+<li><strong>随机性和选择</strong>：<code>PoS机制</code>通过一种随机的方法来选择验证者，使他们有机会创建新区块。这个随机性有助于防止攻击者预测或控制谁获得验证权。具体的选择机制可能因实施方式而异，以太坊2.0的Beacon Chain网络使用了RANDAO和VDF（Verifiable Delay Function）等技术来实现。</li>
+<li><strong>抵押奖励</strong>：验证者获得抵押奖励作为他们参与网络维护的回报。抵押奖励通常包括区块奖励（与<code>PoW</code>中的区块奖励类似）以及交易费用。抵押奖励的分配根据每个验证者的抵押数量和行为来确定。</li>
+<li><strong>退出和罚款</strong>：如果验证者不诚实或不执行他们的职责，他们可能会面临抵押金额的一部分或全部被处罚的风险。这是为了鼓励验证者遵守规则并维护网络的安全性。</li>
+<li><strong>可扩展性</strong>：<code>PoS机制</code>被认为更具可扩展性，因为它不需要大量的计算资源和电力来维护网络。这可以帮助以太币网络应对更多的交易负载和提高性能。</li>
+<li><strong>环保性</strong>：与<code>PoW</code>相比，<code>PoS</code>机制通常更环保，因为它不需要大量电力来解决数学问题。这有助于减少加密货币对环境的影响。</li>
+</ol>
+<p>以太币的<code>PoS机制</code>是以太坊2.0升级的一部分，这个升级计划逐步过渡到<code>PoS共识机制</code>。这将减少挖矿的依赖，并使抵押成为维护网络安全性的主要方式。 <code>PoS</code>机制的实施还将有助于提高以太坊网络的效率和可扩展性。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn">郜宇博</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn/blogs/dba06f9e.html">https://gaoyubo.cn/blogs/dba06f9e.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gaoyubo.cn" target="_blank">疼了也不哭</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BD%9C%E4%B8%9A/">作业</a><a class="post-meta__tags" href="/tags/%E4%BB%A5%E5%A4%AA%E5%B8%81/">以太币</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blogs/f57f32cf.html" title="Golang实现JAVA虚拟机-指令集和解释器"><img class="cover" src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=1734247813,400897296&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Golang实现JAVA虚拟机-指令集和解释器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blogs/9ad5026b.html" title="国科大-区块链技术作业1"><img class="cover" src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&fm=253&fmt=auto&app=138&f=JPEG" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-26</div><div class="title">国科大-区块链技术作业1</div></div></a></div><div><a href="/blogs/3ecd1561.html" title="国科大-算法设计作业1"><img class="cover" src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/0df3d7ca7bcb0a46162bebcb6163f6246b60af33" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-26</div><div class="title">国科大-算法设计作业1</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郜宇博</div><div class="author-info__description">个人博客网站</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gaoyubo2"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E5%B8%81"><span class="toc-text">以太币</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81PoW%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6-Ethash%E7%AE%97%E6%B3%95"><span class="toc-text">一、PoW共识机制-Ethash算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">1、工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%9A%BE%E9%A2%98%E5%8F%82%E6%95%B0"><span class="toc-text">2、难题参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%9A%8F%E6%9C%BA%E6%80%A7"><span class="toc-text">3.随机性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8A%97ASIC%E7%89%B9%E6%80%A7"><span class="toc-text">4.抗ASIC特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%8C%96%E7%9F%BF%E6%B1%A0"><span class="toc-text">5.挖矿池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Pos%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6"><span class="toc-text">二、Pos共识机制</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-区块链技术作业2"/></a><div class="content"><a class="title" href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2">国科大-区块链技术作业2</a><time datetime="2023-11-04T07:51:27.000Z" title="发表于 2023-11-04 15:51:27">2023-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/f57f32cf.html" title="Golang实现JAVA虚拟机-指令集和解释器"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=1734247813,400897296&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Golang实现JAVA虚拟机-指令集和解释器"/></a><div class="content"><a class="title" href="/blogs/f57f32cf.html" title="Golang实现JAVA虚拟机-指令集和解释器">Golang实现JAVA虚拟机-指令集和解释器</a><time datetime="2023-11-01T03:01:43.000Z" title="发表于 2023-11-01 11:01:43">2023-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/8ae1f4ca.html" title="Golang实现JAVA虚拟机-运行时数据区"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=1734247813,400897296&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Golang实现JAVA虚拟机-运行时数据区"/></a><div class="content"><a class="title" href="/blogs/8ae1f4ca.html" title="Golang实现JAVA虚拟机-运行时数据区">Golang实现JAVA虚拟机-运行时数据区</a><time datetime="2023-10-30T02:37:25.000Z" title="发表于 2023-10-30 10:37:25">2023-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/6997cf1f.html" title="JVM学习-自动内存管理"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM学习-自动内存管理"/></a><div class="content"><a class="title" href="/blogs/6997cf1f.html" title="JVM学习-自动内存管理">JVM学习-自动内存管理</a><time datetime="2023-10-28T15:31:47.000Z" title="发表于 2023-10-28 23:31:47">2023-10-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/de1bedad.html" title="Golang实现JAVA虚拟机-解析class文件"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=1734247813,400897296&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Golang实现JAVA虚拟机-解析class文件"/></a><div class="content"><a class="title" href="/blogs/de1bedad.html" title="Golang实现JAVA虚拟机-解析class文件">Golang实现JAVA虚拟机-解析class文件</a><time datetime="2023-10-26T11:55:55.000Z" title="发表于 2023-10-26 19:55:55">2023-10-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郜宇博</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
