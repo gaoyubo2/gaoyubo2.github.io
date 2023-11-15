@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760">
 <meta property="article:published_time" content="2023-11-14T02:41:08.000Z">
-<meta property="article:modified_time" content="2023-11-14T16:23:35.744Z">
+<meta property="article:modified_time" content="2023-11-15T08:34:43.598Z">
 <meta property="article:author" content="郜宇博">
 <meta property="article:tag" content="JVM笔记">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-11-15 00:23:35'
+  postUpdate: '2023-11-15 16:34:43'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -153,7 +153,7 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">JVM学习-虚拟机执行子系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-14T02:41:08.000Z" title="发表于 2023-11-14 10:41:08">2023-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-14T16:23:35.744Z" title="更新于 2023-11-15 00:23:35">2023-11-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习-虚拟机执行子系统"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="一、Class类文件的结构"><a href="#一、Class类文件的结构" class="headerlink" title="一、Class类文件的结构"></a>一、Class类文件的结构</h1><blockquote>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">JVM学习-虚拟机执行子系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-14T02:41:08.000Z" title="发表于 2023-11-14 10:41:08">2023-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-15T08:34:43.598Z" title="更新于 2023-11-15 16:34:43">2023-11-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习-虚拟机执行子系统"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="一、Class类文件的结构"><a href="#一、Class类文件的结构" class="headerlink" title="一、Class类文件的结构"></a>一、Class类文件的结构</h1><blockquote>
 <p>任何一个Class文件都对应着唯一的一个类或接口的定义信息。</p>
 <p>但是反过来说，类或接口并不一定都得定义在文件里（譬如类或接口也可以动态生成，直接送入类加载器中）。</p>
 </blockquote>
@@ -545,7 +545,7 @@
 <p>通过这三项数据，可以建立起类的继承关系和接口实现关系，确定类的层次结构和实现的接口，如下为全限定名索引查找过程。</p>
 <img src="/blogs/844dc0e7/image-20231114230035312.png" alt="image-20231114230035312" style="zoom:50%;">
 
-<p>访问标志后面紧跟类索引、父类索引、接口索引，JVMTest.class中表示如下，这里类索引u2值为0x0005，父类索引u2值为0x0006：</p>
+<h3 id="class文件中示例"><a href="#class文件中示例" class="headerlink" title="class文件中示例"></a>class文件中示例</h3><p>访问标志后面紧跟类索引、父类索引、接口索引，JVMTest.class中表示如下，这里类索引u2值为0x0005，父类索引u2值为0x0006：</p>
 <img src="/blogs/844dc0e7/image-20231115000304683.png" alt="image-20231115000304683" style="zoom:50%;">
 
 <p>使用jclasslib查看u2值对应常量如下，可以看出JVMTest类的父类为Object类：<br><img src="/blogs/844dc0e7/image-20231115000334908.png" alt="image-20231115000334908" style="zoom:50%;"></p>
@@ -622,7 +622,7 @@
 <td>attributes_count</td>
 </tr>
 </tbody></table>
-<h4 id="字段访问标志（access-flags）"><a href="#字段访问标志（access-flags）" class="headerlink" title="字段访问标志（access_flags）"></a>字段访问标志（access_flags）</h4><p>其中，<code>access_flags</code>字段访问标志定义如下：</p>
+<h4 id="字段表访问标志（access-flags）"><a href="#字段表访问标志（access-flags）" class="headerlink" title="字段表访问标志（access_flags）"></a>字段表访问标志（access_flags）</h4><p>其中，<code>access_flags</code>字段访问标志定义如下：</p>
 <table>
 <thead>
 <tr>
@@ -778,20 +778,7 @@
 </ul>
 </li>
 </ul>
-<p>在class文件中，表示如下，按照顺序分别是fields_count，access_flags，name_index，descriptor_index：</p>
-<img src="/blogs/844dc0e7/image-20231115000631384.png" alt="image-20231115000631384" style="zoom: 67%;">
-
-<p>0x0001：说明这个类只有一个字段表数 据</p>
-<p>0x0002：代表private修饰符的ACC_PRIVATE 标志位为真（ACC_PRIVATE标志的值为0x0002）</p>
-<p>0x0008：字面量为<code>m</code>，在常量池中对应内容如下图<br><img src="/blogs/844dc0e7/image-20231115001408220.png" alt="image-20231115001408220" style="zoom:33%;"> </p>
-<p>0x0009：字面量<code>I</code>，在常量池中对应内容如下图</p>
-<img src="/blogs/844dc0e7/image-20231115001454132.png" alt="image-20231115001454132" style="zoom: 33%;"> 
-
-<blockquote>
-<p>与类访问标志相同，字段访问标志计算字段访问标志的值也是通过按位或（<code>|</code>）操作将各个标志的值组合而成的。</p>
-<p>例如，如果一个字段是 <code>public</code> 和 <code>static</code> 的，那么其访问标志的值为 <code>ACC_PUBLIC | ACC_STATIC</code></p>
-</blockquote>
-<p>字段表中的固定数据项一直到 <code>descriptor_index</code> 为止，而在 <code>descriptor_index</code> 之后，跟随着一个属性表集合。这个属性表集合用于存储一些额外的信息，允许字段表附加描述零至多项的额外信息。</p>
+<h3 id="属性表"><a href="#属性表" class="headerlink" title="属性表"></a>属性表</h3><p>字段表中的固定数据项一直到 <code>descriptor_index</code> 为止，而在 <code>descriptor_index</code> 之后，跟随着一个属性表集合。这个属性表集合用于存储一些额外的信息，允许字段表附加描述零至多项的额外信息。</p>
 <ol>
 <li><strong>属性表计数器：</strong><ul>
 <li>用于记录附加到字段上的属性个数。</li>
@@ -828,4 +815,167 @@
 </ul>
 </li>
 </ol>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn">郜宇博</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn/blogs/844dc0e7.html">https://gaoyubo.cn/blogs/844dc0e7.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gaoyubo.cn" target="_blank">疼了也不哭</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JVM%E7%AC%94%E8%AE%B0/">JVM笔记</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试"><img class="cover" src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/0df3d7ca7bcb0a46162bebcb6163f6246b60af33" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">国科大-软件测试与分析-插桩和变异测试</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blogs/6997cf1f.html" title="JVM学习-自动内存管理"><img class="cover" src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-28</div><div class="title">JVM学习-自动内存管理</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郜宇博</div><div class="author-info__description">个人博客网站</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gaoyubo2"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Class%E7%B1%BB%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">一、Class类文件的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-text">示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E9%AD%94%E6%95%B0%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-text">1.1魔数与版本号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="toc-text">1.2常量池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3%E8%AE%BF%E9%97%AE%E6%A0%87%E5%BF%97"><span class="toc-text">1.3访问标志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4%E7%B1%BB%E7%B4%A2%E5%BC%95%E3%80%81%E7%88%B6%E7%B1%BB%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%8E%A5%E5%8F%A3%E7%B4%A2%E5%BC%95"><span class="toc-text">1.4类索引、父类索引与接口索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%B4%A2%E5%BC%95%EF%BC%88this-class%EF%BC%89%E5%92%8C%E7%88%B6%E7%B1%BB%E7%B4%A2%E5%BC%95%EF%BC%88super-class%EF%BC%89"><span class="toc-text">类索引（this_class）和父类索引（super_class）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%B4%A2%E5%BC%95%E9%9B%86%E5%90%88%EF%BC%88interfaces%EF%BC%89"><span class="toc-text">接口索引集合（interfaces）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5%E5%AD%97%E6%AE%B5%E8%A1%A8%E9%9B%86%E5%90%88"><span class="toc-text">1.5字段表集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E8%AE%BF%E9%97%AE%E6%A0%87%E5%BF%97%EF%BC%88access-flags%EF%BC%89"><span class="toc-text">字段访问标志（access_flags）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8F%8F%E8%BF%B0%E7%AC%A6%EF%BC%88name-index%E5%92%8Cdescriptor-index%EF%BC%89"><span class="toc-text">简单描述和描述符（name_index和descriptor_index）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E8%A1%A8%E9%9B%86%E5%90%88%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">字段表集合的特性</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blogs/844dc0e7.html" title="JVM学习-虚拟机执行子系统"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM学习-虚拟机执行子系统"/></a><div class="content"><a class="title" href="/blogs/844dc0e7.html" title="JVM学习-虚拟机执行子系统">JVM学习-虚拟机执行子系统</a><time datetime="2023-11-14T02:41:08.000Z" title="发表于 2023-11-14 10:41:08">2023-11-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/0df3d7ca7bcb0a46162bebcb6163f6246b60af33" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-软件测试与分析-插桩和变异测试"/></a><div class="content"><a class="title" href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试">国科大-软件测试与分析-插桩和变异测试</a><time datetime="2023-11-13T07:12:08.000Z" title="发表于 2023-11-13 15:12:08">2023-11-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/d7a98a3.html" title="国科大-移动互联网技术复习"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-移动互联网技术复习"/></a><div class="content"><a class="title" href="/blogs/d7a98a3.html" title="国科大-移动互联网技术复习">国科大-移动互联网技术复习</a><time datetime="2023-11-06T17:15:16.000Z" title="发表于 2023-11-07 01:15:16">2023-11-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-区块链技术作业2"/></a><div class="content"><a class="title" href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2">国科大-区块链技术作业2</a><time datetime="2023-11-04T07:51:27.000Z" title="发表于 2023-11-04 15:51:27">2023-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/f57f32cf.html" title="Golang实现JAVA虚拟机-指令集和解释器"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=1734247813,400897296&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Golang实现JAVA虚拟机-指令集和解释器"/></a><div class="content"><a class="title" href="/blogs/f57f32cf.html" title="Golang实现JAVA虚拟机-指令集和解释器">Golang实现JAVA虚拟机-指令集和解释器</a><time datetime="2023-11-01T03:01:43.000Z" title="发表于 2023-11-01 11:01:43">2023-11-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郜宇博</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+<h3 id="class文件中示例-1"><a href="#class文件中示例-1" class="headerlink" title="class文件中示例"></a>class文件中示例</h3><p>在class文件中，表示如下，按照顺序分别是fields_count，access_flags，name_index，descriptor_index：</p>
+<img src="/blogs/844dc0e7/image-20231115000631384.png" alt="image-20231115000631384" style="zoom: 67%;">
+
+<p>0x0001：说明这个类只有一个字段表数据</p>
+<p>0x0002：代表private修饰符的ACC_PRIVATE 标志位为真（ACC_PRIVATE标志的值为0x0002）</p>
+<p>0x0008：字面量为<code>m</code>，在常量池中对应内容如下图<br><img src="/blogs/844dc0e7/image-20231115001408220.png" alt="image-20231115001408220" style="zoom: 50%;"> </p>
+<p>0x0009：字面量<code>I</code>，在常量池中对应内容如下图</p>
+<img src="/blogs/844dc0e7/image-20231115001454132.png" alt="image-20231115001454132" style="zoom: 50%;"> 
+
+<blockquote>
+<p>与类访问标志相同，字段访问标志计算字段访问标志的值也是通过按位或（<code>|</code>）操作将各个标志的值组合而成的。</p>
+<p>例如，如果一个字段是 <code>public</code> 和 <code>static</code> 的，那么其访问标志的值为 <code>ACC_PUBLIC | ACC_STATIC</code></p>
+<p>如果有两个字段，那么这个顺序就会重复两次，依次表示两个字段的描述信息。</p>
+</blockquote>
+<h2 id="1-6方法表集合"><a href="#1-6方法表集合" class="headerlink" title="1.6方法表集合"></a>1.6方法表集合</h2><p>Class文件存储 格式中对方法的描述与对字段的描述采用了几乎完全一致的方式，方法表的结构如同字段表一样。</p>
+<p>依次包括访问标志（access_flags）、名称索引（name_index）、描述符索引（descriptor_index）、属性表集合（attributes）几项</p>
+<p>因此方法表表结构定义如下：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>描述</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>access_flags</td>
+<td>u2</td>
+<td>访问标志</td>
+<td>1</td>
+</tr>
+<tr>
+<td>name_index</td>
+<td>u2</td>
+<td>方法名索引</td>
+<td>1</td>
+</tr>
+<tr>
+<td>descriptor_index</td>
+<td>u2</td>
+<td>描述符索引</td>
+<td>1</td>
+</tr>
+<tr>
+<td>attributes_count</td>
+<td>u2</td>
+<td>属性计数</td>
+<td>1</td>
+</tr>
+<tr>
+<td>attributes</td>
+<td>attribute_info</td>
+<td>属性集合</td>
+<td>attributes_count</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>方法的定义可以通过访问标志、名称索引、描述符索引来表达清楚，但方法内部的Java代码去哪里了？</p>
+<p>方法内的Java代码在经过Javac编译器编译成字节码指令后，实际上存放在方法属性表集合中的一个名为“Code”的属性里面。属性表作为Class文件格式中最具扩展性的一种数据项目，将在后续介绍。</p>
+</blockquote>
+<h3 id="方法表的访问标志"><a href="#方法表的访问标志" class="headerlink" title="方法表的访问标志"></a>方法表的访问标志</h3><p>方法表的访问标志中不包含 <code>ACC_VOLATILE</code> 和 <code>ACC_TRANSIENT</code> 标志，因为 <code>volatile</code> 和 <code>transient</code> 关键字不能修饰方法。</p>
+<p>相反，方法表的访问标志中增加了以下标志，因为这些关键字可以修饰方法：</p>
+<ul>
+<li><code>ACC_SYNCHRONIZED</code>：用于修饰同步方法，表示该方法是同步方法。</li>
+<li><code>ACC_NATIVE</code>：表示该方法用其他语言（如 C）实现，由本地方法库提供。</li>
+<li><code>ACC_STRICTFP</code>：表示该方法遵循 IEEE 754 浮点运算规范。</li>
+<li><code>ACC_ABSTRACT</code>：表示该方法是抽象方法，没有具体的实现。</li>
+</ul>
+<p>以下是方法表的访问标志及其取值：</p>
+<table>
+<thead>
+<tr>
+<th>标志名称</th>
+<th>标志值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>公共访问标志</td>
+</tr>
+<tr>
+<td>ACC_PRIVATE</td>
+<td>0x0002</td>
+<td>私有访问标志</td>
+</tr>
+<tr>
+<td>ACC_PROTECTED</td>
+<td>0x0004</td>
+<td>受保护访问标志</td>
+</tr>
+<tr>
+<td>ACC_STATIC</td>
+<td>0x0008</td>
+<td>静态方法标志</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>常量方法标志</td>
+</tr>
+<tr>
+<td>ACC_SYNCHRONIZED</td>
+<td>0x0020</td>
+<td>同步方法标志</td>
+</tr>
+<tr>
+<td>ACC_BRIDGE</td>
+<td>0x0040</td>
+<td>桥接方法标志</td>
+</tr>
+<tr>
+<td>ACC_VARARGS</td>
+<td>0x0080</td>
+<td>可变参数方法标志</td>
+</tr>
+<tr>
+<td>ACC_NATIVE</td>
+<td>0x0100</td>
+<td>本地方法标志</td>
+</tr>
+<tr>
+<td>ACC_ABSTRACT</td>
+<td>0x0400</td>
+<td>抽象方法标志</td>
+</tr>
+<tr>
+<td>ACC_STRICTFP</td>
+<td>0x0800</td>
+<td>严格浮点标志</td>
+</tr>
+<tr>
+<td>ACC_SYNTHETIC</td>
+<td>0x1000</td>
+<td>由编译器自动生成的标志</td>
+</tr>
+</tbody></table>
+<h3 id="class文件中示例-2"><a href="#class文件中示例-2" class="headerlink" title="class文件中示例"></a>class文件中示例</h3><p>按照顺序分别为：<code>method_count</code>,<code>access_flags</code>,<code>name_index</code>,<code>descriptor_index</code>,<code>attributes_count</code>,<code>attribute_name_index</code></p>
+<img src="/blogs/844dc0e7/image-20231115160405529.png" alt="image-20231115160405529" style="zoom: 67%;">
+
+<p>0x0003（<code>method_count</code>）：说明这个类有三个方法，编译器自动添加了&lt;init&gt;方法，即实例构造器，如下：<br><img src="/blogs/844dc0e7/image-20231115160917202.png" alt="image-20231115160917202" style="zoom:50%;"></p>
+<p>0x0001（<code>access_flags</code>）：只有ACC_PUBLIC标志为真</p>
+<p>0x000A（<code>name_index</code>）：字面量索引位10：字面量为&lt;init&gt;</p>
+<img src="/blogs/844dc0e7/image-20231115161005373.png" alt="image-20231115161005373" style="zoom:50%;"> 
+
+<p>0x000B（<code>descriptor_index</code>）:字面量索引位11，字面量<code>()V</code>，代表void返回类型，参数列表为空</p>
+<img src="/blogs/844dc0e7/image-20231115161133878.png" alt="image-20231115161133878" style="zoom:50%;"> 
+
+<p>0x0001(<code>attributes_count</code>)：表示此方法的属性表集合有1项属性</p>
+<p>0x000C(<code>attribute_name_index</code>)：属性名称的索引值为0x000C，对应常量为“Code”</p>
+<img src="/blogs/844dc0e7/image-20231115161432171.png" alt="image-20231115161432171" style="zoom:50%;"> 
+
+<p>字段表集合相对应地，如果父类方法在子类中没有被重写（Override），方法表集合中就不会出 现来自父类的方法信息。<br>但同样地，有可能会出现由编译器自动添加的方法，最常见的便是类构造器<code>&lt;clinit&gt;()</code>方法和实例构造器<code>&lt;init&gt;()</code>方法</p>
+<blockquote>
+<p>在Java语言中，要重载一个方法，除了要与原方法具有相同的简单名称之外，还要求必须拥有一个与原方法不同的<code>特征签名</code></p>
+<p>(<strong>Java代码的方法特征签名只包括方法名称、参数顺序及参数类型</strong>，而字节码的特征签名还包括方法返回值以及受查异常表)。</p>
+<p>由于返回值不包含在特征签名中，因此无法仅仅通过返回值的不同来对一个已有方法进行重载,如下图。</p>
+<img src="/blogs/844dc0e7/image-20231115162548801.png" alt="image-20231115162548801" style="zoom:50%;"> 
+
+<p>然而，在Class文件格式中，特征签名的范围明显更大。只要两个方法的描述符不完全相同，它们就可以在同一个Class文件中合法共存。具体来说，如果两个方法具有相同的名称和特征签名，但返回值不同，它们仍然可以在同一个Class文件中存在。</p>
+</blockquote>
+<h2 id="1-7属性表集合"><a href="#1-7属性表集合" class="headerlink" title="1.7属性表集合"></a>1.7属性表集合</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn">郜宇博</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn/blogs/844dc0e7.html">https://gaoyubo.cn/blogs/844dc0e7.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gaoyubo.cn" target="_blank">疼了也不哭</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JVM%E7%AC%94%E8%AE%B0/">JVM笔记</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试"><img class="cover" src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/0df3d7ca7bcb0a46162bebcb6163f6246b60af33" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">国科大-软件测试与分析-插桩和变异测试</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blogs/6997cf1f.html" title="JVM学习-自动内存管理"><img class="cover" src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-28</div><div class="title">JVM学习-自动内存管理</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郜宇博</div><div class="author-info__description">个人博客网站</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gaoyubo2"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Class%E7%B1%BB%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">一、Class类文件的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-text">示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E9%AD%94%E6%95%B0%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-text">1.1魔数与版本号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="toc-text">1.2常量池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3%E8%AE%BF%E9%97%AE%E6%A0%87%E5%BF%97"><span class="toc-text">1.3访问标志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4%E7%B1%BB%E7%B4%A2%E5%BC%95%E3%80%81%E7%88%B6%E7%B1%BB%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%8E%A5%E5%8F%A3%E7%B4%A2%E5%BC%95"><span class="toc-text">1.4类索引、父类索引与接口索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%B4%A2%E5%BC%95%EF%BC%88this-class%EF%BC%89%E5%92%8C%E7%88%B6%E7%B1%BB%E7%B4%A2%E5%BC%95%EF%BC%88super-class%EF%BC%89"><span class="toc-text">类索引（this_class）和父类索引（super_class）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%B4%A2%E5%BC%95%E9%9B%86%E5%90%88%EF%BC%88interfaces%EF%BC%89"><span class="toc-text">接口索引集合（interfaces）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class%E6%96%87%E4%BB%B6%E4%B8%AD%E7%A4%BA%E4%BE%8B"><span class="toc-text">class文件中示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5%E5%AD%97%E6%AE%B5%E8%A1%A8%E9%9B%86%E5%90%88"><span class="toc-text">1.5字段表集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E8%A1%A8%E8%AE%BF%E9%97%AE%E6%A0%87%E5%BF%97%EF%BC%88access-flags%EF%BC%89"><span class="toc-text">字段表访问标志（access_flags）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%8F%8F%E8%BF%B0%E5%92%8C%E6%8F%8F%E8%BF%B0%E7%AC%A6%EF%BC%88name-index%E5%92%8Cdescriptor-index%EF%BC%89"><span class="toc-text">简单描述和描述符（name_index和descriptor_index）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E8%A1%A8"><span class="toc-text">属性表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E8%A1%A8%E9%9B%86%E5%90%88%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">字段表集合的特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class%E6%96%87%E4%BB%B6%E4%B8%AD%E7%A4%BA%E4%BE%8B-1"><span class="toc-text">class文件中示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6%E6%96%B9%E6%B3%95%E8%A1%A8%E9%9B%86%E5%90%88"><span class="toc-text">1.6方法表集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A1%A8%E7%9A%84%E8%AE%BF%E9%97%AE%E6%A0%87%E5%BF%97"><span class="toc-text">方法表的访问标志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class%E6%96%87%E4%BB%B6%E4%B8%AD%E7%A4%BA%E4%BE%8B-2"><span class="toc-text">class文件中示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7%E5%B1%9E%E6%80%A7%E8%A1%A8%E9%9B%86%E5%90%88"><span class="toc-text">1.7属性表集合</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blogs/844dc0e7.html" title="JVM学习-虚拟机执行子系统"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM学习-虚拟机执行子系统"/></a><div class="content"><a class="title" href="/blogs/844dc0e7.html" title="JVM学习-虚拟机执行子系统">JVM学习-虚拟机执行子系统</a><time datetime="2023-11-14T02:41:08.000Z" title="发表于 2023-11-14 10:41:08">2023-11-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/0df3d7ca7bcb0a46162bebcb6163f6246b60af33" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-软件测试与分析-插桩和变异测试"/></a><div class="content"><a class="title" href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试">国科大-软件测试与分析-插桩和变异测试</a><time datetime="2023-11-13T07:12:08.000Z" title="发表于 2023-11-13 15:12:08">2023-11-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/d7a98a3.html" title="国科大-移动互联网技术复习"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-移动互联网技术复习"/></a><div class="content"><a class="title" href="/blogs/d7a98a3.html" title="国科大-移动互联网技术复习">国科大-移动互联网技术复习</a><time datetime="2023-11-06T17:15:16.000Z" title="发表于 2023-11-07 01:15:16">2023-11-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=3148291992,1746578584&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-区块链技术作业2"/></a><div class="content"><a class="title" href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2">国科大-区块链技术作业2</a><time datetime="2023-11-04T07:51:27.000Z" title="发表于 2023-11-04 15:51:27">2023-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/f57f32cf.html" title="Golang实现JAVA虚拟机-指令集和解释器"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/u=1734247813,400897296&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Golang实现JAVA虚拟机-指令集和解释器"/></a><div class="content"><a class="title" href="/blogs/f57f32cf.html" title="Golang实现JAVA虚拟机-指令集和解释器">Golang实现JAVA虚拟机-指令集和解释器</a><time datetime="2023-11-01T03:01:43.000Z" title="发表于 2023-11-01 11:01:43">2023-11-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郜宇博</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
