@@ -1,0 +1,436 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>国科大-算法设计-Greedy | 疼了也不哭</title><meta name="author" content="郜宇博"><meta name="copyright" content="郜宇博"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、Commando War There is a war and it doesn’t look very promising for your country.   Now it’s time to act.   You have a commando squad at your disposal and planning an ambush on an important enemy cam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="国科大-算法设计-Greedy">
+<meta property="og:url" content="https://gaoyubo.cn/blogs/8b85a768.html">
+<meta property="og:site_name" content="疼了也不哭">
+<meta property="og:description" content="一、Commando War There is a war and it doesn’t look very promising for your country.   Now it’s time to act.   You have a commando squad at your disposal and planning an ambush on an important enemy cam">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png">
+<meta property="article:published_time" content="2023-11-26T17:44:41.000Z">
+<meta property="article:modified_time" content="2023-11-26T17:45:21.331Z">
+<meta property="article:author" content="郜宇博">
+<meta property="article:tag" content="作业">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gaoyubo.cn/blogs/8b85a768.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '国科大-算法设计-Greedy',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-27 01:45:21'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">国科大-算法设计-Greedy</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-26T17:44:41.000Z" title="发表于 2023-11-27 01:44:41">2023-11-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-26T17:45:21.331Z" title="更新于 2023-11-27 01:45:21">2023-11-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/">国科大课程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="国科大-算法设计-Greedy"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="一、Commando-War"><a href="#一、Commando-War" class="headerlink" title="一、Commando War"></a>一、Commando War</h1><blockquote>
+<p>There is a war and it doesn’t look very promising for your country.   Now it’s time to act.   You have a commando squad at your disposal and planning an ambush on an important enemy camp located nearby.   You have N soldiers in your squad.   In your master-plan, every single soldier has a unique responsibility and you don’t want any of your soldier to know the plan for other soldiers so that everyone can focus on his task only.   In order to enforce this, you brief every individual soldier about his tasks separately and just before sending him to the battlefield.   You know that every single soldier needs a certain amount of time to execute his job.   You also know very clearly how much time you need to brief every single soldier.   Being anxious to finish the total operation as soon as possible, you need to find an order of briefing your soldiers that will minimize the time necessary for all the soldiers to complete their tasks.   You may assume that, no soldier has a plan that depends on the tasks of his fellows.   In other words, once a soldier begins a task, he can finish it without the necessity of pausing in between.</p>
+<p><strong>Input:</strong> There will be multiple test cases in the input file.   Every test case starts with an integer<br>N(1 &lt;&#x3D; N &lt;&#x3D; 1000), denoting the number of soldiers.   Each of the following N lines describe a<br>soldier with two integers B(1 &lt;&#x3D; B &lt;&#x3D; 10000)&amp;J(1 &lt;&#x3D; J &lt;&#x3D; 10000).   B seconds are needed to<br>brief the soldier while completing his job needs J seconds.   The end of input will be denoted by a<br>case with N &#x3D; 0 .   This case should not be processed.</p>
+<p><strong>Output:</strong> For each test case, print a line in the format, “Case X: Y ”, where X is the case<br>number &amp;Y is the total number of seconds counted from the start of your first briefing till the<br>completion of all jobs.</p>
+</blockquote>
+<h2 id="1-自然语言描述和伪代码"><a href="#1-自然语言描述和伪代码" class="headerlink" title="1.自然语言描述和伪代码"></a>1.自然语言描述和伪代码</h2><p><strong>伪代码</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/image-20231127002641422.png" alt="image-20231127002641422" style="zoom:50%;">
+
+<p><strong>自然语言描述</strong></p>
+<ol>
+<li><strong>输入处理：</strong> 对于每个测试用例，首先读取 N，表示士兵的数量。如果 N 为 0，则结束输入。</li>
+<li><strong>士兵信息读取：</strong> 读取接下来的 N 行，每行包含两个整数 B 和 J，分别表示士兵的说明时间和完成任务时间。</li>
+<li><strong>排序：</strong> 对士兵数组按照说明时间升序和完成任务时间降序进行排序，以确保最优的任务执行顺序。</li>
+<li><strong>计算总时间：</strong> 初始化总时间（total_time）和当前时间（current_time）为 0。遍历排序后的士兵数组，累加每个士兵的说明时间到当前时间，并更新总时间为当前时间加上该士兵完成任务的时间的最大值。</li>
+<li><strong>输出结果：</strong> 输出当前测试用例的结果，格式为“Case X: Y”，其中 X 是测试用例编号，Y 是从第一个说明开始到完成所有任务所需的总时间。</li>
+</ol>
+<h2 id="2-贪心思路"><a href="#2-贪心思路" class="headerlink" title="2.贪心思路"></a>2.贪心思路</h2><p>算法是利用了排序解决了“贪心“的思路。</p>
+<p>因为在所有士兵中，说明时间越短一定越有利于节省时间，二在说明时间相同的情况下，完成任务时间最长的士兵可以更早的开始任务，以便于更早 的结束任务，可以在总体上花费最短的时间</p>
+<h2 id="3-算法的正确性证明"><a href="#3-算法的正确性证明" class="headerlink" title="3.算法的正确性证明"></a>3.算法的正确性证明</h2><ol>
+<li><strong>初始化步骤：</strong> 对于排序后的士兵数组，初始的总时间是0。</li>
+<li><strong>归纳假设：</strong> 设当前已经选择了前k个士兵，总时间为T。假设这个选择是最优的，即不存在其他选择使得总时间更短。</li>
+<li><strong>归纳证明：</strong> 考虑加入第k+1个士兵，这时选择的是说明时间最短的、完成任务时间最长的士兵。这样选择的合理性在于，希望尽早完成说明，以便后续的士兵可以更早开始执行任务，从而最终减少总时间。<ul>
+<li>如果选择了其他士兵而不是第k+1个士兵，假设选择了第i个士兵，那么说明时间就会更长。因为选择的是完成任务时间最长的，所以其他士兵的完成任务时间一定更短，而完成任务时间短的士兵说明时间更短，所以总时间会更长。</li>
+</ul>
+</li>
+<li><strong>归纳步骤：</strong> 继续这个过程，每次选择说明时间最短的、完成任务时间最长的士兵，直到选择完所有士兵。这样的选择策略保证了总时间最短。</li>
+</ol>
+<p>由此，证明了贪心算法的正确性。</p>
+<h2 id="4-算法的复杂度"><a href="#4-算法的复杂度" class="headerlink" title="4.算法的复杂度"></a>4.算法的复杂度</h2><ul>
+<li><strong>排序复杂度：</strong> 对于N名士兵，进行一次排序的时间复杂度为O(NlogN)。</li>
+<li><strong>总时间计算复杂度：</strong> 在排序后的数组中遍历每个士兵，计算总时间。这一步的时间复杂度是O(N)。</li>
+</ul>
+<h1 id="二、DNA-Consensus-String"><a href="#二、DNA-Consensus-String" class="headerlink" title="二、DNA Consensus String"></a>二、DNA Consensus String</h1><blockquote>
+<p>The Hamming distance is the number of different characters at each position from two strings of equal length.   </p>
+<p>For example, assume we are given the two strings “AGCAT” and “GGAAT.”    The Hamming distance of these two strings is 2 because the 1st and the 3rd characters of the two strings are different.   </p>
+<p>Using the Hamming distance, we can define a representative string for a set of multiple strings of equal length.   </p>
+<p>Given a set of strings S &#x3D; {s1, …   , sm} of length n, the consensus error between a string y of length n and the set S is the sum of the Hamming distances between y and each si in S. If the consensus error between y and S is the minimum among all possible strings y of length n, y is called a consensus string of S. </p>
+<p>For example,  given the three strings “AGCAT”、“AGACT” and “GGAAT” the consensus string of the given strings is “AGAAT” because the sum of the Hamming distances between “AGAAT” and the three strings is 3 which is minimal.    (In this case, the consensus string is unique, but in general, there can be more than one consensus string.)  </p>
+<p>We use the consensus string as a representative of the DNA sequence.    For the example of Figure 1 above, a consensus string of gene X is “GCAAATGGCTGTGCA” and the consensus error is 7.</p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/image-20231127005056522.png" alt="image-20231127005056522" style="zoom:50%;">
+
+<p>Input: Your program is to read from standard input.    The input consists of T test cases.    The number of test cases T is given in the first line of the input.    Each test case starts with a line containing two integers m and n which are separated by a single space.    The integer m(4 ≤ m ≤ 50) represents the number of DNA sequences and n(4 ≤ n ≤ 1000) represents the length of the DNA sequences, respectively.    In each of the next m lines, each DNA sequence is given.</p>
+<p>Output: Your program is to write to standard output.    Print the consensus string in the first<br>line of each case and the consensus error in the second line of each case.    If there exists more than<br>one consensus string, print the lexicographically smallest consensus string.</p>
+</blockquote>
+<h2 id="1-自然语言描述和伪代码-1"><a href="#1-自然语言描述和伪代码-1" class="headerlink" title="1.自然语言描述和伪代码"></a>1.自然语言描述和伪代码</h2><p><strong>伪代码</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/image-20231127003443010.png" alt="image-20231127003443010" style="zoom: 80%;">
+
+<p><strong>自然语言描述</strong></p>
+<ol>
+<li><strong>输入：</strong> 读取测试用例数 <code>T</code>。</li>
+<li><strong>循环处理每个测试用例：</strong><ul>
+<li>读取整数 <code>m</code> 和 <code>n</code>，表示 DNA 序列的数量和长度。</li>
+<li>初始化一个空列表 <code>sequences</code> 用于存储 DNA 序列。</li>
+</ul>
+</li>
+<li><strong>处理每个 DNA 序列的输入：</strong><ul>
+<li>通过循环读取每个 DNA 序列的字符，将其追加到列表 <code>sequences</code> 中。</li>
+</ul>
+</li>
+<li><strong>寻找共识序列：</strong><ul>
+<li>对于每个位置 <code>i</code>（从 1 到 <code>n</code>），初始化一个字典 <code>counts</code> 用于统计 A、C、G、T 四个字符的出现次数。</li>
+<li>对于每个 DNA 序列，统计当前位置字符的出现次数，并选择出现次数最多的字符作为目标序列的当前位置字符。</li>
+</ul>
+</li>
+<li><strong>计算 Hamming 距离：</strong><ul>
+<li>遍历每个 DNA 序列，计算其与目标序列的 Hamming 距离，并累加得到总的 Hamming 距离。</li>
+</ul>
+</li>
+<li><strong>输出结果：</strong><ul>
+<li>输出目标序列。</li>
+<li>输出总的 Hamming 距离。</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-贪心思路-1"><a href="#2-贪心思路-1" class="headerlink" title="2.贪心思路"></a>2.贪心思路</h2><p><strong>贪心选择策略：</strong></p>
+<ul>
+<li>在每个位置上选择出现次数最多的字符，目的是试图在每个位置上使目标序列与输入序列的差异尽可能小，从而最小化总的 Hamming 距离。</li>
+</ul>
+<p><strong>如何想到使用贪心</strong></p>
+<ul>
+<li>考虑从每个位置的字符出现次数的角度出发，贪心地选择每个位置的字符，试图最小化总的 Hamming 距离。这是因为在每个位置上选择出现次数最多的字符，相当于局部最优的选择，希望通过这种局部最优选择达到全局最优。</li>
+<li>具体地，通过统计每个位置上字符的出现次数，选择出现次数最多的字符，将其作为目标序列的字符。这样的选择策略使得目标序列在每个位置上尽量与输入序列相似，从而最小化 Hamming 距离。</li>
+<li>每个位置的字符选择可以看作是一个局部最优解，通过选择每个位置上的字符，希望达到总体上的最优解，即最小化总的 Hamming 距离。</li>
+</ul>
+<h2 id="3-算法的正确性证明-1"><a href="#3-算法的正确性证明-1" class="headerlink" title="3.算法的正确性证明"></a>3.算法的正确性证明</h2><p><strong>归纳基础：</strong></p>
+<p>首先证明当序列的长度 <code>n</code> 为 1 时算法的正确性。</p>
+<ol>
+<li><strong>初始情况：</strong> 当 <code>n=1</code> 时，只有一个字符，无需比较，算法直接输出该字符，这是显然正确的。</li>
+</ol>
+<p><strong>归纳步骤：</strong></p>
+<p>假设当序列的长度为 <code>n=k</code> 时，算法对任意长度为 <code>k</code> 的 DNA 序列集合都能正确地找到共识序列。</p>
+<p>现在考虑长度为 <code>n=k+1</code> 的情况。将算法的步骤分解为以下几个部分：</p>
+<ol>
+<li><strong>寻找共识序列：</strong> 对于每个位置 <code>i</code>（从 1 到 <code>k+1</code>），统计出现次数最多的字符作为目标序列的当前位置字符。<ul>
+<li>根据归纳假设，算法在长度为 <code>k</code> 的情况下是正确的。</li>
+<li>添加第 <code>k+1</code> 个位置的字符时，根据算法，选择出现次数最多的字符作为目标序列的字符。</li>
+</ul>
+</li>
+<li><strong>归纳步骤：</strong> 根据归纳假设，算法对长度为 <code>k</code> 的情况是正确的，现在要证明它对长度为 <code>k+1</code> 的情况也是正确的。<ul>
+<li>在选择第 <code>k+1</code> 个位置字符时，算法选择的是出现次数最多的字符，这保证了在每个位置上都选择了局部最优的字符。</li>
+<li>通过局部最优的选择，期望在整体上得到总体最优解，即最小化总的 Hamming 距离。</li>
+</ul>
+</li>
+</ol>
+<p>因此，通过数学归纳法，证明了算法对于任意长度的 DNA 序列集合都能正确地找到共识序列</p>
+<h2 id="4-算法的复杂度-1"><a href="#4-算法的复杂度-1" class="headerlink" title="4.算法的复杂度"></a>4.算法的复杂度</h2><p><strong>时间复杂度分析：</strong></p>
+<ol>
+<li><p>寻找共识序列 (<code>FindConsensus</code>): 对于每个位置 <code>i</code>，都需要统计 <code>m</code> 个序列在该位置上的字符出现次数，然后选择出现次数最多的字符。这一过程的时间复杂度为<br>$$<br>O(m \cdot n)<br>$$<br>其中 <code>n</code> 是序列的长度。</p>
+</li>
+<li><p>计算错误 (<code>CalculateError</code>): 需要遍历 <code>m</code> 个序列，每个序列长度为 <code>n</code>，并计算 Hamming 距离。计算 Hamming 距离的时间复杂度为 O(n)。因此，计算错误的总时间复杂度为<br>$$<br>O(m \cdot n)。<br>$$</p>
+</li>
+</ol>
+<p>因此，整体上，算法的时间复杂度为<br>$$<br>O(m \cdot n)。<br>$$<br>空间复杂度分析：</p>
+<ol>
+<li>****寻找共识序列 (<code>FindConsensus</code>):需要一个长度为 <code>n</code> 的字符串 (<code>consensus</code>) 用于存储共识序列，以及一个长度为 4 的数组 (<code>counts</code>) 用于统计字符出现次数。因此，空间复杂度为 O(n)。</li>
+<li>****计算错误 (<code>CalculateError</code>): 额外的空间复杂度主要来自常数大小的变量和函数调用栈，可以忽略。</li>
+</ol>
+<p>因此，整体上，算法的空间复杂度为 O(n)。</p>
+<p><strong>综上所述，算法的时间复杂度为</strong><br>$$<br>O(m \cdot n)<br>$$<br><strong>空间复杂度为</strong><br>$$<br>O(n)<br>$$</p>
+<h1 id="三、Opponents"><a href="#三、Opponents" class="headerlink" title="三、Opponents"></a>三、Opponents</h1><blockquote>
+<p>Arya has n opponents in the school.  Each day he will fight with all opponents who are present this day.  His opponents have some fighting plan that guarantees they will win, but implementing this plan requires presence of them all.  That means if one day at least one of Arya’s opponents is absent at the school, then Arya will beat all present opponents.  Otherwise, if all opponents are present, then they will beat Arya.  For each opponent Arya knows his schedule — whether or not he is going to present on each particular day.  Tell him the maximum number of consecutive days that he will beat all present opponents.</p>
+<p>Note, that if some day there are no opponents present, Arya still considers he beats all the present opponents.</p>
+<p>Input: The first line of the input contains two integers n and d ( 1 &lt;&#x3D; n, d &lt;&#x3D; 100 ) — the number of opponents and the number of days, respectively.  The i -th of the following d lines contains a string of length n consisting of characters ’0’ and ’1’.  The j -th character of this string is ’0’ if the j -th opponent is going to be absent on the i -th day.</p>
+<p>Output: Print the only integer — the maximum number of consecutive days that Arya will beat all present opponents.</p>
+</blockquote>
+<h2 id="1-自然语言描述和伪代码-2"><a href="#1-自然语言描述和伪代码-2" class="headerlink" title="1.自然语言描述和伪代码"></a>1.自然语言描述和伪代码</h2><p><strong>伪代码</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/image-20231127005621753.png" alt="image-20231127005621753" style="zoom:50%;">
+
+<p><strong>自然语言描述</strong></p>
+<p>需要找到 Arya 连续击败所有在场对手的最长天数。对于每一天，如果至少有一个对手不在场，Arya 就能赢；否则，如果所有对手都在场，Arya 就输了。目标是找到 Arya 连续赢的最长天数。</p>
+<p>可以使用滑动窗口的方法。维护一个窗口，窗口的大小就是 Arya 连续击败所有在场对手的天数。在窗口中检查每一天的情况，如果有一天至少有一个对手不在场，就移动窗口的右边缘；否则，移动窗口的左边缘。在这个过程中，保持记录最大窗口的大小。</p>
+<h2 id="2-贪心思路-2"><a href="#2-贪心思路-2" class="headerlink" title="2.贪心思路"></a>2.贪心思路</h2><p>Arya 想要最大化连续击败对手的天数。贪心的思路是在每一步都做出当前最优的选择，即在每一天都选择击败对手，只要有对手在场。</p>
+<p><strong>思考贪心的过程：</strong></p>
+<ol>
+<li><strong>问题特性：</strong> 首先观察问题的特性，Arya 在一天内要么赢，要么输。他要连续击败对手，就不能有输的情况。</li>
+<li><strong>最优子结构：</strong> Arya 连续击败对手的最长天数应该是在每一步都做出当前最优的选择，即每一天都击败对手。</li>
+<li><strong>贪心策略：</strong> 可以贪心地选择每一天都击败对手。如果有一天没有对手在场，那么这一天是连续击败对手的开始，就从下一天重新计数。</li>
+</ol>
+<p><strong>贪心的实现（滑动窗口）：</strong></p>
+<ol>
+<li>使用一个窗口，窗口的大小表示 Arya 连续击败对手的天数。</li>
+<li>遍历每一天，如果有一天至少有一个对手不在场，窗口右移；否则，窗口左移。</li>
+<li>在每一步都更新最大连续击败天数。</li>
+</ol>
+<p><strong>为什么使用滑动窗口：</strong></p>
+<p>滑动窗口适用于连续子序列的问题。在这个问题中，需要找到连续的击败对手的天数，因此滑动窗口是一个自然的选择。窗口的左右边缘表示 Arya 连续击败对手的起始和结束位置，通过滑动窗口来寻找最优的连续天数。</p>
+<h2 id="3-算法的正确性证明-2"><a href="#3-算法的正确性证明-2" class="headerlink" title="3.算法的正确性证明"></a>3.算法的正确性证明</h2><p><strong>基础步骤：</strong> 对于 d&#x3D;1，即一天的情况，算法首先检查对手是否存在。如果对手存在，Arya将被击败；否则，他将战胜所有对手。这是正确的，因为算法会返回0，即Arya在这一天战胜所有对手的最大连续天数为0。</p>
+<p><strong>归纳步骤：</strong> 假设对于规模为 d*&#x3D;<em>k 的问题，算法给出的最大连续击败天数是正确的。现在考虑规模为d</em>&#x3D;*k+1 的问题。</p>
+<p>如果在第k+1 天对手的存在数量小于n，那么 Arya 将战胜所有对手，并且最大连续击败天数将在前一天的基础上加1。这符合归纳假设。</p>
+<p>如果在第k+1 天对手的存在数量等于n，那么 Arya 将被击败，最大连续击败天数将重置为0。这也是正确的，因为在这一天 Arya 未能击败所有对手。</p>
+<p>因此，通过数学归纳法，可以证明算法对于所有符合条件的输入是正确的。</p>
+<h2 id="4-算法的复杂度-2"><a href="#4-算法的复杂度-2" class="headerlink" title="4.算法的复杂度"></a>4.算法的复杂度</h2><p><strong>时间复杂度</strong></p>
+<ol>
+<li><p><strong>CountOpponentsPresent 函数的复杂度：</strong></p>
+<ul>
+<li>在每一天的循环中，CountOpponentsPresent 函数对对手的状态进行遍历。</li>
+<li>时间复杂度：O*(*n)</li>
+</ul>
+</li>
+<li><p><strong>MaxConsecutiveDays 函数的复杂度：</strong></p>
+<ul>
+<li><p>MaxConsecutiveDays 函数包含一个从 1到 d 的天数循环，每次迭代中调用了 CountOpponentsPresent 函数。</p>
+</li>
+<li><p>因此，总的时间复杂度为：<br>$$<br>O(d⋅n)<br>$$</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>空间复杂度</strong>：除了输入参数外，算法使用的额外空间非常有限，只有几个整数变量，因此整体空间复杂度是常数级的。<br>$$<br>O(1)<br>$$</p>
+<h1 id="四、Minimum-Varied-Number"><a href="#四、Minimum-Varied-Number" class="headerlink" title="四、Minimum Varied Number"></a>四、Minimum Varied Number</h1><blockquote>
+<p>Find the minimum number with the given sum of digits s such that all digits in it are distinct (i.e. all digits are unique).<br>For example, if s &#x3D; 20 , then the answer is 389 .  This is the minimum number in which all digits are different and the sum of the digits is 20 ( 3 + 8 + 9 &#x3D; 20 ). For the given s print the required number.</p>
+<p>Input: The first line contains an integer t ( 1 ≤ t ≤ 45 ) — the number of test cases.  Each<br>test case is specified by a line that contains the only integer s ( 1 ≤ s ≤ 45 ).</p>
+<p>Output: Print t integers — the answers to the given test cases.</p>
+</blockquote>
+<h2 id="1-自然语言描述和伪代码-3"><a href="#1-自然语言描述和伪代码-3" class="headerlink" title="1.自然语言描述和伪代码"></a>1.自然语言描述和伪代码</h2><p><strong>伪代码</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/image-20231127011715795.png" alt="image-20231127011715795" style="zoom: 67%;">
+
+<p><strong>自然语言描述</strong></p>
+<ul>
+<li><strong>目标：</strong> 在给定数字和 <code>s</code> 的情况下，目标是构造一个具有唯一数字的最小数字。</li>
+<li><strong>选择最大的数字：</strong> 为了使数字最小，应该尽可能选择高位上的最大数字。</li>
+<li><strong>递减选择：</strong> 可以从 9 开始，递减到 1，依次尝试将最大的数字添加到数字中，同时保持数字和不超过 <code>s</code>。</li>
+<li><strong>保持唯一性：</strong> 还需要确保添加的数字在已经选择的数字中是唯一的，以满足“所有数字都是唯一的”这个条件。</li>
+<li><strong>算法步骤：</strong><ul>
+<li>从 9 开始递减选择数字。</li>
+<li>对于每个数字，检查将其添加到当前数字中是否会导致数字和超过 <code>s</code>。</li>
+<li>如果不超过，将该数字添加到数字中。</li>
+<li>重复此过程，直到达到给定数字和 <code>s</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-贪心思路-3"><a href="#2-贪心思路-3" class="headerlink" title="2.贪心思路"></a>2.贪心思路</h2><p><strong>贪心选择的原因：</strong></p>
+<ul>
+<li>通过选择高位上的最大数字，可以确保数字是最小的。这是因为高位上的数字对数字的大小有更大的影响。</li>
+<li>通过递减选择，保持了数字和的最小性，因为首先考虑了最大的数字，然后是次大的数字，以此类推。</li>
+<li>确保唯一性是为了满足题目中的条件，即所有数字都是唯一的。</li>
+</ul>
+<p><strong>如何想到使用贪心：</strong></p>
+<ul>
+<li>题目中要求构造最小数字，而最小数字通常与高位上的大数字有关。</li>
+<li>需要在数字和不超过给定和的情况下进行选择，这暗示了递减选择的过程。</li>
+<li>考虑到唯一性的要求，可以通过递减选择高位上的数字，以确保数字的唯一性。</li>
+</ul>
+<p>综上所述，通过观察题目的特征和要求，可以想到使用贪心策略来构造最小的、具有唯一数字的数字。</p>
+<h2 id="3-算法的正确性证明-3"><a href="#3-算法的正确性证明-3" class="headerlink" title="3.算法的正确性证明"></a>3.算法的正确性证明</h2><ol>
+<li><p><strong>基础步骤：</strong></p>
+<ol>
+<li><strong>初始情况：</strong> 对于 <code>s = 1</code>，最小数字是 <code>1</code>，唯一且符合条件。</li>
+<li><strong>初始步骤：</strong> 假设对于 <code>s = k</code>（其中 <code>k</code> 为某个正整数），贪心算法构造的数字是最小的、具有唯一数字的数字。</li>
+</ol>
+</li>
+<li><p><strong>归纳步骤：</strong> </p>
+<ol>
+<li><strong>递增情况：</strong> 考虑 <code>s = k + 1</code> 的情况。 <code>s = k</code> 时的最小数字，即已构造的数字。</li>
+<li><strong>添加下一位：</strong> 贪心算法会尝试添加下一位，即从 9 到 1 中选择一个数字，以保持数字和不超过 <code>s</code>。</li>
+<li><strong>保持唯一性：</strong> 由于在构造 <code>s = k</code> 时已经考虑了唯一性，所以在添加下一位时，贪心算法会选择保持已经选择数字的唯一性。</li>
+<li><strong>保持最小性：</strong> 在添加下一位时，贪心算法会选择尽可能大的数字，以保持数字的最小性。</li>
+<li><strong>综合证明：</strong> 综合考虑递增情况的所有步骤，得出结论：对于 <code>s = k + 1</code>，贪心算法构造的数字仍然是最小的、具有唯一数字的数字。</li>
+</ol>
+<p><strong>结论：</strong> 根据数学归纳法，证明了对于任意正整数 <code>s</code>，贪心算法构造的数字是最小的、具有唯一数字的数字。</p>
+</li>
+</ol>
+<h2 id="4-算法的复杂度-3"><a href="#4-算法的复杂度-3" class="headerlink" title="4.算法的复杂度"></a>4.算法的复杂度</h2><p> <strong>时间复杂度：</strong> O(t * 9) ，在最坏的情况下，从左到右迭代每个数字，对于每个数字，都有一个最多9次迭代的循环。 </p>
+<p><strong>空间复杂度</strong>： O(1) ，使用了常量空间</p>
+<h1 id="五、Minimum-Varied-Number"><a href="#五、Minimum-Varied-Number" class="headerlink" title="五、Minimum Varied Number"></a>五、Minimum Varied Number</h1><blockquote>
+<p>Joey Takes Money<br>Joey is low on money.  His friend Chandler wants to lend Joey some money, but can’t give him directly, as Joey is too proud of himself to accept it.  So, in order to trick him, Chandler asks Joey to play a game.<br>In this game, Chandler gives Joey an array a1, a2, . . .  , an ( n ≥ 2 ) of positive integers ( ai ≥ 1 ). Joey can perform the following operation on the array any number of times:</p>
+<p>Take two indices i and j ( 1 ≤ i &lt; j ≤ n) .  2.  Choose two integers x and y ( x, y ≥ 1 ) such that x · y &#x3D; ai · aj .  3.  Replace ai by x and aj by y . In the end, Joey will get the money equal to the sum of elements of the final array. </p>
+<p>Find the maximum amount of money ans Joey can get but print 2022 · ans .  Why multiplied by 2022 ?  Because we are never gonna see it again!<br>It is guaranteed that the product of all the elements of the array a doesn’t exceed 1012.</p>
+<p>Input: Each test contains multiple test cases.  The first line contains the number of test cases t ( 1 ≤ t ≤ 4000 ).  Description of the test cases follows.  The first line of each test case contains a single integer n ( 2 ≤ n ≤ 50 ) — the length of the array a .  The second line contains n integers a1, a2, . . .  , an ( 1 ≤ ai ≤ 106 ) — the array itself.  It’s guaranteed that the product of all ai doesn’t exceed 1012 (i. e. a1 · a2 · . . .  · an ≤ 1012 ).</p>
+<p>Output: For each test case, print the maximum money Joey can get multiplied by 2022 .</p>
+</blockquote>
+<h2 id="1-自然语言描述和伪代码-4"><a href="#1-自然语言描述和伪代码-4" class="headerlink" title="1.自然语言描述和伪代码"></a>1.自然语言描述和伪代码</h2><p><strong>伪代码</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/image-20231127013622467.png" alt="image-20231127013622467" style="zoom:67%;">
+
+<p><strong>自然语言描述</strong></p>
+<ol>
+<li>对数组进行排序，从小到大。</li>
+<li>初始化变量 <code>maxMoney</code> 为 1，表示 Joey 能得到的最大金额。</li>
+<li>从数组的最小值开始遍历，设当前元素为 <code>currentElement</code>。</li>
+<li>对于 currentElement的每个因子对 (x, y)，其中 x * y &#x3D; currentElement：<ul>
+<li>计算 Joey 得到的金额 <code>currentMoney = x + y</code>。</li>
+<li>如果 <code>currentMoney</code> 大于 <code>maxMoney</code>，更新 <code>maxMoney</code> 为 <code>currentMoney</code>。</li>
+</ul>
+</li>
+<li>继续遍历数组的下一个元素，重复步骤 3-4。</li>
+<li>最终，<code>maxMoney</code> 的值即为 Joey 能得到的最大金额。</li>
+</ol>
+<h2 id="2-贪心思路-4"><a href="#2-贪心思路-4" class="headerlink" title="2.贪心思路"></a>2.贪心思路</h2><p>问题要求 Joey 最大化他得到的钱，而 Chandler 给了 Joey 一个数组，Joey可以通过选择数组中的两个元素，将它们替换为它们的因子，从而最终得到数组中所有元素的和。目标是找到 Joey 能够获得的最大钱数。</p>
+<p><strong>贪心思路步骤：</strong></p>
+<ol>
+<li><strong>对数组进行排序：</strong> 将数组按升序排序，以便 Joey 从小的元素开始选择。</li>
+<li><strong>遍历数组元素：</strong> 对于数组中的每个元素，考虑替换它为两个因子的组合，使得替换后的和最大。</li>
+<li><strong>选择最大的因子组合：</strong> 对于当前元素，选择它的两个因子组合，使得组合的和最大。可以通过计算元素的所有因子对，并选择使和最大的组合。</li>
+<li><strong>更新最大值：</strong> 在每一步中，更新当前的最大值。</li>
+<li><strong>返回结果：</strong> 返回最终得到的最大值。</li>
+</ol>
+<p><strong>为什么使用贪心？</strong></p>
+<p>在这个问题中，每一步选择是选择一个元素的两个因子，以使得替换后的和最大。通过贪心地选择使得每一步都达到局部最优解，可以期望得到全局最优解。</p>
+<p>贪心的思路是尽可能地选择大的因子，以获得更大的和。在排序数组后，从小到大考虑每个元素，选择其两个因子中最大的组合，这样就可以保证每一步都是局部最优的。</p>
+<h2 id="3-算法的正确性证明-4"><a href="#3-算法的正确性证明-4" class="headerlink" title="3.算法的正确性证明"></a>3.算法的正确性证明</h2><p>假设 Joey 在每一步中都选择了最优的替换方案，即选择了两个因子中的最大组合，以最大化替换后的和。</p>
+<p><strong>基础步骤：</strong> 对于数组长度为 2 的情况，算法直接返回数组中两个元素的和，这就是最大值。这个基础步骤是正确的。</p>
+<p><strong>归纳假设：</strong> 假设算法对于数组长度为 k 的情况是正确的，即在数组中选择了最优的替换方案，以最大化替换后的和。</p>
+<p><strong>归纳步骤：</strong> 考虑数组长度为 k+1 的情况。在排序后的数组中，选择最小的两个元素 a 和 b 进行替换。根据归纳假设，对于数组中除了 a 和 b 的部分，算法选择了最优的替换方案。</p>
+<p>现在要证明，在包含 a 和 b 的情况下，选择 a 和 b 的最大因子组合也是最优的。设 a &#x3D; p1 * q1，b &#x3D; p2 * q2，其中 p1, q1, p2, q2 是 a 和 b 的因子。</p>
+<p>由于数组的元素都是正整数，p1, q1, p2, q2 都是大于等于 1 的整数。要证明选择 p1, q2 或者 p2, q1 中的最大组合，是为了最大化 a+b 的和。</p>
+<p>考虑两种情况：</p>
+<ol>
+<li>如果 p1 &gt;&#x3D; p2，q1 &gt;&#x3D; q2，即 a 的两个因子都大于等于 b 的两个因子。那么选择 p1, q2 作为替换组合，a + b 的和是 (p1 * q1) + (p2 * q2) &gt;&#x3D; (p1 * q2) + (p2 * q2) &#x3D; (p1 + p2) * q2。由于 p1 + p2 &gt;&#x3D; 2，所以 (p1 + p2) * q2 &gt;&#x3D; 2 * q2 &gt;&#x3D; q1 + q2。因此，选择 p1, q2 是为了最大化和。</li>
+<li>如果 p1 &gt;&#x3D; p2，q1 &lt; q2，即 a 的两个因子中，第一个因子大于等于 b 的两个因子，第二个因子小于 b 的两个因子。那么选择 p1, q2 作为替换组合，a + b 的和是 (p1 * q1) + (p2 * q2) &gt;&#x3D; (p1 * q2) + (p2 * q2) &#x3D; (p1 + p2) * q2。由于 p1 + p2 &gt;&#x3D; 2，所以 (p1 + p2) * q2 &gt;&#x3D; 2 * q2 &gt; q1 + q2。因此，选择 p1, q2 是为了最大化和。</li>
+</ol>
+<p>综上所述，无论是哪种情况，选择 a 和 b 的最大因子组合都是为了最大化和。因此，基于归纳假设，证明了算法对于数组长度为 k+1 的情况也是正确的。</p>
+<p>由归纳法可知，算法对于任意长度的数组都是正确的。</p>
+<h2 id="4-算法的复杂度-4"><a href="#4-算法的复杂度-4" class="headerlink" title="4.算法的复杂度"></a>4.算法的复杂度</h2><p><strong>时间复杂度：</strong></p>
+<ol>
+<li>排序数组的时间复杂度为 O(n log n)，其中 n 为数组的长度。</li>
+<li>遍历数组的时间复杂度为 O(n)。</li>
+</ol>
+<p>因此，整体时间复杂度为 O(n log n)。</p>
+<p><strong>空间复杂度：</strong></p>
+<p>空间复杂度取决于排序算法的实现。<br>如果使用的是不占用额外空间的排序算法（比如堆排序），则空间复杂度为 O(1)。<br>如果使用的是需要额外空间的排序算法（比如归并排序），则空间复杂度为 O(n)。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn">郜宇博</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn/blogs/8b85a768.html">https://gaoyubo.cn/blogs/8b85a768.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gaoyubo.cn" target="_blank">疼了也不哭</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BD%9C%E4%B8%9A/">作业</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blogs/67a23ec8.html" title="国科大-算法设计-Dynamic Programming"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">国科大-算法设计-Dynamic Programming</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blogs/67a23ec8.html" title="国科大-算法设计-Dynamic Programming"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-26</div><div class="title">国科大-算法设计-Dynamic Programming</div></div></a></div><div><a href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-13</div><div class="title">国科大-软件测试与分析-插桩和变异测试</div></div></a></div><div><a href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-04</div><div class="title">国科大-区块链技术作业2</div></div></a></div><div><a href="/blogs/9ad5026b.html" title="国科大-区块链技术作业1"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-26</div><div class="title">国科大-区块链技术作业1</div></div></a></div><div><a href="/blogs/3ecd1561.html" title="国科大-算法设计-Divide and Conquer"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-26</div><div class="title">国科大-算法设计-Divide and Conquer</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郜宇博</div><div class="author-info__description">个人博客网站</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gaoyubo2"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Commando-War"><span class="toc-text">一、Commando War</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E5%92%8C%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="toc-text">1.自然语言描述和伪代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B4%AA%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-text">2.贪心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="toc-text">3.算法的正确性证明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%AE%97%E6%B3%95%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">4.算法的复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81DNA-Consensus-String"><span class="toc-text">二、DNA Consensus String</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E5%92%8C%E4%BC%AA%E4%BB%A3%E7%A0%81-1"><span class="toc-text">1.自然语言描述和伪代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B4%AA%E5%BF%83%E6%80%9D%E8%B7%AF-1"><span class="toc-text">2.贪心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E-1"><span class="toc-text">3.算法的正确性证明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%AE%97%E6%B3%95%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="toc-text">4.算法的复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81Opponents"><span class="toc-text">三、Opponents</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E5%92%8C%E4%BC%AA%E4%BB%A3%E7%A0%81-2"><span class="toc-text">1.自然语言描述和伪代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B4%AA%E5%BF%83%E6%80%9D%E8%B7%AF-2"><span class="toc-text">2.贪心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E-2"><span class="toc-text">3.算法的正确性证明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%AE%97%E6%B3%95%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6-2"><span class="toc-text">4.算法的复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Minimum-Varied-Number"><span class="toc-text">四、Minimum Varied Number</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E5%92%8C%E4%BC%AA%E4%BB%A3%E7%A0%81-3"><span class="toc-text">1.自然语言描述和伪代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B4%AA%E5%BF%83%E6%80%9D%E8%B7%AF-3"><span class="toc-text">2.贪心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E-3"><span class="toc-text">3.算法的正确性证明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%AE%97%E6%B3%95%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6-3"><span class="toc-text">4.算法的复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81Minimum-Varied-Number"><span class="toc-text">五、Minimum Varied Number</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E5%92%8C%E4%BC%AA%E4%BB%A3%E7%A0%81-4"><span class="toc-text">1.自然语言描述和伪代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B4%AA%E5%BF%83%E6%80%9D%E8%B7%AF-4"><span class="toc-text">2.贪心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E-4"><span class="toc-text">3.算法的正确性证明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%AE%97%E6%B3%95%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6-4"><span class="toc-text">4.算法的复杂度</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blogs/8b85a768.html" title="国科大-算法设计-Greedy"><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-算法设计-Greedy"/></a><div class="content"><a class="title" href="/blogs/8b85a768.html" title="国科大-算法设计-Greedy">国科大-算法设计-Greedy</a><time datetime="2023-11-26T17:44:41.000Z" title="发表于 2023-11-27 01:44:41">2023-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/67a23ec8.html" title="国科大-算法设计-Dynamic Programming"><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-算法设计-Dynamic Programming"/></a><div class="content"><a class="title" href="/blogs/67a23ec8.html" title="国科大-算法设计-Dynamic Programming">国科大-算法设计-Dynamic Programming</a><time datetime="2023-11-26T13:57:55.000Z" title="发表于 2023-11-26 21:57:55">2023-11-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/e6df8766.html" title="JVM学习-字节码执行引擎"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM学习-字节码执行引擎"/></a><div class="content"><a class="title" href="/blogs/e6df8766.html" title="JVM学习-字节码执行引擎">JVM学习-字节码执行引擎</a><time datetime="2023-11-23T06:17:17.000Z" title="发表于 2023-11-23 14:17:17">2023-11-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/c54ab307.html" title="力扣题解(601-750)"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/LeetCode-1.png!760" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="力扣题解(601-750)"/></a><div class="content"><a class="title" href="/blogs/c54ab307.html" title="力扣题解(601-750)">力扣题解(601-750)</a><time datetime="2023-11-22T09:44:55.000Z" title="发表于 2023-11-22 17:44:55">2023-11-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/6b203e53.html" title="力扣题解(451-600)"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/LeetCode-1.png!760" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="力扣题解(451-600)"/></a><div class="content"><a class="title" href="/blogs/6b203e53.html" title="力扣题解(451-600)">力扣题解(451-600)</a><time datetime="2023-11-22T09:36:37.000Z" title="发表于 2023-11-22 17:36:37">2023-11-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郜宇博</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
