@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>算法设计与分析-Linear Programming | 疼了也不哭</title><meta name="author" content="郜宇博"><meta name="copyright" content="郜宇博"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Question1 You want to determine the quantities x1, x2, …, xn of n different foods, each containing m types of nutrients. The amount of the i-th nutrient in the j-th food is represented as an, and the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法设计与分析-Linear Programming">
+<meta property="og:url" content="https://gaoyubo.cn/blogs/ec021f50.html">
+<meta property="og:site_name" content="疼了也不哭">
+<meta property="og:description" content="Question1 You want to determine the quantities x1, x2, …, xn of n different foods, each containing m types of nutrients. The amount of the i-th nutrient in the j-th food is represented as an, and the">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png">
+<meta property="article:published_time" content="2023-12-14T11:08:00.000Z">
+<meta property="article:modified_time" content="2023-12-14T12:03:14.852Z">
+<meta property="article:author" content="郜宇博">
+<meta property="article:tag" content="作业">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gaoyubo.cn/blogs/ec021f50.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '算法设计与分析-Linear Programming',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-14 20:03:14'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">算法设计与分析-Linear Programming</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-14T11:08:00.000Z" title="发表于 2023-12-14 19:08:00">2023-12-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-14T12:03:14.852Z" title="更新于 2023-12-14 20:03:14">2023-12-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/">国科大课程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="算法设计与分析-Linear Programming"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Question1"><a href="#Question1" class="headerlink" title="Question1"></a>Question1</h1><blockquote>
+<p>You want to determine the quantities x1, x2, …, xn of n different foods, each containing m types of nutrients. The amount of the i-th nutrient in the j-th food is represented as an, and the prices of the n foods are c1, c2, …, cn. Your goal is to find a recipe where the content of each of the m nutrients is at least b1, b2, …, bm, while minimizing the total cost.</p>
+</blockquote>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><strong>定义变量：</strong><br>$$<br>x_i 表示购买第 i 种食物的数量，其中 i &#x3D; 1, 2, …, n。\<br> a_{ij}  表示第 i 种食物中第 j 种营养成分的含量，其中 i &#x3D; 1, 2, …, n，j &#x3D; 1, 2, …, m。\<br>c_i\ 表示购买第 i 种食物的价格，其中 i &#x3D; 1, 2, …, n。\<br>$$<br><strong>目标函数：</strong><br>$$<br>\text{Minimize} \quad \sum_{i&#x3D;1}^{n} c_i \cdot x_i<br>$$<br><strong>约束条件：</strong><br>$$<br>\sum_{i&#x3D;1}^{n} a_{ij} \cdot x_i \geq b_j, \quad j &#x3D; 1, 2, …, m \<br> x_i \geq 0, \quad i &#x3D; 1, 2, …, n<br>$$<br>其中，约束条件确保每种营养成分的含量至少为<br>$$<br>b_1, b_2, …, b_m<br>$$</p>
+<h1 id="Question2"><a href="#Question2" class="headerlink" title="Question2"></a>Question2</h1><blockquote>
+<p>You now need to pack dormitory items. You have m items and n boxes, with enough boxes to accommodate all items. The space occupied by the i-th item is Ci , and the capacity of the j-th box is Sj . Your goal is to pack all items using as few boxes as possible.</p>
+</blockquote>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><strong>定义变量</strong>：<br>$$<br> x_{ij} 表示将第 i 个物品放入第 j 个箱子中的数量，其中 i &#x3D; 1, 2, …, m，j &#x3D; 1, 2, …, n。<br>$$<br><strong>目标函数：</strong><br>$$<br>\text{Minimize} \quad \sum_{j&#x3D;1}^{n} y_j<br>$$<br><strong>约束条件：</strong><br>$$<br>\sum_{i&#x3D;1}^{m} C_i \cdot x_{ij} \leq S_j \cdot y_j, \quad j &#x3D; 1, 2, …, n  \ x_{ij} \geq 0, \quad i &#x3D; 1, 2, …, m, \quad j &#x3D; 1, 2, …, n  \ y_j \in {0, 1}, \quad j &#x3D; 1, 2, …, n<br>$$<br>其中，约束条件确保每个箱子的容量不超过，并且每个物品要么被放入一个箱子中，要么没有。</p>
+<h1 id="Question3"><a href="#Question3" class="headerlink" title="Question3"></a>Question3</h1><blockquote>
+<p>On a farm, there are two different crops: wheat and soybeans. Planting one acre of wheat requires 5 units of fertilizer and 2 units of water, while planting one acre of soybeans requires 3 units of fertilizer and 4 units of water. The farm has 30 units of fertilizer and 20 units of water available. Each acre of wheat can be sold for 150 dollars, and each acre of soybeans can be sold for 120 dollars. The farm owner wants to maximize the total income.</p>
+</blockquote>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><strong>定义变量：</strong><br>$$<br> x_1  表示种植小麦的面积（亩数）  \x_2  表示种植大豆的面积（亩数）<br>$$<br> <strong>目标函数：</strong><br>$$<br> \text{Maximize} \quad 150x_1 + 120x_2<br>$$<br><strong>约束条件：</strong><br>$$<br> 5x_1 + 3x_2 \leq 30 \  2x_1 + 4x_2 \leq 20 \ x_1, x_2 \geq 0<br>$$</p>
+<h1 id="Question4"><a href="#Question4" class="headerlink" title="Question4"></a>Question4</h1><blockquote>
+<p>The company manufactures three products, A1, A2, and A3, utilizing resources such as metal sheets, labor, and machinery. The quantities of various resources required to manufacture one unit of each product are provided in the table below. Without considering fixed costs, the unit profits for each product are 40,000 yuan, 50,000 yuan, and 60,000 yuan, respectively. Available resources include 500 tons of metal sheets, 300 workers per month, and 100 machines per month. In addition to production, fixed costs must be paid: 1 million yuan for A1, 1.5 million yuan for A2, and 2 million yuan for A3. Develop a production plan for the company to maximize profits.</p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/image-20231214191206919.png" alt="image-20231214191206919" style="zoom: 33%;">
+</blockquote>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p><strong>定义变量：</strong><br>$$<br> x_1  表示生产产品 A1 的数量（单位：件） \ x_2  表示生产产品 A2 的数量（单位：件）\ x_3  表示生产产品 A3 的数量（单位：件）<br>$$<br><strong>目标函数：</strong><br>$$<br> \text{Maximize} \quad 40000x_1 + 50000x_2 + 60000x_3 - 1000000x_1 - 1500000x_2 - 2000000x_3<br>$$<br><strong>约束条件：</strong><br>$$<br> 2x_1 + 4x_2 + 8x_3 \leq 500 \ 2x_1 + 3x_2 + 4x_3 \leq 300 \ x_1 + 2x_2 + 3x_3 \leq 100 \ x_1, x_2, x_3 \geq 0<br>$$<br> 其中，约束条件确保各种资源的需求不超过可用资源，同时产品的生产数量为非负值。</p>
+<h1 id="Question5"><a href="#Question5" class="headerlink" title="Question5"></a>Question5</h1><blockquote>
+<p>The company plans to open branches in four districts in the urban area, with a total of 10 locations to choose from. Taking into account the consumption levels and residential density of residents in each district, the following rules are established: 1 In District 1, at most two points can be selected from A1, A2, and A3; In District 2, at least one point must be selected from A4 and A5; In District 3, at least one point must be selected from A6 and A7; In District 4, at least two points must be selected from A8, A9, and A10. The investment and annual profit for each point Aj vary depending on the location, as shown in the table below. The total investment of the company should not exceed 7.2 million yuan. Which sales points should be selected to maximize the company’s annual profit?</p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/image-20231214191227572.png" alt="image-20231214191227572" style="zoom:33%;">
+</blockquote>
+<h2 id="模型-4"><a href="#模型-4" class="headerlink" title="模型"></a>模型</h2><p><strong>定义变量：</strong><br>$$<br> x_1, x_2, x_3 表示在第一区选址的点的数量（单位：个） \ x_4, x_5 表示在第二区选址的点的数量（单位：个） \ x_6, x_7  表示在第三区选址的点的数量（单位：个） \ x_8, x_9, x_{10} 表示在第四区选址的点的数量（单位：个）<br>$$<br><strong>目标函数：</strong><br>$$<br> \text{Maximize} \quad 36x_1 + 40x_2 + 50x_3 + 22x_4 + 20x_5 + 30x_6 + 25x_7 + 48x_8 + 58x_9 + 61x_{10}<br>$$<br><strong>约束条件：</strong><br>$$<br> 100x_1 + 120x_2 + 150x_3 + 80x_4 + 70x_5 + 90x_6 + 80x_7 + 140x_8 + 160x_9 + 180x_{10} \leq 7200 \ x_1 + x_2 + x_3 \leq 2 \ x_4 + x_5 \geq 1 \ x_6 + x_7 \geq 1 \ x_8 + x_9 + x_{10} \geq 2 \ x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_{10} \geq 0<br>$$<br>其中，约束条件确保总投资不超过 7200 万元，同时满足每个区的选址规则和点的数量非负。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn">郜宇博</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://gaoyubo.cn/blogs/ec021f50.html">https://gaoyubo.cn/blogs/ec021f50.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gaoyubo.cn" target="_blank">疼了也不哭</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BD%9C%E4%B8%9A/">作业</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blogs/52ef5bf7.html" title="ElasticSearch-1"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/ES1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ElasticSearch-1</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blogs/8b85a768.html" title="算法设计与分析-Greedy"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-27</div><div class="title">算法设计与分析-Greedy</div></div></a></div><div><a href="/blogs/67a23ec8.html" title="算法设计与分析-Dynamic Programming"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-26</div><div class="title">算法设计与分析-Dynamic Programming</div></div></a></div><div><a href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-13</div><div class="title">国科大-软件测试与分析-插桩和变异测试</div></div></a></div><div><a href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-04</div><div class="title">国科大-区块链技术作业2</div></div></a></div><div><a href="/blogs/9ad5026b.html" title="国科大-区块链技术作业1"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-26</div><div class="title">国科大-区块链技术作业1</div></div></a></div><div><a href="/blogs/3ecd1561.html" title="算法设计与分析-Divide and Conquer"><img class="cover" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-26</div><div class="title">算法设计与分析-Divide and Conquer</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郜宇博</div><div class="author-info__description">个人博客网站</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gaoyubo2"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Question1"><span class="toc-text">Question1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B"><span class="toc-text">模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Question2"><span class="toc-text">Question2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B-1"><span class="toc-text">模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Question3"><span class="toc-text">Question3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B-2"><span class="toc-text">模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Question4"><span class="toc-text">Question4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B-3"><span class="toc-text">模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Question5"><span class="toc-text">Question5</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B-4"><span class="toc-text">模型</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blogs/ec021f50.html" title="算法设计与分析-Linear Programming"><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法设计与分析-Linear Programming"/></a><div class="content"><a class="title" href="/blogs/ec021f50.html" title="算法设计与分析-Linear Programming">算法设计与分析-Linear Programming</a><time datetime="2023-12-14T11:08:00.000Z" title="发表于 2023-12-14 19:08:00">2023-12-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/52ef5bf7.html" title="ElasticSearch-1"><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/ES1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ElasticSearch-1"/></a><div class="content"><a class="title" href="/blogs/52ef5bf7.html" title="ElasticSearch-1">ElasticSearch-1</a><time datetime="2023-12-12T13:17:45.000Z" title="发表于 2023-12-12 21:17:45">2023-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/89d6d9be.html" title="JVM学习-程序编译与优化"><img src="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM学习-程序编译与优化"/></a><div class="content"><a class="title" href="/blogs/89d6d9be.html" title="JVM学习-程序编译与优化">JVM学习-程序编译与优化</a><time datetime="2023-12-08T11:16:54.000Z" title="发表于 2023-12-08 19:16:54">2023-12-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/8b85a768.html" title="算法设计与分析-Greedy"><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法设计与分析-Greedy"/></a><div class="content"><a class="title" href="/blogs/8b85a768.html" title="算法设计与分析-Greedy">算法设计与分析-Greedy</a><time datetime="2023-11-26T17:44:41.000Z" title="发表于 2023-11-27 01:44:41">2023-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/67a23ec8.html" title="算法设计与分析-Dynamic Programming"><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法设计与分析-Dynamic Programming"/></a><div class="content"><a class="title" href="/blogs/67a23ec8.html" title="算法设计与分析-Dynamic Programming">算法设计与分析-Dynamic Programming</a><time datetime="2023-11-26T13:57:55.000Z" title="发表于 2023-11-26 21:57:55">2023-11-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郜宇博</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
