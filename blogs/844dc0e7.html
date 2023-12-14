@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760">
 <meta property="article:published_time" content="2023-11-14T02:41:08.000Z">
-<meta property="article:modified_time" content="2023-11-20T11:07:03.879Z">
+<meta property="article:modified_time" content="2023-12-14T14:14:41.293Z">
 <meta property="article:author" content="郜宇博">
 <meta property="article:tag" content="JVM笔记">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-11-20 19:07:03'
+  postUpdate: '2023-12-14 22:14:41'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -153,7 +153,7 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">JVM学习-Class文件结构</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-14T02:41:08.000Z" title="发表于 2023-11-14 10:41:08">2023-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-20T11:07:03.879Z" title="更新于 2023-11-20 19:07:03">2023-11-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">15.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>50分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习-Class文件结构"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>文章原文：<a href="https://gaoyubo.cn/blogs/844dc0e7.html">https://gaoyubo.cn/blogs/844dc0e7.html</a></p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">JVM学习-Class文件结构</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-14T02:41:08.000Z" title="发表于 2023-11-14 10:41:08">2023-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-14T14:14:41.293Z" title="更新于 2023-12-14 22:14:41">2023-12-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">15.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>50分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习-Class文件结构"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>文章原文：<a href="https://gaoyubo.cn/blogs/844dc0e7.html">https://gaoyubo.cn/blogs/844dc0e7.html</a></p>
 <h1 id="一、Class类文件的结构"><a href="#一、Class类文件的结构" class="headerlink" title="一、Class类文件的结构"></a>一、Class类文件的结构</h1><blockquote>
 <p>任何一个Class文件都对应着唯一的一个类或接口的定义信息。</p>
 <p>但是反过来说，类或接口并不一定都得定义在文件里（譬如类或接口也可以动态生成，直接送入类加载器中）。</p>
@@ -277,11 +277,11 @@
 </blockquote>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> algorithmAnalysis;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JVMTest</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> m;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">inc</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;gaoyubo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<img src="/blogs/844dc0e7/image-20231114235821239.png" alt="image-20231114235821239" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/647621c2b09c2f2b1a095aa462ab0eef.png" alt="image-20231114235821239" style="zoom:50%;">
 
 <h2 id="1-1魔数与版本号"><a href="#1-1魔数与版本号" class="headerlink" title="1.1魔数与版本号"></a>1.1魔数与版本号</h2><p>Class 文件的头 8 个字节是魔数和版本号，其中头 4 个字节是魔数，也就是 <code>0xCAFEBABE</code>，它可以用来确定这个文件是否为一个能被虚拟机接受的 Class 文件（这通过扩展名来识别文件类型要安全，毕竟扩展名是可以随便修改的）。</p>
 <p>后 4 个字节则是当前 Class 文件的版本号，其中第 5、6 个字节是次版本号，第 7、8 个字节是主版本号。</p>
-<img src="/blogs/844dc0e7/image-20231114213923343.png" alt="image-20231114213923343" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/7859e1fee43971de686df3f44891c1ab.png" alt="image-20231114213923343" style="zoom:80%;">
 
 <h2 id="1-2常量池"><a href="#1-2常量池" class="headerlink" title="1.2常量池"></a>1.2常量池</h2><p>从第 9 个字节开始，就是常量池的入口，常量池是 Class 文件中：</p>
 <ul>
@@ -499,14 +499,14 @@
 <li>string_index: 是一个指向CONSTANT_Utf8_info表的索引，该表中存储了实际的字符串值。通过使用这样的表形式，可以方便地存储和引用字符串值，保证了程序的灵活性和可读性。</li>
 </ul>
 <p>如果全部介绍，篇幅太长，这里使用IDEA的<code>jclasslib</code>插件，查看效果如下：</p>
-<img src="/blogs/844dc0e7/image-20231114235903061.png" alt="image-20231114235903061" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/1dd574ed31d84b8ed275b2760706b383.png" alt="image-20231114235903061" style="zoom:50%;">
 
 <p>常量表中常量项定义如下：</p>
-<img src="/blogs/844dc0e7/jvm-constPool1.png" alt="jvm-constPool1" style="zoom: 50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/89b08b090ecaebd628f800eb47e284e6.png" alt="jvm-constPool1" style="zoom: 50%;">
 
-<img src="/blogs/844dc0e7/jvm-constPool2.png" alt="jvm-constPool2" style="zoom: 80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/c126ab3a53937d613e6407c11f032bfd.png" alt="jvm-constPool2" style="zoom: 80%;">
 
-<img src="/blogs/844dc0e7/jvm-constPool3.png" alt="jvm-constPool3" style="zoom: 80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/867b43ebfc2d8aa4847ce0bb5bf12722.png" alt="jvm-constPool3" style="zoom: 80%;">
 
 <h2 id="1-3访问标志"><a href="#1-3访问标志" class="headerlink" title="1.3访问标志"></a>1.3访问标志</h2><p>在常量池结束之后，紧接着的2个字节代表访问标志（access_flags），这个标志用于识别一些类或者接口层次的访问信息，包括：</p>
 <p>这个Class是类还是接口？</p>
@@ -585,7 +585,7 @@
 </ol>
 <p>因此，<code>JVMTest</code> 类的访问标识应该是 <code>ACC_PUBLIC | ACC_SUPER</code>，即 0x0021。</p>
 </blockquote>
-<img src="/blogs/844dc0e7/image-20231115000052594.png" alt="image-20231115000052594" style="zoom:67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/bdb1c238e0c6c4693345796de7ea4bed.png" alt="image-20231115000052594" style="zoom:67%;">
 
 <h2 id="1-4类索引、父类索引与接口索引"><a href="#1-4类索引、父类索引与接口索引" class="headerlink" title="1.4类索引、父类索引与接口索引"></a>1.4类索引、父类索引与接口索引</h2><h3 id="类索引（this-class）和父类索引（super-class）"><a href="#类索引（this-class）和父类索引（super-class）" class="headerlink" title="类索引（this_class）和父类索引（super_class）"></a>类索引（this_class）和父类索引（super_class）</h3><ul>
 <li><strong>类型：</strong><ul>
@@ -632,13 +632,13 @@
 </li>
 </ul>
 <p>通过这三项数据，可以建立起类的继承关系和接口实现关系，确定类的层次结构和实现的接口，如下为全限定名索引查找过程。</p>
-<img src="/blogs/844dc0e7/image-20231114230035312.png" alt="image-20231114230035312" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/bd6360e10afb8dfc608b244c0b5e72e7.png" alt="image-20231114230035312" style="zoom:50%;">
 
 <h3 id="class文件中示例"><a href="#class文件中示例" class="headerlink" title="class文件中示例"></a>class文件中示例</h3><p>访问标志后面紧跟类索引、父类索引、接口索引，JVMTest.class中表示如下，这里类索引u2值为0x0005，父类索引u2值为0x0006：</p>
-<img src="/blogs/844dc0e7/image-20231115000304683.png" alt="image-20231115000304683" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/781a2d1b74d17f010c195f89bc1ab576.png" alt="image-20231115000304683" style="zoom:50%;">
 
-<p>使用jclasslib查看u2值对应常量如下，可以看出JVMTest类的父类为Object类：<br><img src="/blogs/844dc0e7/image-20231115000334908.png" alt="image-20231115000334908" style="zoom:50%;"></p>
-<img src="/blogs/844dc0e7/image-20231115000350477.png" alt="image-20231115000350477" style="zoom:50%;"> 
+<p>使用jclasslib查看u2值对应常量如下，可以看出JVMTest类的父类为Object类：<br><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/07a591ee39a51870e3301902c31c1acb.png" alt="image-20231115000334908" style="zoom:50%;"></p>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/51bf6773030b15e97b3b84e7ea53e8f8.png" alt="image-20231115000350477" style="zoom:50%;"> 
 
 <h2 id="1-5字段表集合"><a href="#1-5字段表集合" class="headerlink" title="1.5字段表集合"></a>1.5字段表集合</h2><ul>
 <li><strong>描述：</strong><ul>
@@ -905,13 +905,13 @@
 </li>
 </ol>
 <h3 id="class文件中示例-1"><a href="#class文件中示例-1" class="headerlink" title="class文件中示例"></a>class文件中示例</h3><p>在class文件中，表示如下，按照顺序分别是fields_count，access_flags，name_index，descriptor_index：</p>
-<img src="/blogs/844dc0e7/image-20231115000631384.png" alt="image-20231115000631384" style="zoom: 67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/91f4bc58169a7aaa93a2fc089bd8c8d8.png" alt="image-20231115000631384" style="zoom: 67%;">
 
 <p>0x0001：说明这个类只有一个字段表数据</p>
 <p>0x0002：代表private修饰符的ACC_PRIVATE 标志位为真（ACC_PRIVATE标志的值为0x0002）</p>
-<p>0x0008：字面量为<code>m</code>，在常量池中对应内容如下图<br><img src="/blogs/844dc0e7/image-20231115001408220.png" alt="image-20231115001408220" style="zoom: 50%;"> </p>
+<p>0x0008：字面量为<code>m</code>，在常量池中对应内容如下图<br><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/943c9e95d3ee0a6a7d6ac3e30452d3e2.png" alt="image-20231115001408220" style="zoom: 50%;"> </p>
 <p>0x0009：字面量<code>I</code>，在常量池中对应内容如下图</p>
-<img src="/blogs/844dc0e7/image-20231115001454132.png" alt="image-20231115001454132" style="zoom: 50%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/be7e756bcfdf9e903fe00458c1265475.png" alt="image-20231115001454132" style="zoom: 50%;"> 
 
 <blockquote>
 <p>与类访问标志相同，字段访问标志计算字段访问标志的值也是通过按位或（<code>|</code>）操作将各个标志的值组合而成的。</p>
@@ -1044,34 +1044,34 @@
 </tr>
 </tbody></table>
 <h3 id="class文件中示例-2"><a href="#class文件中示例-2" class="headerlink" title="class文件中示例"></a>class文件中示例</h3><p>按照顺序分别为：<code>method_count</code>,<code>access_flags</code>,<code>name_index</code>,<code>descriptor_index</code>,<code>attributes_count</code>,<code>attribute_name_index</code></p>
-<img src="/blogs/844dc0e7/image-20231115160405529.png" alt="image-20231115160405529" style="zoom: 67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/41fda37bba40c7c287b4935b21d38d58.png" alt="image-20231115160405529" style="zoom: 67%;">
 
-<p>0x0003（<code>method_count</code>）：说明这个类有三个方法，编译器自动添加了&lt;init&gt;方法，即实例构造器，如下：<br><img src="/blogs/844dc0e7/image-20231115160917202.png" alt="image-20231115160917202" style="zoom:50%;"></p>
+<p>0x0003（<code>method_count</code>）：说明这个类有三个方法，编译器自动添加了&lt;init&gt;方法，即实例构造器，如下：<br><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/79dec29138829a170aa0c5d4b64e202a.png" alt="image-20231115160917202" style="zoom:50%;"></p>
 <p>0x0001（<code>access_flags</code>）：只有ACC_PUBLIC标志为真</p>
 <p>0x000A（<code>name_index</code>）：字面量索引位10：字面量为&lt;init&gt;</p>
-<img src="/blogs/844dc0e7/image-20231115161005373.png" alt="image-20231115161005373" style="zoom:50%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/5546747b19afdb7de7567b6bd099ca86.png" alt="image-20231115161005373" style="zoom:50%;"> 
 
 <p>0x000B（<code>descriptor_index</code>）:字面量索引位11，字面量<code>()V</code>，代表void返回类型，参数列表为空</p>
-<img src="/blogs/844dc0e7/image-20231115161133878.png" alt="image-20231115161133878" style="zoom:50%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/9d97d640a1252455bdf206c9ac0bfdb9.png" alt="image-20231115161133878" style="zoom:50%;"> 
 
 <p>0x0001(<code>attributes_count</code>)：表示此方法的属性表集合有1项属性</p>
 <p>0x000C(<code>attribute_name_index</code>)：属性名称的索引值为0x000C，对应常量为“Code”</p>
-<img src="/blogs/844dc0e7/image-20231115161432171.png" alt="image-20231115161432171" style="zoom:50%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/38b1c495a3a8e8df828268b663514551.png" alt="image-20231115161432171" style="zoom:50%;"> 
 
 <p>字段表集合相对应地，如果父类方法在子类中没有被重写（Override），方法表集合中就不会出 现来自父类的方法信息。<br>但同样地，有可能会出现由编译器自动添加的方法，最常见的便是类构造器<code>&lt;clinit&gt;()</code>方法和实例构造器<code>&lt;init&gt;()</code>方法</p>
 <blockquote>
 <p>在Java语言中，要重载一个方法，除了要与原方法具有相同的简单名称之外，还要求必须拥有一个与原方法不同的<code>特征签名</code></p>
 <p>(<strong>Java代码的方法特征签名只包括方法名称、参数顺序及参数类型</strong>，而字节码的特征签名还包括方法返回值以及受查异常表)。</p>
 <p>由于返回值不包含在特征签名中，因此无法仅仅通过返回值的不同来对一个已有方法进行重载,如下图。</p>
-<img src="/blogs/844dc0e7/image-20231115162548801.png" alt="image-20231115162548801" style="zoom:50%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/f952a5240da28dca41646ab80ee0f252.png" alt="image-20231115162548801" style="zoom:50%;"> 
 
 <p>然而，在Class文件格式中，特征签名的范围明显更大。只要两个方法的描述符不完全相同，它们就可以在同一个Class文件中合法共存。具体来说，如果两个方法具有相同的名称和特征签名，但返回值不同，它们仍然可以在同一个Class文件中存在。</p>
 </blockquote>
 <h2 id="1-7属性表集合"><a href="#1-7属性表集合" class="headerlink" title="1.7属性表集合"></a>1.7属性表集合</h2><p>属性表（attribute_info）在前面的讲解之中已经出现过数次，Class文件、字段表、方法表都可以 携带自己的属性表集合，以描述某些场景专有的信息。</p>
 <p>在《Java虚拟机规范》的Java SE 12版本中，预定义属性已经增加到29项，如下：</p>
-<img src="/blogs/844dc0e7/image-20231116145829332.png" alt="image-20231116145829332" style="zoom:67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/801d4dd1dbb4fb69e72921746003ca1f.png" alt="image-20231116145829332" style="zoom:67%;">
 
-<img src="/blogs/844dc0e7/image-20231116145859903.png" alt="image-20231116145859903" style="zoom:67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/fa8739c19ffc5cd0c86fe2a9a702cec8.png" alt="image-20231116145859903" style="zoom:67%;">
 
 <p>对于每一个属性，它的名称都要从常量池中引用一个<code>CONSTANT_Utf8_info</code>类型的常量来表示， 而属性值的结构则是完全自定义的，只需要通过一个u4的长度属性去说明属性值所占用的位数即可。一个符合规则的属性表应该满足下表结构。</p>
 <table>
@@ -1173,14 +1173,14 @@
 <li><strong>attributes_count：</strong> Code属性的属性数量，用于存储额外的属性信息。</li>
 <li><strong>attributes：</strong> Code属性的属性集合，可能包含一些额外的信息，如调试信息等。</li>
 </ul>
-<h4 id="class文件中示例-3"><a href="#class文件中示例-3" class="headerlink" title="class文件中示例"></a>class文件中示例</h4><img src="/blogs/844dc0e7/image-20231116155555581.png" alt="image-20231116155555581" style="zoom: 67%;">
+<h4 id="class文件中示例-3"><a href="#class文件中示例-3" class="headerlink" title="class文件中示例"></a>class文件中示例</h4><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/53b788641f81d868a5bfad51f8a2b097.png" alt="image-20231116155555581" style="zoom: 67%;">
 
 <p>属性表的<code>attribute_name_index</code>后的<code>00 00 00 2F</code>表示属性值的长度。在这里，<code>00 00 00 2F</code>表示长度为47个字节。它告诉虚拟机在读取属性值时要读取47个字节的内容。如果前面的0x000C的字面量<code>Code</code>虚拟机不认识，那么就可以跳过这些长度。</p>
 <blockquote>
 <p>《Java虚拟机规范》允许只要不与已有属性名重复，任何人实现的编译器都可以向属性表中写入自己定义的属性信息，Java虚拟机运行时会忽略掉它不认识的属性。</p>
 </blockquote>
 <p>按顺序分别为：max_stack，max_locals，code_length，code</p>
-<img src="/blogs/844dc0e7/image-20231116160039741.png" alt="image-20231116160039741" style="zoom: 67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/fcbf087efe7ac98e3fb067fc46a06db7.png" alt="image-20231116160039741" style="zoom: 67%;">
 
 <p>0x0001: 操作数栈的最大深度为1</p>
 <p>0x0001: 本地变量表容量为1</p>
@@ -1475,7 +1475,7 @@
 
 <h2 id="2-1字节码与数据类型"><a href="#2-1字节码与数据类型" class="headerlink" title="2.1字节码与数据类型"></a>2.1字节码与数据类型</h2><p>如下列举了Java虚拟机所支持的与数据类型相关的字节码指令，通过使用数据类型列所代表的特殊字符替换opcode列的指令模板中的T，就可以得到一个具体的字节码指令。</p>
 <p>如果在表中指令模板与数据类型两列共同确定的格为空，则说明虚拟机不支持对这种数据类型执行这项操作。例如load指令有操作int类型的iload，但是没有操作byte类型的同类指令。</p>
-<img src="/blogs/844dc0e7/image-20231117183830521.png" alt="image-20231117183830521" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/994661055c49c9e0920f1060f23a1027.png" alt="image-20231117183830521" style="zoom:80%;">
 Java虚拟机的字节码指令集并没有提供专门用于处理整数类型`byte`、`char`和`short`以及布尔类型(`boolean`)的指令。相反，编译器在编译期或运行期进行类型转换，将这些较小的整数类型转换为`int`类型，然后使用`int`类型的字节码指令来进行操作。
 
 <p>具体而言：</p>
@@ -1747,7 +1747,7 @@ Java虚拟机的字节码指令集并没有提供专门用于处理整数类型`
 <p>​	编译后，这段代码生成的字节码序列如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Method <span class="keyword">void</span> <span class="title function_">onlyMe</span><span class="params">(Foo)</span></span><br><span class="line"><span class="number">0</span> aload_1          <span class="comment">// 将对象f入栈</span></span><br><span class="line"><span class="number">1</span> dup              <span class="comment">// 复制栈顶元素（即f的引用）</span></span><br><span class="line"><span class="number">2</span> astore_2         <span class="comment">// 将栈顶元素存储到局部变量表变量槽2中</span></span><br><span class="line"><span class="number">3</span> monitorenter     <span class="comment">// 以栈顶元素（即f）作为锁，开始同步</span></span><br><span class="line"><span class="number">4</span> aload_0          <span class="comment">// 将局部变量槽0（即this指针）的元素入栈</span></span><br><span class="line"><span class="number">5</span> invokevirtual #<span class="number">5</span> <span class="comment">// 调用doSomething()方法</span></span><br><span class="line"><span class="number">8</span> aload_2          <span class="comment">// 将局部变量槽2的元素（即f）入栈</span></span><br><span class="line"><span class="number">9</span> monitorexit      <span class="comment">// 退出同步</span></span><br><span class="line"><span class="number">10</span> goto <span class="number">18</span>         <span class="comment">// 方法正常结束，跳转到18返回</span></span><br><span class="line"></span><br><span class="line"><span class="number">13</span> astore_3        <span class="comment">// 从这步开始是异常路径，见下面异常表的Target</span></span><br><span class="line"><span class="number">14</span> aload_2          <span class="comment">// 将局部变量槽2的元素（即f）入栈</span></span><br><span class="line"><span class="number">15</span> monitorexit      <span class="comment">// 退出同步</span></span><br><span class="line"><span class="number">16</span> aload_3          <span class="comment">// 将局部变量槽3的元素（即异常对象）入栈</span></span><br><span class="line"><span class="number">17</span> athrow           <span class="comment">// 把异常对象重新抛出给onlyMe()方法的调用者</span></span><br><span class="line"></span><br><span class="line"><span class="number">18</span> <span class="keyword">return</span>          <span class="comment">// 方法正常返回</span></span><br></pre></td></tr></table></figure>
 
-<img src="/blogs/844dc0e7/image-20231117200044252.png" alt="image-20231117200044252" style="zoom:50%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-Class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/2023/12/14/dd2bd4ebcbef6bfa443a517c391b58a0.png" alt="image-20231117200044252" style="zoom:50%;"> 
 
 <p>为了保证在方法异常完成时monitorenter和monitorexit指 令依然可以正确配对执行，编译器会自动产生一个异常处理程序，这个异常处理程序声明可处理所有的异常，它的目的就是用来执行monitorexit指令。</p>
 </li>

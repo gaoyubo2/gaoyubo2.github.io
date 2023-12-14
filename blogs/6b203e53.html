@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/LeetCode-1.png!760">
 <meta property="article:published_time" content="2023-11-22T09:36:37.000Z">
-<meta property="article:modified_time" content="2023-11-22T09:48:59.752Z">
+<meta property="article:modified_time" content="2023-12-14T12:23:33.336Z">
 <meta property="article:author" content="郜宇博">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-11-22 17:48:59'
+  postUpdate: '2023-12-14 20:23:33'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -153,7 +153,7 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">力扣题解(451-600)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-22T09:36:37.000Z" title="发表于 2023-11-22 17:36:37">2023-11-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-22T09:48:59.752Z" title="更新于 2023-11-22 17:48:59">2023-11-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>39分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="力扣题解(451-600)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="一、双指针"><a href="#一、双指针" class="headerlink" title="一、双指针"></a>一、双指针</h1><h3 id="541-反转字符串-II"><a href="#541-反转字符串-II" class="headerlink" title="541. 反转字符串 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string-ii/">541. 反转字符串 II</a></h3><p>给定一个字符串 <code>s</code> 和一个整数 <code>k</code>，从字符串开头算起，每计数至 <code>2k</code> 个字符，就反转这 <code>2k</code> 字符中的前 <code>k</code> 个字符。</p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">力扣题解(451-600)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-22T09:36:37.000Z" title="发表于 2023-11-22 17:36:37">2023-11-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-14T12:23:33.336Z" title="更新于 2023-12-14 20:23:33">2023-12-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>39分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="力扣题解(451-600)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="一、双指针"><a href="#一、双指针" class="headerlink" title="一、双指针"></a>一、双指针</h1><h3 id="541-反转字符串-II"><a href="#541-反转字符串-II" class="headerlink" title="541. 反转字符串 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string-ii/">541. 反转字符串 II</a></h3><p>给定一个字符串 <code>s</code> 和一个整数 <code>k</code>，从字符串开头算起，每计数至 <code>2k</code> 个字符，就反转这 <code>2k</code> 字符中的前 <code>k</code> 个字符。</p>
 <ul>
 <li>如果剩余字符少于 <code>k</code> 个，则将剩余字符全部反转。</li>
 <li>如果剩余字符小于 <code>2k</code> 但大于或等于 <code>k</code> 个，则反转前 <code>k</code> 个字符，其余字符保持原样。</li>
@@ -238,7 +238,7 @@
 <h3 id="598-范围求和-II"><a href="#598-范围求和-II" class="headerlink" title="598. 范围求和 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-addition-ii/">598. 范围求和 II</a></h3><p>给你一个 <code>m x n</code> 的矩阵 <code>M</code> ，初始化时所有的 <code>0</code> 和一个操作数组 <code>op</code> ，其中 <code>ops[i] = [ai, bi]</code> 意味着当所有的 <code>0 &lt;= x &lt; ai</code> 和 <code>0 &lt;= y &lt; bi</code> 时， <code>M[x][y]</code> 应该加 1。</p>
 <p>在 <em>执行完所有操作后</em> ，计算并返回 <em>矩阵中最大整数的个数</em> 。</p>
 <p><strong>示例 1:</strong></p>
-<img src="/blogs/6b203e53/ex1.jpg" alt="img" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022916.jpg" alt="img" style="zoom:80%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: m = 3, n = 3，ops = [[2,2],[3,3]]</span><br><span class="line">输出: 4</span><br><span class="line">解释: M 中最大的整数是 2, 而且 M 中有4个值为2的元素。因此返回 4。</span><br></pre></td></tr></table></figure>
 
@@ -322,7 +322,7 @@
 <li>第二行由字符 <code>&quot;asdfghjkl&quot;</code> 组成。</li>
 <li>第三行由字符 <code>&quot;zxcvbnm&quot;</code> 组成。</li>
 </ul>
-<img src="/blogs/6b203e53/image-20231026235620629.png" alt="image-20231026235620629" style="zoom:67%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022960.png" alt="image-20231026235620629" style="zoom:67%;"> 
 
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：words = [&quot;Hello&quot;,&quot;Alaska&quot;,&quot;Dad&quot;,&quot;Peace&quot;]</span><br><span class="line">输出：[&quot;Alaska&quot;,&quot;Dad&quot;]</span><br></pre></td></tr></table></figure>
@@ -369,7 +369,7 @@
 <p>重构后的矩阵需要将原始矩阵的所有元素以相同的 <strong>行遍历顺序</strong> 填充。</p>
 <p>如果具有给定参数的 <code>reshape</code> 操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/reshape1-grid.jpg" alt="img" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022013.jpg" alt="img" style="zoom:80%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：mat = [[1,2],[3,4]], r = 1, c = 4</span><br><span class="line">输出：[[1,2,3,4]]</span><br></pre></td></tr></table></figure>
 
@@ -439,7 +439,7 @@
 <p>网格中的格子 <strong>水平和垂直</strong> 方向相连（对角线方向不相连）。整个网格被水完全包围，但其中恰好有一个岛屿（或者说，一个或多个表示陆地的格子相连组成的岛屿）。</p>
 <p>岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100 。计算这个岛屿的周长。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/image-20231026235734963.png" alt="image-20231026235734963" style="zoom:50%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022055.png" alt="image-20231026235734963" style="zoom:50%;"> 
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]</span><br><span class="line">输出：16</span><br><span class="line">解释：它的周长是上面图片中的 16 个黄色的边</span><br></pre></td></tr></table></figure>
 
@@ -449,12 +449,12 @@
 <p>最大深度是指从根节点到最远叶子节点的最长路径上的节点总数。</p>
 <p>N 叉树输入按层序遍历序列化表示，每组子节点由空值分隔（请参见示例）。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/image-20231026235751259.png" alt="image-20231026235751259" style="zoom:67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022105.png" alt="image-20231026235751259" style="zoom:67%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,null,3,2,4,null,5,6]</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<img src="/blogs/6b203e53/image-20231026235801405.png" alt="image-20231026235801405" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022166.png" alt="image-20231026235801405" style="zoom:80%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]</span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure>
 
@@ -463,7 +463,7 @@
 <h3 id="572-另一棵树的子树"><a href="#572-另一棵树的子树" class="headerlink" title="572. 另一棵树的子树"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subtree-of-another-tree/">572. 另一棵树的子树</a></h3><p>给你两棵二叉树 <code>root</code> 和 <code>subRoot</code> 。检验 <code>root</code> 中是否包含和 <code>subRoot</code> 具有相同结构和节点值的子树。如果存在，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
 <p>二叉树 <code>tree</code> 的一棵子树包括 <code>tree</code> 的某个节点和这个节点的所有后代节点。<code>tree</code> 也可以看做它自身的一棵子树。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/image-20231026235816921.png" alt="image-20231026235816921" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022230.png" alt="image-20231026235816921" style="zoom:50%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [3,4,5,1,2], subRoot = [4,1,2]</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
 
@@ -473,7 +473,7 @@
 <p>二叉树的 <strong>直径</strong> 是指树中任意两个节点之间最长路径的 <strong>长度</strong> 。这条路径可能经过也可能不经过根节点 <code>root</code> 。</p>
 <p>两节点之间路径的 <strong>长度</strong> 由它们之间边数表示。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/diamtree.jpg" alt="img" style="zoom:67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022285.jpg" alt="img" style="zoom:67%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,2,3,4,5]</span><br><span class="line">输出：3</span><br><span class="line">解释：3 ，取路径 [4,2,1,3] 或 [5,2,1,3] 的长度。</span><br></pre></td></tr></table></figure>
 
@@ -486,12 +486,12 @@
 <p>一个树的 <strong>节点的坡度</strong> 定义即为，该节点左子树的节点之和和右子树节点之和的 <strong>差的绝对值</strong> 。如果没有左子树的话，左子树的节点之和为 0 ；没有右子树的话也是一样。空结点的坡度是 0 。</p>
 <p><strong>整个树</strong> 的坡度就是其所有节点的坡度之和。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/tilt1.jpg" alt="img" style="zoom:67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022341.jpg" alt="img" style="zoom:67%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,2,3]</span><br><span class="line">输出：1</span><br><span class="line">解释：</span><br><span class="line">节点 2 的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点 3 的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点 1 的坡度：|2-3| = 1（左子树就是左子节点，所以和是 2 ；右子树就是右子节点，所以和是 3 ）</span><br><span class="line">坡度总和：0 + 0 + 1 = 1</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<img src="/blogs/6b203e53/tilt2.jpg" alt="img" style="zoom:67%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022393.jpg" alt="img" style="zoom:67%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [4,2,9,3,5,null,7]</span><br><span class="line">输出：15</span><br><span class="line">解释：</span><br><span class="line">节点 3 的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点 5 的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点 7 的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点 2 的坡度：|3-5| = 2（左子树就是左子节点，所以和是 3 ；右子树就是右子节点，所以和是 5 ）</span><br><span class="line">节点 9 的坡度：|0-7| = 7（没有左子树，所以和是 0 ；右子树正好是右子节点，所以和是 7 ）</span><br><span class="line">节点 4 的坡度：|(3+5+2)-(9+7)| = |10-16| = 6（左子树值为 3、5 和 2 ，和是 10 ；右子树值为 9 和 7 ，和是 16 ）</span><br><span class="line">坡度总和：0 + 0 + 0 + 2 + 7 + 6 = 15</span><br></pre></td></tr></table></figure>
 
@@ -500,7 +500,7 @@
 <h3 id="589-N-叉树的前序遍历"><a href="#589-N-叉树的前序遍历" class="headerlink" title="589. N 叉树的前序遍历"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-ary-tree-preorder-traversal/">589. N 叉树的前序遍历</a></h3><p>给定一个 n 叉树的根节点 <code>root</code> ，返回 <em>其节点值的 <strong>前序遍历</strong></em> 。</p>
 <p>n 叉树 在输入中按层序遍历进行序列化表示，每组子节点由空值 <code>null</code> 分隔（请参见示例）。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/narytreeexample.png" alt="img" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022448.png" alt="img" style="zoom:50%;">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,null,3,2,4,null,5,6]</span><br><span class="line">输出：[1,3,5,6,2,4]</span><br></pre></td></tr></table></figure>
 
@@ -534,7 +534,7 @@
 <li>左子树和右子树都是二叉搜索树</li>
 </ul>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/mode-tree.jpg" alt="img" style="zoom:80%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022526.jpg" alt="img" style="zoom:80%;"> 
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,null,2,2]</span><br><span class="line">输出：[2]</span><br></pre></td></tr></table></figure>
 
@@ -546,7 +546,7 @@
 <h3 id="530-二叉搜索树的最小绝对差"><a href="#530-二叉搜索树的最小绝对差" class="headerlink" title="530. 二叉搜索树的最小绝对差"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">530. 二叉搜索树的最小绝对差</a></h3><p>给你一个二叉搜索树的根节点 <code>root</code> ，返回 <strong>树中任意两不同节点值之间的最小差值</strong> 。</p>
 <p>差值是一个正数，其数值等于两值之差的绝对值。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/blogs/6b203e53/image-20231026235903921.png" alt="image-20231026235903921" style="zoom:50%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/202312142022605.png" alt="image-20231026235903921" style="zoom:50%;"> 
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [4,2,6,1,3]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
 

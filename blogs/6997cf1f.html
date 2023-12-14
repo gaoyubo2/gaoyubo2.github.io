@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/gyb20010204/gyb-blog/raw/master/img/JVM.png!760">
 <meta property="article:published_time" content="2023-10-28T15:31:47.000Z">
-<meta property="article:modified_time" content="2023-11-23T08:24:10.239Z">
+<meta property="article:modified_time" content="2023-12-14T14:12:41.139Z">
 <meta property="article:author" content="郜宇博">
 <meta property="article:tag" content="JVM笔记">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-11-23 16:24:10'
+  postUpdate: '2023-12-14 22:12:41'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -153,11 +153,11 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">JVM学习-自动内存管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-28T15:31:47.000Z" title="发表于 2023-10-28 23:31:47">2023-10-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-23T08:24:10.239Z" title="更新于 2023-11-23 16:24:10">2023-11-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">14.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>45分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习-自动内存管理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>文章原文：<a href="https://gaoyubo.cn/blogs/6997cf1f.html">https://gaoyubo.cn/blogs/6997cf1f.html</a></p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="疼了也不哭"><span class="site-name">疼了也不哭</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">JVM学习-自动内存管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-28T15:31:47.000Z" title="发表于 2023-10-28 23:31:47">2023-10-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-14T14:12:41.139Z" title="更新于 2023-12-14 22:12:41">2023-12-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">14.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>45分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习-自动内存管理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>文章原文：<a href="https://gaoyubo.cn/blogs/6997cf1f.html">https://gaoyubo.cn/blogs/6997cf1f.html</a></p>
 <h1 id="一、运行时数据区"><a href="#一、运行时数据区" class="headerlink" title="一、运行时数据区"></a>一、运行时数据区</h1><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域 有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而一直存在，有些区域则是 依赖用户线程的启动和结束而建立和销毁。根据《Java虚拟机规范》的规定，Java虚拟机所管理的内存将会包括以下几个运行时数据区域</p>
-<img src="/blogs/6997cf1f/image-20231029140510184.png" alt="image-20231029140510184" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/7cfa9f5cfe849dc48d42bc703c67c433.png" alt="image-20231029140510184" style="zoom:80%;">
 
-<img src="/blogs/6997cf1f/image-20231029233012225.png" alt="image-20231029233012225" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/f979cb4a486c7771ba13e3a671a92aed.png" alt="image-20231029233012225" style="zoom:80%;">
 
 <h2 id="1-1程序计数器"><a href="#1-1程序计数器" class="headerlink" title="1.1程序计数器"></a>1.1程序计数器</h2><p>线程私有</p>
 <p>是一个非常小的内存区域，用于存储当前线程正在执行的字节码指令的地址。每个线程在JVM中都有一个独立的程序计数器。当JVM执行一条字节码指令时，程序计数器会更新为下一条指令的地址。</p>
@@ -173,7 +173,7 @@
 </li>
 <li>是 5 个区域中<strong>唯一不会出现 OOM 的区域</strong>。</li>
 </ul>
-<h2 id="1-2虚拟机栈"><a href="#1-2虚拟机栈" class="headerlink" title="1.2虚拟机栈"></a>1.2虚拟机栈</h2><img src="/blogs/6997cf1f/image-20231029233100723.png" alt="image-20231029233100723" style="zoom: 50%;">
+<h2 id="1-2虚拟机栈"><a href="#1-2虚拟机栈" class="headerlink" title="1.2虚拟机栈"></a>1.2虚拟机栈</h2><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/348a2a13cb3edb9e3c4ecf5aa09d500f.png" alt="image-20231029233100723" style="zoom: 50%;">
 
 <p>线程私有</p>
 <p>每个方法被执行的时候，Java虚拟机都 会同步创建一个栈帧用于存储<code>局部变量表</code>、<code>操作数栈</code>、<code>动态连接</code>、<code>方法出口</code>等信息。</p>
@@ -192,7 +192,7 @@
 <li>服务于 native 方法；</li>
 <li>可能抛出的异常：与 Java 虚拟机栈一样。</li>
 </ul>
-<h2 id="1-4堆"><a href="#1-4堆" class="headerlink" title="1.4堆"></a>1.4堆</h2><img src="/blogs/6997cf1f/image-20231029233145284.png" alt="image-20231029233145284" style="zoom:50%;">
+<h2 id="1-4堆"><a href="#1-4堆" class="headerlink" title="1.4堆"></a>1.4堆</h2><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/0033d25a9bbd3bc0ce420327653563db.png" alt="image-20231029233145284" style="zoom:50%;">
 
 <p>线程共享</p>
 <p><strong>“几乎”</strong>所有的对象实例都在这里分配内存</p>
@@ -244,9 +244,9 @@
 <li>来源于<code>NIO</code>，通过存在堆中的<code>DirectByteBuffer</code>操作Native内存</li>
 <li>通常，访问直接内存的速度会优于Java堆，即读写性能高。因此处于性能考虑，读写频繁的场合可能会考虑使用直接内存。Java的NIO库允许Java程序使用直接内存，用于数据缓冲区</li>
 </ul>
-<img src="/blogs/6997cf1f/image-20231029143742474.png" alt="image-20231029143742474" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/32f8c9db8ca61b4c147e4752c768ba39.png" alt="image-20231029143742474" style="zoom:80%;">
 
-<img src="/blogs/6997cf1f/image-20231029143859646.png" alt="image-20231029143859646" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/f7c4c2a3381819cd22f5130a1d6a49ac.png" alt="image-20231029143859646" style="zoom:80%;">
 
 <p>由于直接内存在Java堆外，因此它的大小不会直接受限于<code>-Xmx</code>指定的最大堆大小，但是系统内存是有限的，Java堆和直接内存的总和依然受限于操作系统能给出的最大内存</p>
 <p>缺点</p>
@@ -278,7 +278,7 @@
 </ul>
 </li>
 </ul>
-<img src="/blogs/6997cf1f/image-20231029232645062.png" alt="image-20231029232645062" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/17ed9910c4823082dcb2e3689629d833.png" alt="image-20231029232645062" style="zoom:50%;">
 
 <ul>
 <li>空闲列表（内存分配不规整）<ul>
@@ -297,9 +297,9 @@
 </li>
 </ul>
 <h2 id="2-2对象的内存布局"><a href="#2-2对象的内存布局" class="headerlink" title="2.2对象的内存布局"></a>2.2对象的内存布局</h2><p>对象在堆内存中的存储布局可以划分为三个部分：<br><code>对象头(Header)</code>、<code>实例数据(Instance Data)</code>和<code>对齐填充(Padding)</code>。</p>
-<img src="/blogs/6997cf1f/image-20231029150149170.png" alt="image-20231029150149170" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/83e6dd2b7e7da8acd0925d59784c27bf.png" alt="image-20231029150149170" style="zoom:80%;">
 
-<img src="/blogs/6997cf1f/image-20231029150309158.png" alt="image-20231029150309158" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/1f999326bf2aac8d181502c6084b7884.png" alt="image-20231029150309158" style="zoom:50%;">
 
 <ul>
 <li>对象头：<ul>
@@ -321,11 +321,11 @@
 <h2 id="2-3对象的访问定位"><a href="#2-3对象的访问定位" class="headerlink" title="2.3对象的访问定位"></a>2.3对象的访问定位</h2><p>Java 程序需要通过虚拟机栈上的 reference 数据来操作堆上的具体对象，reference 数据是一个指向对象的引用，不过如何通过这个引用定位到具体的对象，目前主要有以下两种访问方式：句柄访问和直接指针访问。</p>
 <h3 id="句柄访问"><a href="#句柄访问" class="headerlink" title="句柄访问"></a>句柄访问</h3><p>句柄访问会在 Java 堆中划分一块内存作为句柄池，每一个<strong>句柄存放</strong>着到对象实例数据和<strong>对象类型数据的指针。</strong></p>
 <p>优势：对象移动的时候（这在垃圾回收时十分常见）只需改变句柄池中对象实例数据的指针，不需要修改reference本身。</p>
-<img src="/blogs/6997cf1f/image-20231029155643690.png" alt="image-20231029155643690" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/46e1bd5c025e945fb80432ef59d3c28e.png" alt="image-20231029155643690" style="zoom:80%;">
 
 <h3 id="直接指针访问"><a href="#直接指针访问" class="headerlink" title="直接指针访问"></a>直接指针访问</h3><p>直接指针访问方式在 Java 堆对象的实例数据中<strong>存放了一个指向对象类型数据的指针</strong>，在 <code>HotSpot </code>中，这个指针会被存<strong>放在对象头</strong>中。</p>
 <p>优势：减少了一次指针定位对象实例数据的开销，速度更快。</p>
-<img src="/blogs/6997cf1f/image-20231029155746893.png" alt="image-20231029155746893" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/e9c62cb45fb452144d518dada19b83a3.png" alt="image-20231029155746893" style="zoom:80%;">
 
 <h1 id="三、OOM-异常"><a href="#三、OOM-异常" class="headerlink" title="三、OOM 异常"></a>三、OOM 异常</h1><h2 id="3-1Java-堆溢出"><a href="#3-1Java-堆溢出" class="headerlink" title="3.1Java 堆溢出"></a>3.1Java 堆溢出</h2><ul>
 <li>出现标志：<code>java.lang.OutOfMemoryError: Java heap space</code></li>
@@ -362,7 +362,7 @@
 <li>如何回收？</li>
 </ul>
 <p>其中第一个问题很好回答，在 Java 中，<code>GC </code>主要发生在 Java 堆和方法区中，对于后两个问题，将在之后的内容中进行讨论，并介绍 <code>HotSpot </code>的 7 个垃圾收集器。</p>
-<h2 id="4-1判断对象的生死"><a href="#4-1判断对象的生死" class="headerlink" title="4.1判断对象的生死"></a>4.1判断对象的生死</h2><img src="/blogs/6997cf1f/image-20231029203959484.png" style="zoom:80%;">
+<h2 id="4-1判断对象的生死"><a href="#4-1判断对象的生死" class="headerlink" title="4.1判断对象的生死"></a>4.1判断对象的生死</h2><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/cee000556d5616cd7cd6ced461d42bf7.png" style="zoom:80%;">
 
 <p>什么时候回收对象？当然是这个对象再也不会被用到的时候回收。</p>
 <p>所以要想解决 “什么时候回收？” 这个问题，我们要先能判断一个对象什么时候什么时候真正的 “死” 掉了，判断对象是否可用主要有以下两种方法。</p>
@@ -379,7 +379,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="可达性分析算法（主流）"><a href="#可达性分析算法（主流）" class="headerlink" title="可达性分析算法（主流）"></a>可达性分析算法（主流）</h4><img src="/blogs/6997cf1f/image-20231029233255061.png" alt="image-20231029233255061" style="zoom:50%;">
+<h4 id="可达性分析算法（主流）"><a href="#可达性分析算法（主流）" class="headerlink" title="可达性分析算法（主流）"></a>可达性分析算法（主流）</h4><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/102e6c10d4156fc54859c675c039b67e.png" alt="image-20231029233255061" style="zoom:50%;">
 
 <ul>
 <li><strong>算法描述：</strong><ul>
@@ -409,14 +409,14 @@
 <li>黑色：表示<strong>对象已经被垃圾收集器访问过</strong>，且这个对象的所有引用都已经扫描过。黑色的对象代 表已经扫描过，它是安全存活的，如果有其他对象引用指向了黑色对象，无须重新扫描一遍。黑色对 象不可能直接（不经过灰色对象）指向某个白色对象。 </li>
 <li>灰色：表示<strong>对象已经被垃圾收集器访问过</strong>，但这个对象上<strong>至少存在一个引用还没有被扫描</strong>过。</li>
 </ul>
-<img src="/blogs/6997cf1f/image-20231029215916416.png" alt="image-20231029215916416" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/56f314d83c268c3733b7d9a472b337e2.png" alt="image-20231029215916416" style="zoom:50%;">
 
 <p>关于可达性分析的扫描过程，可以看作对象图上一股以灰色为波峰的波纹从黑向白推进的过程，此时如果用户线程改变了对象的引用关系，会发生两种情况：</p>
 <ul>
 <li>一种是把原本消亡的对象错误标记为存活， 这下次收集清理掉就好。</li>
 <li>另一种是把原本存活的对象错误标记为已消亡，那么可能会导致程序崩溃。</li>
 </ul>
-<img src="/blogs/6997cf1f/image-20231029220102915.png" alt="image-20231029220102915" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/b6458ec0f1bb68fa55dc9cf221fe106a.png" alt="image-20231029220102915" style="zoom:50%;">
 
 <p>如上图所示，<strong>b -&gt; c 的引用被切断，但同时用户线程建立了一个新的从 a -&gt; c 的引用</strong>，由于已经遍历到了 b，不可能再回去遍历 a（黑色对象不会被重新扫描），再遍历 c，所以这个 c 实际是存活的对象，但由于没有被垃圾收集器扫描到，被错误地标记成了白色，就<strong>会导致c被标记为需要回收的对象</strong>。</p>
 <p>总结下对象消失问题的两个条件：</p>
@@ -456,7 +456,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="4-2垃圾收集算法"><a href="#4-2垃圾收集算法" class="headerlink" title="4.2垃圾收集算法"></a>4.2垃圾收集算法</h2><img src="/blogs/6997cf1f/image-20231029204343997.png" alt="image-20231029204343997" style="zoom:80%;">
+<h2 id="4-2垃圾收集算法"><a href="#4-2垃圾收集算法" class="headerlink" title="4.2垃圾收集算法"></a>4.2垃圾收集算法</h2><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/ec233657aa1527d3930f7e0b309f4758.png" alt="image-20231029204343997" style="zoom:80%;">
 
 <h3 id="4-2-1标记-清除算法"><a href="#4-2-1标记-清除算法" class="headerlink" title="4.2.1标记 - 清除算法"></a>4.2.1标记 - 清除算法</h3><ul>
 <li><p><strong>算法描述：</strong></p>
@@ -470,7 +470,7 @@
 <li>效率问题：标记和清理两个过程的效率都不高。</li>
 <li>空间碎片问题：标记清除后会产生大量不连续的内存碎片，导致以后为较大的对象分配内存时找不到足够的连续内存，会提前触发另一次 GC。</li>
 </ul>
-<img src="/blogs/6997cf1f/image-20231029204413509.png" alt="image-20231029204413509" style="zoom: 33%;"></li>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/eb183f60bfa40656c7650373bda8e1a0.png" alt="image-20231029204413509" style="zoom: 33%;"></li>
 </ul>
 <h3 id="4-2-2标记-复制算法"><a href="#4-2-2标记-复制算法" class="headerlink" title="4.2.2标记 - 复制算法"></a>4.2.2标记 - 复制算法</h3><ul>
 <li><p><strong>算法描述：</strong></p>
@@ -493,7 +493,7 @@
 <li>回收时，将以上 2 部分区域中的存活对象复制到另一块 Survivor 区中，然后将以上两部分区域清空；</li>
 <li>JVM 参数设置：<code>-XX:SurvivorRatio=8</code> 表示 <code>Eden 区大小 / 1 块 Survivor 区大小 = 8</code>。</li>
 </ul>
-<img src="/blogs/6997cf1f/image-20231029204510517.png" alt="image-20231029204510517" style="zoom:33%;"></li>
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/35e3c8c7c46efa9ad29e5ce47711a0e7.png" alt="image-20231029204510517" style="zoom:33%;"></li>
 </ul>
 <h3 id="4-2-3标记-整理算法"><a href="#4-2-3标记-整理算法" class="headerlink" title="4.2.3标记 - 整理算法"></a>4.2.3标记 - 整理算法</h3><ul>
 <li><strong>算法描述：</strong><ul>
@@ -503,13 +503,13 @@
 </li>
 <li><strong>不足：</strong> 存在效率问题，适合老年代。</li>
 </ul>
-<img src="/blogs/6997cf1f/image-20231029204836071.png" alt="image-20231029204836071" style="zoom: 33%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/8dc60cdf37d768a3bb2bfb0e2070f1e1.png" alt="image-20231029204836071" style="zoom: 33%;">
 
 <h3 id="进化：分代收集算法"><a href="#进化：分代收集算法" class="headerlink" title="进化：分代收集算法"></a>进化：分代收集算法</h3><ul>
 <li><strong>新生代：</strong> GC 过后只有少量对象存活 —— <strong>复制算法</strong></li>
 <li><strong>老年代：</strong> GC 过后对象存活率高 —— <strong>标记 - 整理算法</strong></li>
 </ul>
-<h2 id="4-3HotSpot-中-GC-算法的实现"><a href="#4-3HotSpot-中-GC-算法的实现" class="headerlink" title="4.3HotSpot 中 GC 算法的实现"></a>4.3HotSpot 中 GC 算法的实现</h2><img src="/blogs/6997cf1f/image-20231029204934730.png" alt="image-20231029204934730" style="zoom:80%;">
+<h2 id="4-3HotSpot-中-GC-算法的实现"><a href="#4-3HotSpot-中-GC-算法的实现" class="headerlink" title="4.3HotSpot 中 GC 算法的实现"></a>4.3HotSpot 中 GC 算法的实现</h2><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/c5c838a33a4843d582cd92f8b09c3e3e.png" alt="image-20231029204934730" style="zoom:80%;">
 
 <p>通过之前的分析，GC 算法的实现流程简单的来说分为以下两步：</p>
 <ol>
@@ -553,7 +553,7 @@
 
 <p>字节数组CARD_TABLE的每一个元素都对应着其标识的内存区域中一块特定大小的内存块，这个 内存块被称作<code>卡页（Card Page）</code>。</p>
 <p>一般来说，卡页大小都是以2的N次幂的字节数，通过上面代码可 以看出HotSpot中使用的卡页是2的9次幂，即512字节（地址右移9位，相当于用地址除以512）。那如 果卡表标识内存区域的起始地址是0x0000的话，数组CARD_TABLE的第0、1、2号元素，分别对应了 地址范围为0x0000～0x01FF、0x0200～0x03FF、0x0400～0x05FF的卡页内存块</p>
-<img src="/blogs/6997cf1f/image-20231029213018820.png" alt="image-20231029213018820" style="zoom:33%;"> 
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/b2d537f7aa4c0e81587bfa3e8d5ff6c1.png" alt="image-20231029213018820" style="zoom:33%;"> 
 
 <p>一个卡页的内存中通常包含不止一个对象，<strong>只要卡页内有一个（或更多）对象的字段存在着跨代 指针，那就将对应卡表的数组元素的值标识为1，称为这个元素变脏（Dirty）</strong>，没有则标识为0。</p>
 <p>在垃圾收集发生时，只要筛选出卡表中变脏的元素，就能轻易得出哪些卡页内存块中包含跨代指针，把它 们加入<code>GC Roots</code>中一并扫描。</p>
@@ -579,9 +579,9 @@
 <p>在JDK 7之后，HotSpot虚拟机增加了一个新的参数<code>-XX：+UseCondCardMark</code>，用来决定是否开启卡表更新的条件判断</p>
 <h2 id="4-5垃圾收集器"><a href="#4-5垃圾收集器" class="headerlink" title="4.5垃圾收集器"></a>4.5垃圾收集器</h2><p>垃圾收集器就是内存回收操作的具体实现。有的属于新生代收集器，有的属于老年代收集器，所以一般是搭配使用的。</p>
 <p>查看垃圾收集器种类指令：<code>java -XX:+PrintCommandLineFlags -version</code></p>
-<img src="/blogs/6997cf1f/image-20231029210826750.png" alt="image-20231029210826750" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/999455c2ac492b0a6e116c2f9d250c49.png" alt="image-20231029210826750" style="zoom:80%;">
 
-<h3 id="Serial-ParNew-搭配-Serial-Old-收集器"><a href="#Serial-ParNew-搭配-Serial-Old-收集器" class="headerlink" title="Serial &#x2F; ParNew 搭配 Serial Old 收集器"></a>Serial &#x2F; ParNew 搭配 Serial Old 收集器</h3><img src="/blogs/6997cf1f/image-20231029210903044.png" alt="image-20231029210903044" style="zoom:80%;">
+<h3 id="Serial-ParNew-搭配-Serial-Old-收集器"><a href="#Serial-ParNew-搭配-Serial-Old-收集器" class="headerlink" title="Serial &#x2F; ParNew 搭配 Serial Old 收集器"></a>Serial &#x2F; ParNew 搭配 Serial Old 收集器</h3><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/ea7ae8082fb0fc615e7811b0e422209f.png" alt="image-20231029210903044" style="zoom:80%;">
 
 <p>Serial 收集器是虚拟机在 Client 模式下的默认新生代收集器，它的优势是简单高效，在单 CPU 模式下很牛。</p>
 <p>ParNew 收集器就是 Serial 收集器的多线程版本，虽然除此之外没什么创新之处，但它却是许多运行在 Server 模式下的虚拟机中的首选新生代收集器，因为除了 Serial 收集器外，只有它能和 CMS 收集器搭配使用。</p>
@@ -597,9 +597,9 @@
 <li><code>-XX:+UseAdaptiveSizePolicy</code>：一个开关参数，打开后就无需手工指定 <code>-Xmn</code>，<code>-XX:SurvivorRatio</code> 等参数了，虚拟机会根据当前系统的运行情况收集性能监控信息，自行调整。</li>
 </ul>
 <h3 id="CMS-收集器"><a href="#CMS-收集器" class="headerlink" title="CMS 收集器"></a>CMS 收集器</h3><p>回收老年代</p>
-<img src="/blogs/6997cf1f/image-20231029211205554.png" alt="image-20231029211205554" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/1ae2b17610e9d4b26024dbc6609e9f76.png" alt="image-20231029211205554" style="zoom:80%;">
 
-<img src="/blogs/6997cf1f/image-20231029211216197.png" alt="image-20231029211216197" style="zoom:80%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/9bd61e7d4958276c440ca237a1da6f54.png" alt="image-20231029211216197" style="zoom:80%;">
 
 <p><strong>参数设置：</strong></p>
 <ul>
@@ -615,9 +615,9 @@
 </ol>
 <p>所以，CMS 采用了 标记 - 清除 算法。</p>
 </blockquote>
-<h3 id="Garbage-First-G1-收集器"><a href="#Garbage-First-G1-收集器" class="headerlink" title="Garbage First(G1)收集器"></a>Garbage First(G1)收集器</h3><img src="/blogs/6997cf1f/image-20231029212015528.png" alt="image-20231029212015528" style="zoom:80%;">
+<h3 id="Garbage-First-G1-收集器"><a href="#Garbage-First-G1-收集器" class="headerlink" title="Garbage First(G1)收集器"></a>Garbage First(G1)收集器</h3><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/b7bed2192840156fcaf1ff2386910228.png" alt="image-20231029212015528" style="zoom:80%;">
 
-<img src="/blogs/6997cf1f/image-20231029212024404.png" alt="image-20231029212024404" style="zoom:50%;">
+<img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/27d006feb0a43388dde1febd564351bd.png" alt="image-20231029212024404" style="zoom:50%;">
 
 <p>在G1收集器出现之前的所有 其他收集器，包括CMS在内，垃圾收集的目标范围要么是整个新生代<code>（Minor GC）</code>，要么就是整个老年代<code>（Major GC）</code>，再要么就是整个Java堆<code>（Full GC）</code>。</p>
 <p>而G1跳出了这个樊笼，它可以面向堆内存任何部分来组成回收集（Collection Set，一般简称CSet）进行回收，衡量标准不再是它属于哪个分代，而<strong>是哪块内存中存放的垃圾数量最多，回收收益最大，这就是G1收集器的Mixed GC模式。</strong></p>
@@ -666,7 +666,7 @@
 <h4 id="里程碑"><a href="#里程碑" class="headerlink" title="里程碑"></a>里程碑</h4><p>从G1开始，最先进的垃圾收集器的设计导向都不约而同地变为追求能够应付应用的内存分配速率 （Allocation Rate），而不追求一次把整个Java堆全部清理干净。</p>
 <p>这样，应用在分配，同时收集器在收集，<strong>只要收集的速度能跟得上对象分配的速度，那一切就能运作得很完美。</strong></p>
 <p>这种新的收集器设计思路 从工程实现上看是从G1开始兴起的，所以说G1是收集器技术发展的一个里程碑。</p>
-<h4 id="GC-日志解读"><a href="#GC-日志解读" class="headerlink" title="GC 日志解读"></a>GC 日志解读</h4><img src="/blogs/6997cf1f/image-20231029212257717.png" alt="image-20231029212257717" style="zoom:50%;">
+<h4 id="GC-日志解读"><a href="#GC-日志解读" class="headerlink" title="GC 日志解读"></a>GC 日志解读</h4><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/54ad86cc59de150dede0c1f9175316f9.png" alt="image-20231029212257717" style="zoom:50%;">
 
 <h3 id="低延迟收集器"><a href="#低延迟收集器" class="headerlink" title="低延迟收集器"></a>低延迟收集器</h3><p>Shenandoah和ZGC是两种在Java平台上开发的具有低停顿时间目标的垃圾收集器。它们的目标是减少长时间停顿（Full GC）的发生，以提高Java应用程序的响应性和性能。以下是关于Shenandoah和ZGC的一些关键特点：</p>
 <h4 id="Shenandoah-Garbage-Collector"><a href="#Shenandoah-Garbage-Collector" class="headerlink" title="Shenandoah Garbage Collector:"></a>Shenandoah Garbage Collector:</h4><ol>
@@ -739,7 +739,7 @@
 <p>总的来说，ZGC是一种在大型内存应用程序中降低停顿时间的有效垃圾收集器，特别适用于需要可预测性和低延迟的应用程序。</p>
 </blockquote>
 <h5 id="CMS-G1"><a href="#CMS-G1" class="headerlink" title="CMS&#x2F;G1"></a>CMS&#x2F;G1</h5><p>如果接手的是遗留系统，软硬件基础设施和JDK版本都比较落后，那就根据内存规模衡量一 下，对于大概4GB到6GB以下的堆内存，CMS一般能处理得比较好，而对于更大的堆内存，可重点考察一下G1。</p>
-<h1 id="五、内存分配策略"><a href="#五、内存分配策略" class="headerlink" title="五、内存分配策略"></a>五、内存分配策略</h1><img src="/blogs/6997cf1f/image-20231029231733213.png" alt="image-20231029231733213" style="zoom: 33%;">
+<h1 id="五、内存分配策略"><a href="#五、内存分配策略" class="headerlink" title="五、内存分配策略"></a>五、内存分配策略</h1><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/b7d3d032cf5e2ee43dad9c92d5eaa931.png" alt="image-20231029231733213" style="zoom: 33%;">
 
 <p><strong>新生代和老年代的 GC 操作</strong></p>
 <ul>
@@ -753,7 +753,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="5-1优先在-Eden-区分配"><a href="#5-1优先在-Eden-区分配" class="headerlink" title="5.1优先在 Eden 区分配"></a>5.1优先在 Eden 区分配</h2><img src="/blogs/6997cf1f/image-20231029233351944.png" alt="image-20231029233351944" style="zoom:50%;">
+<h2 id="5-1优先在-Eden-区分配"><a href="#5-1优先在-Eden-区分配" class="headerlink" title="5.1优先在 Eden 区分配"></a>5.1优先在 Eden 区分配</h2><img src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/JVM%E5%AD%A6%E4%B9%A0-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/2023/12/14/9a0a44ef0c4447ff0473e210528cf3b7.png" alt="image-20231029233351944" style="zoom:50%;">
 
 <ol>
 <li><strong>new的对象先放在伊甸园区</strong>，此区有大小限制</li>
