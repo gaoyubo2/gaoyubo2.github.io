@@ -14037,7 +14037,7 @@ blockquote {
 }
 #article-container.post-content ol p,
 #article-container.post-content ul p {
-  margin: 0 0 8px;
+  margin: -1px -15px 8px;
 }
 #article-container.post-content li::marker {
   color: #07c;
