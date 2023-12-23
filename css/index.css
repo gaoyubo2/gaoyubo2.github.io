@@ -13834,7 +13834,7 @@ a#toPageButton {
 }
 blockquote {
   border: var(--style-border-always);
-  background-color: var(--anzhiyu-secondbg);
+  background-color: rgba(234,246,255,0.22);
   color: var(--anzhiyu-secondtext);
   border-radius: 8px;
   margin: 1rem 0;
@@ -14037,7 +14037,7 @@ blockquote {
 }
 #article-container.post-content ol p,
 #article-container.post-content ul p {
-  margin: -1px -15px 8px;
+  margin: 0 0 8px;
 }
 #article-container.post-content li::marker {
   color: #07c;
@@ -20686,16 +20686,19 @@ body:has(.post-bg) #he-plugin-simple .s-sticker div {
   margin: 0.2rem 0px;
 }
 #article-container ul > li:not(.tab) {
-  padding: 0.2em 0.2em 0.2em 1.4em;
+  /*padding: 0.2em 0.2em 0.2em 1.4em;*/
+  padding: 0.2em 0.2em 0.2em 1.1em;
+
 }
 #article-container ul > li:not(.tab):before {
   border: 0.21em solid var(--anzhiyu-lighttext);
   background: var(--anzhiyu-lighttext);
 }
 #article-container ul > li:not(.tab)::before {
-  top: 0.78em;
-  width: 0.42em;
-  height: 0.42em;
+  /*top: 0.78em;*/
+  top: 1em;
+  /*width: 0.42em;*/
+  /*height: 0.42em;*/
   border-radius: 0.42em;
   content: "";
   line-height: 0.42em;
@@ -20704,22 +20707,28 @@ body:has(.post-bg) #he-plugin-simple .s-sticker div {
 #article-container ol li::before,
 #article-container ul li::before {
   position: absolute;
-  top: 0px;
+  /*top: 0px;*/
+  top: 2px;
   left: 0px;
-  background: var(--anzhiyu-main);
-  color: rgb(255, 255, 255);
+  /*background: var(--anzhiyu-main);*/
+  /*color: rgb(255, 255, 255);*/
+  color: var(--anzhiyu-main);
+  font-weight: 1000;
   transition: all 0.3s ease-out 0s;
 }
 #article-container ol > li::before {
-  margin-top: 0.65em;
+  /*margin-top: 0.65em;*/
+  margin-top: 0.38em;
   width: 1.45em;
   height: 1.45em;
   border-radius: 0.725em;
   content: counter(li);
   counter-increment: li 1;
   text-align: center;
-  font-size: 0.85em;
+  font-size: 1.0em;
   line-height: 1.45em;
+  font-style: italic;
+  left: -10px;
 }
 #article-container ol[start] {
   counter-reset: unset;
@@ -20730,7 +20739,9 @@ body:has(.post-bg) #he-plugin-simple .s-sticker div {
   margin: 0.2rem 0px;
 }
 #article-container ol > li:not(.tab) {
-  padding: 0.2em 0.2em 0.2em 1.8em;
+  /*padding: 0.2em 0.2em 0.2em 1.8em;*/
+  padding: 0.2em 0.2em 0.2em 1.1em;
+
 }
 
 /* 代码框主题 */
