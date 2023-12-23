@@ -20300,7 +20300,9 @@ html.hide-aside .layout > div:first-child {
     opacity: 1;
   }
 }
-
+figcaption{
+  display: none;
+}
 #aside-content .card-widget#card-wechat {
   background: #57bd6a;
   display: flex;
