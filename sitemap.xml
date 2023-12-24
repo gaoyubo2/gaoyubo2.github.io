@@ -388,6 +388,13 @@
   </url>
   
   <url>
+    <loc>https://gaoyubo.cn/tags/Go%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-12-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://gaoyubo.cn/tags/leetcode/</loc>
     <lastmod>2023-12-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -424,13 +431,6 @@
   
   <url>
     <loc>https://gaoyubo.cn/tags/%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2023-12-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://gaoyubo.cn/tags/Go%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -481,14 +481,14 @@
   </url>
   
   <url>
-    <loc>https://gaoyubo.cn/categories/Go/</loc>
+    <loc>https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2023-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://gaoyubo.cn/categories/Go/</loc>
     <lastmod>2023-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

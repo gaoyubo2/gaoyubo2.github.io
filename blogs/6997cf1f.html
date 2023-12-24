@@ -188,7 +188,8 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism.css" type="text/css"><link rel="alternate" href="/atom.xml" title="疼了也不哭" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
   endLoading: () => {
     document.getElementById('loading-box').classList.add("loaded");
   },
@@ -757,7 +758,7 @@ GC 都是安全的。</strong></p>
 <p>在赋值前的部分的写屏障叫作写前屏障（Pre-Write Barrier） 在赋值
 后的则叫作写后屏障（Post-Write Barrier）</p>
 </blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">oop_field_store</span><span class="params">(oop* field, oop new_value)</span> &#123;</span><br><span class="line">  <span class="comment">// 引用字段赋值操作</span></span><br><span class="line">  *field = new_value;</span><br><span class="line">  <span class="comment">// 写后屏障，在这里完成卡表状态更新</span></span><br><span class="line">  post_write_barrier(field, new_value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">oop_field_store</span><span class="params">(oop* field, oop new_value)</span> &#123;</span><br><span class="line">	<span class="comment">// 引用字段赋值操作</span></span><br><span class="line">	*field = new_value;</span><br><span class="line">	<span class="comment">// 写后屏障，在这里完成卡表状态更新</span></span><br><span class="line">	post_write_barrier(field, new_value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="伪共享问题">伪共享问题</h3>
 <p>除了写屏障的开销外，卡表在高并发场景下还面临着<code>伪共享（False Sharing）</code>问题。</p>
 <p>伪共享是处
@@ -768,7 +769,7 @@ GC 都是安全的。</strong></p>
 象正好处于这32KB的内存区域内，就会导致更新卡表时正好写入同一个缓存行而影响性能。</p>
 <p>为了<strong>避免伪共享问题</strong>，一种简单的解决方案是不采用无条件的写屏障，而是<strong>先检查卡表标记</strong>，只有当该卡表元
 素未被标记过时才将其标记为变脏，即将卡表更新的逻辑变为以下代码所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (CARD_TABLE [this address &gt;&gt; <span class="number">9</span>] != <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">  CARD_TABLE [this address &gt;&gt; <span class="number">9</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (CARD_TABLE [this address &gt;&gt; <span class="number">9</span>] != <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	CARD_TABLE [this address &gt;&gt; <span class="number">9</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在JDK
 7之后，HotSpot虚拟机增加了一个新的参数<code>-XX：+UseCondCardMark</code>，用来决定是否开启卡表更新的条件判断</p>
 <h2 id="垃圾收集器">4.5垃圾收集器</h2>

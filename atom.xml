@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>疼了也不哭</title>
+  
+  
+  <link href="https://gaoyubo.cn/atom.xml" rel="self"/>
+  
+  <link href="https://gaoyubo.cn/"/>
+  <updated>2023-12-24T16:04:51.992Z</updated>
+  <id>https://gaoyubo.cn/</id>
+  
+  <author>
+    <name>疼了也不哭</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>国科大-逻辑与批判性思维</title>
+    <link href="https://gaoyubo.cn/blogs/30a55ce7.html"/>
+    <id>https://gaoyubo.cn/blogs/30a55ce7.html</id>
+    <published>2023-12-20T16:46:27.000Z</published>
+    <updated>2023-12-24T16:04:51.992Z</updated>
+    
+    
+    <summary type="html">逻辑与批判性思维</summary>
+    
+    
+    
+    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="逻辑学" scheme="https://gaoyubo.cn/tags/%E9%80%BB%E8%BE%91%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ElasticSearch-2</title>
+    <link href="https://gaoyubo.cn/blogs/cbe60a4d.html"/>
+    <id>https://gaoyubo.cn/blogs/cbe60a4d.html</id>
+    <published>2023-12-19T13:15:56.000Z</published>
+    <updated>2023-12-20T16:49:58.195Z</updated>
+    
+    
+    <summary type="html">Elastic学习</summary>
+    
+    
+    
+    <category term="微服务" scheme="https://gaoyubo.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+    <category term="ElasticSearch" scheme="https://gaoyubo.cn/tags/ElasticSearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法设计与分析-Linear Programming</title>
+    <link href="https://gaoyubo.cn/blogs/ec021f50.html"/>
+    <id>https://gaoyubo.cn/blogs/ec021f50.html</id>
+    <published>2023-12-14T11:08:00.000Z</published>
+    <updated>2023-12-16T09:08:04.087Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;question1&quot;&gt;Question1&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You want to determine the quantities x1, x2, ..., xn of n different
+foods, each</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="作业" scheme="https://gaoyubo.cn/tags/%E4%BD%9C%E4%B8%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ElasticSearch-1</title>
+    <link href="https://gaoyubo.cn/blogs/52ef5bf7.html"/>
+    <id>https://gaoyubo.cn/blogs/52ef5bf7.html</id>
+    <published>2023-12-12T13:17:45.000Z</published>
+    <updated>2023-12-19T13:15:31.892Z</updated>
+    
+    
+    <summary type="html">Elastic学习</summary>
+    
+    
+    
+    <category term="微服务" scheme="https://gaoyubo.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+    <category term="ElasticSearch" scheme="https://gaoyubo.cn/tags/ElasticSearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM学习-程序编译与优化</title>
+    <link href="https://gaoyubo.cn/blogs/89d6d9be.html"/>
+    <id>https://gaoyubo.cn/blogs/89d6d9be.html</id>
+    <published>2023-12-08T11:16:54.000Z</published>
+    <updated>2023-12-23T19:37:25.339Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一前端编译与优化&quot;&gt;一、前端编译与优化&lt;/h1&gt;
+&lt;p&gt;原文链接：&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="JVM" scheme="https://gaoyubo.cn/categories/JVM/"/>
+    
+    
+    <category term="JVM笔记" scheme="https://gaoyubo.cn/tags/JVM%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法设计与分析-Greedy</title>
+    <link href="https://gaoyubo.cn/blogs/8b85a768.html"/>
+    <id>https://gaoyubo.cn/blogs/8b85a768.html</id>
+    <published>2023-11-26T17:44:41.000Z</published>
+    <updated>2023-12-14T12:02:46.476Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一commando-war&quot;&gt;一、Commando War&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There is a war and it doesn’t look very promising for your country.
+Now it’s</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="作业" scheme="https://gaoyubo.cn/tags/%E4%BD%9C%E4%B8%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法设计与分析-Dynamic Programming</title>
+    <link href="https://gaoyubo.cn/blogs/67a23ec8.html"/>
+    <id>https://gaoyubo.cn/blogs/67a23ec8.html</id>
+    <published>2023-11-26T13:57:55.000Z</published>
+    <updated>2023-12-14T12:02:41.083Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一money-robbing&quot;&gt;一、Money Robbing&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A robber is planning to rob houses along a street. Each house has a
+certain</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="作业" scheme="https://gaoyubo.cn/tags/%E4%BD%9C%E4%B8%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM学习-字节码执行引擎</title>
+    <link href="https://gaoyubo.cn/blogs/e6df8766.html"/>
+    <id>https://gaoyubo.cn/blogs/e6df8766.html</id>
+    <published>2023-11-23T06:17:17.000Z</published>
+    <updated>2023-12-14T14:05:17.135Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1</summary>
+        
+      
+    
+    
+    
+    <category term="JVM" scheme="https://gaoyubo.cn/categories/JVM/"/>
+    
+    
+    <category term="JVM笔记" scheme="https://gaoyubo.cn/tags/JVM%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣题解(601-750)</title>
+    <link href="https://gaoyubo.cn/blogs/c54ab307.html"/>
+    <id>https://gaoyubo.cn/blogs/c54ab307.html</id>
+    <published>2023-11-22T09:44:55.000Z</published>
+    <updated>2023-11-22T09:48:59.749Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;十二贪心&quot;&gt;十二、贪心&lt;/h1&gt;
+&lt;h3 id=&quot;种花问题&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="leetcode" scheme="https://gaoyubo.cn/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣题解(451-600)</title>
+    <link href="https://gaoyubo.cn/blogs/6b203e53.html"/>
+    <id>https://gaoyubo.cn/blogs/6b203e53.html</id>
+    <published>2023-11-22T09:36:37.000Z</published>
+    <updated>2023-12-14T12:23:33.336Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一双指针&quot;&gt;一、双指针&lt;/h1&gt;
+&lt;h3 id=&quot;反转字符串-ii&quot;&gt;&lt;a href=&quot;https://leetcode.cn/problems/reverse-string-ii/&quot;&gt;541. 反转字符串
+II&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;给定一个字符串</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="leetcode" scheme="https://gaoyubo.cn/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣题解(301-450)</title>
+    <link href="https://gaoyubo.cn/blogs/9f1f128d.html"/>
+    <id>https://gaoyubo.cn/blogs/9f1f128d.html</id>
+    <published>2023-11-22T09:29:21.000Z</published>
+    <updated>2023-12-14T12:22:12.727Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一双指针&quot;&gt;一、双指针&lt;/h1&gt;
+&lt;h3 id=&quot;反转字符串&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="leetcode" scheme="https://gaoyubo.cn/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣题解(151-300)</title>
+    <link href="https://gaoyubo.cn/blogs/141ec005.html"/>
+    <id>https://gaoyubo.cn/blogs/141ec005.html</id>
+    <published>2023-11-22T09:16:47.000Z</published>
+    <updated>2023-12-14T12:21:00.462Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一双指针&quot;&gt;一、双指针&lt;/h1&gt;
+&lt;h3 id=&quot;反转字符串中的单词&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="leetcode" scheme="https://gaoyubo.cn/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣题解(1-150)</title>
+    <link href="https://gaoyubo.cn/blogs/3ecd1562.html"/>
+    <id>https://gaoyubo.cn/blogs/3ecd1562.html</id>
+    <published>2023-11-22T09:10:46.000Z</published>
+    <updated>2023-12-15T12:50:53.950Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一双指针&quot;&gt;一、双指针&lt;/h1&gt;
+&lt;h3 id=&quot;移除元素&quot;&gt;&lt;a href=&quot;https://leetcode.cn/problems/remove-element/&quot;&gt;27.
+移除元素&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;给你一个数组</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="leetcode" scheme="https://gaoyubo.cn/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM学习-类加载机制</title>
+    <link href="https://gaoyubo.cn/blogs/4b481fd7.html"/>
+    <id>https://gaoyubo.cn/blogs/4b481fd7.html</id>
+    <published>2023-11-17T12:48:32.000Z</published>
+    <updated>2023-12-14T14:09:50.130Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;文章原文：https://gaoyubo.cn/blogs/4b481fd7.html&lt;/p&gt;
+&lt;h1 id=&quot;一类加载机制&quot;&gt;一、类加载机制&lt;/h1&gt;
+&lt;p&gt;在&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="JVM" scheme="https://gaoyubo.cn/categories/JVM/"/>
+    
+    
+    <category term="JVM笔记" scheme="https://gaoyubo.cn/tags/JVM%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM学习-Class文件结构</title>
+    <link href="https://gaoyubo.cn/blogs/844dc0e7.html"/>
+    <id>https://gaoyubo.cn/blogs/844dc0e7.html</id>
+    <published>2023-11-14T02:41:08.000Z</published>
+    <updated>2023-12-14T14:14:41.293Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;文章原文：https://gaoyubo.cn/blogs/844dc0e7.html&lt;/p&gt;
+&lt;h1</summary>
+        
+      
+    
+    
+    
+    <category term="JVM" scheme="https://gaoyubo.cn/categories/JVM/"/>
+    
+    
+    <category term="JVM笔记" scheme="https://gaoyubo.cn/tags/JVM%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国科大-软件测试与分析-插桩和变异测试</title>
+    <link href="https://gaoyubo.cn/blogs/6e5f3213.html"/>
+    <id>https://gaoyubo.cn/blogs/6e5f3213.html</id>
+    <published>2023-11-13T07:12:08.000Z</published>
+    <updated>2023-11-26T09:10:59.558Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;说明&quot;&gt;说明&lt;/h1&gt;
+&lt;p&gt;报告包含Part1和Part2两部分，对应作业的Part1和Part2&lt;/p&gt;
+&lt;p&gt;Part1的文件代码在当前目录的&lt;code&gt;Part1文件夹&lt;/code&gt;中，额外添加了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;```txt</summary>
+        
+      
+    
+    
+    
+    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="作业" scheme="https://gaoyubo.cn/tags/%E4%BD%9C%E4%B8%9A/"/>
+    
+    <category term="PITest" scheme="https://gaoyubo.cn/tags/PITest/"/>
+    
+    <category term="LLVM" scheme="https://gaoyubo.cn/tags/LLVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国科大-移动互联网技术复习</title>
+    <link href="https://gaoyubo.cn/blogs/d7a98a3.html"/>
+    <id>https://gaoyubo.cn/blogs/d7a98a3.html</id>
+    <published>2023-11-06T17:15:16.000Z</published>
+    <updated>2023-12-14T12:26:28.491Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;第一章-概述&quot;&gt;第一章 概述&lt;/h2&gt;
+&lt;h4 id=&quot;移动互联网&quot;&gt;移动互联网&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;移动通信&lt;/li&gt;
+&lt;li&gt;互联网&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4</summary>
+        
+      
+    
+    
+    
+    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="复习" scheme="https://gaoyubo.cn/tags/%E5%A4%8D%E4%B9%A0/"/>
+    
+    <category term="移动互联网技术" scheme="https://gaoyubo.cn/tags/%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国科大-区块链技术作业2</title>
+    <link href="https://gaoyubo.cn/blogs/dba06f9e.html"/>
+    <id>https://gaoyubo.cn/blogs/dba06f9e.html</id>
+    <published>2023-11-04T07:51:27.000Z</published>
+    <updated>2023-11-22T11:03:59.552Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;以太币&quot;&gt;以太币&lt;/h1&gt;
+&lt;p&gt;以太币（Ethereum）的挖矿方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于工作量证明（Proof</summary>
+        
+      
+    
+    
+    
+    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="作业" scheme="https://gaoyubo.cn/tags/%E4%BD%9C%E4%B8%9A/"/>
+    
+    <category term="以太币" scheme="https://gaoyubo.cn/tags/%E4%BB%A5%E5%A4%AA%E5%B8%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Golang实现JAVA虚拟机-指令集和解释器</title>
+    <link href="https://gaoyubo.cn/blogs/f57f32cf.html"/>
+    <id>https://gaoyubo.cn/blogs/f57f32cf.html</id>
+    <published>2023-11-01T03:01:43.000Z</published>
+    <updated>2023-12-15T12:45:08.079Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前置&quot;&gt;前置&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://gaoyubo2.github.io/blogs/de1bedad.html&quot;&gt;Golang实现JAVA虚拟机-解析class文件&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="JVM" scheme="https://gaoyubo.cn/categories/JVM/"/>
+    
+    <category term="JAVA" scheme="https://gaoyubo.cn/categories/JAVA/"/>
+    
+    <category term="Go" scheme="https://gaoyubo.cn/categories/Go/"/>
+    
+    
+    <category term="JVM实现" scheme="https://gaoyubo.cn/tags/JVM%E5%AE%9E%E7%8E%B0/"/>
+    
+    <category term="Go实践" scheme="https://gaoyubo.cn/tags/Go%E5%AE%9E%E8%B7%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Golang实现JAVA虚拟机-运行时数据区</title>
+    <link href="https://gaoyubo.cn/blogs/8ae1f4ca.html"/>
+    <id>https://gaoyubo.cn/blogs/8ae1f4ca.html</id>
+    <published>2023-10-30T02:37:25.000Z</published>
+    <updated>2023-12-15T12:44:39.987Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前置&quot;&gt;前置&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://gaoyubo2.github.io/blogs/de1bedad.html&quot;&gt;Golang实现JAVA虚拟机-解析class文件&lt;/a&gt;&lt;/p&gt;
+&lt;h1</summary>
+        
+      
+    
+    
+    
+    <category term="JVM" scheme="https://gaoyubo.cn/categories/JVM/"/>
+    
+    <category term="JAVA" scheme="https://gaoyubo.cn/categories/JAVA/"/>
+    
+    <category term="Go" scheme="https://gaoyubo.cn/categories/Go/"/>
+    
+    
+    <category term="JVM实现" scheme="https://gaoyubo.cn/tags/JVM%E5%AE%9E%E7%8E%B0/"/>
+    
+    <category term="Go实践" scheme="https://gaoyubo.cn/tags/Go%E5%AE%9E%E8%B7%B5/"/>
+    
+  </entry>
+  
+</feed>
