@@ -6,7 +6,7 @@
   <link href="https://gaoyubo.cn/atom.xml" rel="self"/>
   
   <link href="https://gaoyubo.cn/"/>
-  <updated>2023-12-24T16:04:51.992Z</updated>
+  <updated>2023-12-27T11:29:21.249Z</updated>
   <id>https://gaoyubo.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation</title>
+    <link href="https://gaoyubo.cn/blogs/undefined.html"/>
+    <id>https://gaoyubo.cn/blogs/undefined.html</id>
+    <published>2023-12-27T11:19:24.000Z</published>
+    <updated>2023-12-27T11:29:21.249Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;/h2&gt;
+&lt;p&gt;近年来，RDMA 在云中得到广泛采用，加速第一方工作负载并通过释放</summary>
+        
+      
+    
+    
+    
+    
+    <category term="论文精读" scheme="https://gaoyubo.cn/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>国科大-逻辑与批判性思维</title>
@@ -89,7 +113,7 @@ foods, each</summary>
     <link href="https://gaoyubo.cn/blogs/52ef5bf7.html"/>
     <id>https://gaoyubo.cn/blogs/52ef5bf7.html</id>
     <published>2023-12-12T13:17:45.000Z</published>
-    <updated>2023-12-25T08:13:18.401Z</updated>
+    <updated>2023-12-25T09:08:22.272Z</updated>
     
     
     <summary type="html">Elastic学习</summary>
@@ -512,39 +536,6 @@ II&lt;/a&gt;&lt;/h3&gt;
     <summary type="html">&lt;h1 id=&quot;前置&quot;&gt;前置&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://gaoyubo2.github.io/blogs/de1bedad.html&quot;&gt;Golang实现JAVA虚拟机-解析class文件&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="JVM" scheme="https://gaoyubo.cn/categories/JVM/"/>
-    
-    <category term="JAVA" scheme="https://gaoyubo.cn/categories/JAVA/"/>
-    
-    <category term="Go" scheme="https://gaoyubo.cn/categories/Go/"/>
-    
-    
-    <category term="JVM实现" scheme="https://gaoyubo.cn/tags/JVM%E5%AE%9E%E7%8E%B0/"/>
-    
-    <category term="Go实践" scheme="https://gaoyubo.cn/tags/Go%E5%AE%9E%E8%B7%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Golang实现JAVA虚拟机-运行时数据区</title>
-    <link href="https://gaoyubo.cn/blogs/8ae1f4ca.html"/>
-    <id>https://gaoyubo.cn/blogs/8ae1f4ca.html</id>
-    <published>2023-10-30T02:37:25.000Z</published>
-    <updated>2023-12-15T12:44:39.987Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前置&quot;&gt;前置&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://gaoyubo2.github.io/blogs/de1bedad.html&quot;&gt;Golang实现JAVA虚拟机-解析class文件&lt;/a&gt;&lt;/p&gt;
-&lt;h1</summary>
         
       
     

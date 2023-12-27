@@ -1,0 +1,1115 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation | 疼了也不哭</title><meta name="keywords" content="论文精读"><meta name="author" content="疼了也不哭"><meta name="copyright" content="疼了也不哭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation"><meta name="application-name" content="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#ffffff"><meta property="og:type" content="article"><meta property="og:title" content="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation"><meta property="og:url" content="https://gaoyubo.cn/blogs/undefined.html"><meta property="og:site_name" content="疼了也不哭"><meta property="og:description" content="Abstract 近年来，RDMA 在云中得到广泛采用，加速第一方工作负载并通过释放 CPU 周期来节省成本。现在，云提供商正在努力在通用来宾虚拟机中支持 RDMA，以使第三方工作负载受益。为此，云提供商必须提供强大的性能隔离，以便一个租户的 RDMA 工作负载不会对另一租户的 RDMA"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2/2023/12/27/016f5ad177596f6d9a899a5c5e23710a.png"><meta property="article:author" content="疼了也不哭"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2/2023/12/27/016f5ad177596f6d9a899a5c5e23710a.png"><meta name="description" content="Abstract 近年来，RDMA 在云中得到广泛采用，加速第一方工作负载并通过释放 CPU 周期来节省成本。现在，云提供商正在努力在通用来宾虚拟机中支持 RDMA，以使第三方工作负载受益。为此，云提供商必须提供强大的性能隔离，以便一个租户的 RDMA 工作负载不会对另一租户的 RDMA"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://gaoyubo.cn/blogs/undefined"><link rel="preconnect" href="//cdn.cbd.int"><meta name="google-site-verification" content="xxx"><meta name="baidu-site-verification" content="code-xxx"><meta name="msvalidate.01" content="xxx"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 设计开发一条龙","🏃 脚踏实地行动派","👆🏻 专注Java开发"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 疼了也不哭","link":"链接: ","source":"来源: 疼了也不哭","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '疼了也不哭',
+  title: '论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation',
+  postAI: '',
+  pageFillDescription: 'Abstract, 1 Introduction, 2 Background and Motivation, 2.2 RDMA Overview, 3.1 Methodology, 3.2 NIC Caches, 3.3 Processing Units, 3.4 PCIe Bandwidth, 3.5 Other findings, 4 The Husky Test Suite, 5 Evaluation, 6 Guidelines, 7 Discussion, 8 Related Work, 9 Conclusion近年来在云中得到广泛采用加速第一方工作负载并通过释放周期来节省成本现在云提供商正在努力在通用来宾虚拟机中支持以使第三方工作负载受益为此云提供商必须提供强大的性能隔离以便一个租户的工作负载不会对另一租户的性能产生不利影响尽管在公有云中的网络性能隔离方面做出了很多努力但我们发现由于其复杂的微架构资源例如缓存而带来了独特的挑战在本文中我们旨在系统地了解微架构资源对性能隔离的影响我们提出了一个模型来表示操作如何使用资源使用此模型我们开发了一个测试套件来评估性能隔离解决方案我们的测试套件可以打破各种场景下的所有现有解决方案我们的结果得到了最大的供应商之一的认可和复制最后根据测试结果我们总结了设计未来性能隔离解决方案的新见解在共享计算基础设施上复用来自不同租户的工作负载开启了现代云计算时代全球云基础设施收入已超过亿美元预计未来十年将增长至万亿美元左右众所周知租户的工作负载不同共享计算资源可能会导致不可预测的应用程序性能干扰和隐私泄露这推动了大量研究关注云中的性能隔离特别是对于具有严格服务级别目标的性能关键型应用程序实践中的最新技术也取得了显着的进步供应商甚至实现了硬件机制来控制和隔离缓存随着时间的推移通过共享资源的侧通道正在被修复在本文中我们访问一种特定的硬件设备将网络堆栈从操作系统内核卸载到硬件以提供高吞吐量和超低处理延迟并且开销接近于零已大规模部署在数据中心中以提高性能并释放内核以用于存储和等第一方工作负载现在云提供商正在努力在通用来宾虚拟机中支持以使第三方工作负载受益为此云提供商必须为共享同一的租户提供强大的性能隔离人们已经做出了许多努力来提高公共云中的网络性能隔离特别关注带宽和数据包处理能力然而由于其独特且复杂的微架构资源例如缓存和处理单元带来了新的挑战学术界已经知道它们的存在和对性能的影响为了避免性能异常开发人员精心设计系统以避免耗尽这些微架构资源我们的研究是从不同的角度进行的我们从公有云供应商的角度来研究这些微架构资源如何影响性能隔离云供应商不了解和控制租户的应用程序租户可以以任意方式使用微架构资源为了证明微架构资源对性能隔离的重大影响我们测试了最先进的方法使用具有分离硬件流量类别的和都是商用上可用的硬件机制在中利用多个硬件队列通常是个队列我们可以分配每个租户应用程序使用一个队列我们使用中的标准带宽测试工具在两个虚拟机之间运行一个受害者流量每个虚拟机位于不同的服务器上这两个服务器都配备了图显示了带宽带宽测试达到我们在每台服务器上启动一个虚拟机来代表攻击者即有错误或恶意的租户应用程序并启用性能隔离以向受害者和攻击者授予总带宽的一半受害者流量减少至这是预期的然而当我们开始精心设计的只有的攻击者流量来故意耗尽微架构资源之一时受害者立即下降到违反了性能隔离保证即为受害者保证的网络带宽我们开发了一组实验来研究不同类型的操作如何使用微架构资源我们的实验得出了一些有趣的发现包括异常或错误处理会暂停的并导致其他租户的性能急剧下降控制导致缓存未命中严重增加并损害其他租户的性能数据耗尽不同类型的微架构资源并违反性能隔离据我们所知我们是第一个系统研究所有类型的操作和异常对微架构资源消耗的影响的我们利用这些发现创建操作模型来描述操作动作与消耗的微架构资源之间的关系我们的模型使我们能够了解如何耗尽每个资源使用该操作模型我们创建了第一个测试套件以系统地测试和评估性能隔离解决方案不幸的是在商用上运行我们的测试套件揭示了坏消息目前没有可以提供性能隔离的解决方案我们已经向三大供应商和报告了我们的所有发现我们的结果得到了最大制造商之一的完全重现和认可最后我们提出了关于如何构建未来性能隔离解决方案的新见解我们希望这些见解能够有益于未来的设计和软件开发本文做出以下贡献我们确定了操作和微架构资源之间的多种交互包括错误处理和控制操作的先前未知的影响我们引入第一个操作模型来描述微架构资源在操作动作标准编程中如何消耗以及为什么这些微架构资源会影响性能隔离我们构建了第一个测试套件来系统地测试和评估性能隔离解决方案我们表明现有的性能隔离解决方案都无法通过我们的测试套件测试套件可从获取这项工作表明在公有云中为提供性能隔离比人们想象的要困难得多未来的性能隔离解决方案必须有更高的标准应仔细考虑微架构资源并通过系统基准进行评估我们首先介绍公有云中网络性能隔离的背景知识然后我们介绍了并讨论了网络性能隔离带来的新挑战云中的租户主要造成两类网络资源的争用第一个最明显的问题是网络结构中的带宽为了缓解租户之间的带宽争用第一项工作静态地限制每个租户的带宽另一条工作线为每个租户提供最低带宽保证并允许租户使用空闲带宽容量第二种类型的资源是终端主机处的数据包处理资源每个数据包的处理成本取决于许多因素例如缓存未命中和要执行的操作最近为此类软件数据包处理提供了隔离人们还利用专门的硬件来实现相同的目标值得注意的是网络性能隔离与网络虚拟化有很大不同网络虚拟化编排网络资源为每个租户提供独立网络的错觉租户不应影响另一个租户的网络连接网络虚拟化的目标是实现低开销相比之下网络性能隔离侧重于如何管理资源争用以确保租户能够获得有保证的性能允许直接在线路和应用程序内存之间传输数据网络协议在中实现图展示了工作流程的概述它将标准编程接口也成为分为两类控制和数据应用程序首先需要调用几个控制动作来分配必要的对象例如队列对和完成队列以建立可靠连接不可靠连接或不可靠数据报传输端点然后应用程序需要注册一个内存区域这种注册实质上是固定主机中的内存并获得从虚拟地址到物理地址的映射这使得能够直接读取或写入该内存区域所有这些控制均按以下过程进行处理的用户空间库和内核驱动程序处理动作请求生成请求命令将命令放入协商命令队列中然后按响的门铃例如内存映射寄存器从命令队列中取出命令对其进行处理并将响应推回到队列中然后驱动程序处理响应并将对象返回给应用程序经过上述初始化后应用程序就可以开始本地和远程内存之间的数据传输了应用程序可以使用多种类型的操作例如和我们将这些操作命名为数据为了发出数据应用程序通常将请求发送到其发送队列并通过用户空间库敲响的门铃然后解析该请求从主机存储器读取数据将数据分段成数据包并传输数据包此过程绕过内核不同类型的请求的处理存在一定的差异例如对于消息接收方应在发送方发出请求之前发布足够的请求否则传入的请求可能会被丢弃或需要重传因为接收方缺乏接收请求来处理它们这称为接收未就绪错误对于向从远程端写入读取数据或执行原子操作发送方应指定正确的远程虚拟地址和内存键无效地址或错误密钥将触发内存保护错误并导致转换为错误状态如上所示将许多主机网络功能卸载到具有许多不可见的硬件组件并且每个组件都可能单独成为性能瓶颈图显示了商用的硬件组件我们根据的公开文档绘制此图除了数据包缓冲区之外还具有多个处理单元和多种类型的内部缓存每个内部缓存用于存储特定类型的元数据例如在中互连上下文内存缓存存储上下文内存转换表和内存保护表存储内存地址转换和保护信息的条目工作队列条目缓存存储预取的发送和发布的接收由于这些缓存源自设计需求其他也包含类似的组件基于硬件的类比我们将这些硬件组件命名为微架构资源的设计符合标准指令集架构例如但设计人员可以做出微架构级别的决策例如缓存的级别和缓存大小是相似的因为供应商必须为应用程序开发人员提供相同的编程接口但供应商可以决定这些微架构级别的细节例如缓存之前的许多工作已经确定了这些微架构资源对应用程序性能的一些影响例如发现缓存上下文上下文缓存未命中可能会触发的额外往返行程以从主机获取上下文从而降低应用程序性能例如个连接可能会导致上的请求率下降然而这些努力是从应用程序开发人员的角度研究微架构资源在性能下降之后他们识别瓶颈资源寻求更有效的方法来使用数据动作并相应地修改他们的应用程序然而在公共云中云供应商无法控制租户的应用程序因此租户可以按照自己的意愿甚至恶意地使用的微架构资源因此从云供应商的角度来看我们需要了解大多数如果不是全部动作的微架构资源消耗而不仅仅是常见的数据动作只有掌握了这些知识我们才能正确地将的微架构资源分配给不同的租户以提供可预测的性能在本节中我们将介绍我们目前所知的所有微架构资源的研究先前的工作已经确定了几种特定形式的资源争用但我们的目标是系统地研究所有可能类型的资源争用对于每个微架构资源我们研究三类操作如何消耗它为应用程序分配对象的控制例如启动数据传输的数据例如以及异常处理操作处理异常或错误例如错误由于篇幅限制我们首先介绍一些对性能隔离具有重大影响的关键发现之后我们总结了其他几个发现我们在附录中详细分析了对这些调查结果的回应我们的研究结果围绕如何通过标准编程接口耗尽微架构资源对于每个关键发现我们都通过具体设置进行演示其中包括受害者工作负载和攻击者工作负载尽管我们使用术语攻击者但攻击者租户不会通过漏洞对其他租户进行未经授权的访问相反攻击者只是发出标准的普通应用程序每个租户有一个客户端和一台服务器受害者和攻击者的客户端位于同一台物理机上共享同一个受害者和攻击者的服务器位于不同的物理服务器上在测量过程中我们没有启用任何隔离机制我们将在第节中研究现有的性能隔离解决方案我们重点关注受害者和攻击者之间通过耗尽微架构资源而造成的性能干扰我们首先仅运行受害者以使链路带宽容量每秒位数或的最大请求速率每秒请求数达到饱和然后我们启动攻击者并测量受害者和攻击者的两个指标如果不存在微架构资源争用则两个租户的性能指标之和应符合规范中的限制现代指定其带宽容量和请求速率限制如果两个租户的性能指标之和低于两个指定的限制我们将其归因于微架构资源的争用例如假设没有攻击者受害者可以达到然而对于攻击者受害者会降低至并且我们还假设总请求速率低于规范在这种情况下我们得出结论某些微架构资源出现瓶颈除非另有说明流量均使用连接我们测试了四种类型的和和运行运行同时支持和但我们目前仅测试其实现和是在基于以太网的网络上运行的两种标准方法我们的测试床由两台服务器组成每台服务器都配备一个两个通过交换机连接对于我们可以通过其网络适配器管理工具访问其硬件计数器例如缓存未命中计数器这些硬件计数器使我们能够查明哪个资源被超额认购例如当缓存未命中计数器随着特定应用程序工作负载而快速增加时我们了解到该工作负载大量使用此缓存导致其超额订阅由于其他不公开此类计数器因此我们根据其他的端到端性能指标例如带宽对其进行实验我们知道至少有三种类型的缓存如图所示在这些缓存中存储多种类型的元数据以加速请求处理例如缓存中的上下文先前的工作已经识别出一些由具有特定模式的数据动词引起的缓存争用问题例如同时在许多上传输小消息以及对大量内存区域的随机访问可能会导致某些类型的严重缓存未命中例如和发现这种可扩展性问题可以使请求率降低除了这些众所周知的问题之外我们还观察到一种新的甚至更严重的耗尽缓存的方法主要发现控制动词可能导致过多的缓存未命中和性能急剧下降控制例如用于创建和销毁和等对象数据将使用这些对象来传输数据据我们所知还没有关于控制如何消耗微架构资源的研究我们发现控制很容易触发过多的缓存未命中从而降低带宽和请求率我们通过上的简单实验证明了这一发现我们让受害租户使用个每个个连接发出请求以耗尽的带宽容量即结果如表所示受害者可以达到缓存未命中率为在这样的缓存未命中率下受害者仍然可以实现线速率因为复用和管道设计可以在一定程度上掩盖缓存未命中的开销我们让单线程攻击者在受害者的发送方使用每秒约注册继续注册内存区域在这种情况下受害者的带宽几乎不受影响保持在丢失率略有上升至然而如果攻击者不断注销我们可以看到对受害者的显着影响缓存未命中率增加到带宽下降到如此高的缓存未命中率下的开销变得很大并且不再能够被处理管道屏蔽值得注意的是攻击者不需要发出任何数据动词因此攻击者根本不消耗网络带宽或请求速率幸运的是我们观察到这种干扰在接收器侧可以忽略不计与数据相比我们发现控制更容易造成性能干扰溢出的缓存资源我们需要启动足够的动态数据并强制它们随机访问大量对象例如例如在上我们发现需要个线程才能以个访问超过从而导致严重的缓存未命中导致带宽下降我们相信由于供应商不断增加片上缓存资源由数据引起的缓存未命中将变得不那么严重相反控制通过其特殊语义影响缓存资源而不是简单地消耗它们因此控制的影响可能很难减轻例如我们推测注销可能会使整个缓存失效以避免访问过时的这会导致访问其他时缓存未命中我们还在和上进行了相同的实验我们观察到了类似的结果有多个处理单元来处理动词由于缺乏公共可用的计数器来监控的状态我们使用请求率作为衡量不同动词如何消耗的指标我们总结了以下两个主要发现主要发现不同数据之间的性能干扰取决于的复杂性不同的数据有不同的复杂性简单的如发送和读取仅在机器之间复制数据复杂动词例如以原子方式将位值添加到远程地址的内存中此操作利用功能例如读取修改写入事务并且还可能获取目标地址的锁定这些复杂的消耗更多的资源导致请求率较低我们的新发现是资源消耗的这种差异还可以通过资源耗尽开辟一条新的性能干扰途径当受害者与大量使用复杂的攻击者共处一地时受害者的性能可能会受到严重影响为了理解这种效果我们首先测量与其他数据竞争时的数据请求率我们从开始我们为每个测试设置两个工作负载每个工作负载在个专用核心上运行个以使的速率达到饱和为了避免严重的缓存未命中我们总共只使用个和个我们在所有测试中观察到缓存未命中率低于为了避免达到带宽容量限制我们使用作为所有数据的请求大小我们首先使用特定类型的数据设置一个工作负载受害者然后使用不同类型的数据设置攻击者工作负载我们在图中显示了他们的请求率结果我们的第一个结论是除了操作之外操作也比和更昂贵当它们单独运行时作为受害者流量和仅分别达到和达到约和可以达到以上第二个也是更重要的一点是数据操作的不同组合之间的争用行为可能会有所不同例如当受害者单独运行工作负载时它可以达到如果攻击者运行工作负载受害者的请求率立即降至如果攻击者运行工作负载受害者的请求率只会下降到这意味着复杂例如可能会消耗更多资源并影响其他并置动词工作负载我们要强调的一个非直观行为是如果攻击者在此设置下运行或工作负载则运行或的受害者的请求率实际上会增加我们还在上进行了类似的测试结果如图所示该不支持操作我们观察到与相比对所有类型数据的请求率较低这与之前的研究结果相匹配我们发现的上数据之间的争用也各不相同例如具有工作负载的受害者可以在没有干扰的情况下达到攻击者可以导致受害者的工作负载请求率下降工作负载下降具体模式与不同但这个结果仍然证明了我们的关键发现不同数据的开销有所不同主要发现错误处理可能会导致处理单元停顿并挂起所有应用程序需要处理几种类型的错误包括传输超时响应方未发送或接收未就绪错误响应方没有足够的接收请求来接收到达的发送请求本地或远程保护错误发布的请求未引用有效的本地或远程内存区域和本地操作错误操作码在错误类型的上操作处理这些错误需要处理单元的资源并且处理某些错误的成本可能很高在和上我们发现处理错误可能会完全停止处理单元对于受害者我们使用在单个上保留个未完成的写入请求以使带宽容量饱和对于攻击者来说我们只使用单个即表中的应用程序来仅保留一个正在进行的请求以消耗少量带宽如表所示如果应用程序正常生成流量例如响应者发出足够的接收请求它会消耗带宽而受害者的带宽仅下降约然而当应用程序触发错误时例如响应方没有发布任何接收请求应用程序和受害者都会停止我们在两个方向上测试此误差并看到相同的结果原因是接收方的被停顿甚至无法处理包因此即使受害者向相反方向发送流量他们也会陷入停滞我们使用和进行相同的实验我们观察到在的数据传输过程中受害者的连接也会意外终止幸运的是我们没有看到出现此类问题我们最好的猜测是是在之上设计的旨在在有损结构上运行因此它可能具有更有效的错误处理机制连接到控制器并使用通道从传输数据或向传输数据之前的几项工作已经研究了对网络堆栈的影响基于现有的模型我们进一步研究如何消耗甚至耗尽带宽之前的工作已经确定了环回流量如何耗尽带宽因此我们关注正常的和流量为了传输消息引入了以下类型的额外字节用于敲响上门铃的取决于缓存行大小工作队列元素或协议开销例如标头以及由缓存未命中触发的额外操作我们对带宽的主要观察是主要发现只有当请求大小在特定范围内时带宽才会成为瓶颈我们只需要一个租户来证明这一重要发现我们在上运行实验带宽容量为我们在个核心上使用个来饱和带宽每个保留个未完成的请求我们改变请求大小并通过读取计数器来收集和带宽消耗结果如图所示我们首先观察到当有效负载较小时商品可以通过在中嵌入小消息来减轻开销如绿色矩形所示当请求大小小于时增加请求大小不会导致更多的带宽消耗因为有效负载与嵌入在相同的操作中我们的第二个观察结果是只有当请求的有效负载大小在特定范围内时带宽才可能成为瓶颈原因是短请求在耗尽带宽之前首先受到请求速率的限制而大请求始终受到带宽容量的限制我们通过理论消耗模型证实了这一观察结果并提出了两个具体示例我们假设网络为每个事务的最大有效负载为最大化开销的最差设置开销取决于实现我们假设它为这是设备的典型大小传输字节的消息将消耗最多个网络字节和至少个字节因此要使链路带宽饱和我们至少需要的带宽这远大于的容量附录包括详细的计算我们的测量表明实际消耗可能更高如图所示带宽即到主机的消耗模型与的消耗模型类似此外过多的缓存未命中还可能由于大量读取来获取元数据而导致带宽消耗较高然而在大多数情况下大量的缓存未命中首先会减慢的执行速度例如引入额外的延迟因此带宽的消耗较少在我们对缓存未命中的测量中我们没有观察到带宽耗尽的情况理论模型和我们的实验结果都表明带宽可能成为瓶颈但仅限于特定的请求大小范围我们还有其他一些有趣的发现限于篇幅我们在这里只简单介绍一下然而我们确实使用这些发现来指导我们在第节中的测试套件设计其他发现数据争夺不同的缓存我们使用不同的数据进行可扩展性测试并观察不同类型的缓存争用例如大量发出和的将主要导致缓存未命中大量发出请求的或许多发出请求的可能会导致严重的缓存未命中这一观察结果表明数据以不同的方式争夺缓存类似于上的争用其他发现跨多个对象的大范围访问会导致缓存未命中可扩展性问题已经得到了充分研究但我们的测量揭示了新的观察结果除了和之外缓存中还存储了完成队列的上下文因此访问大量也会触发严重的缓存未命中此外分配大量这些对象并不一定会导致严重的缓存未命中跨对象的大范围访问即较差的局部性是触发严重缓存未命中和性能下降的关键其他发现控制的影响受到其核心参与的限制我们观察到所有控制首先由内核驱动程序处理从而导致昂贵的上下文切换这些控制的执行速率通常由内核而不是处理来限制因此控制对耗尽的影响有限然而正如我们的主要发现所示它们仍然会导致严重的性能干扰并通过触发严重的缓存未命中来影响其他应用程序我们在图所示的操作模型中总结了我们的发现该模型描述了操作大量消耗的微架构资源请注意操作还可以使用我们的实验未捕获的其他微架构资源这是因为这些资源的使用率较低不会导致资源争用该模型是定性的我们不会尝试了解确切的资源使用情况因为我们无法了解专有的硬件例如我们知道某种流量模式可以触发某种类型的缓存未命中但我们不知道缓存的总大小或操作消耗了多少缓存即便如此我们证明这个模型足够强大足以让我们创建第一个性能隔离测试套件并且它可以捕获可以破坏现有性能隔离解决方案的各种工作负载在了解不同的操作如何使用这些微架构资源后我们可以设计一个测试套件来评估性能隔离解决方案我们的目标如下给定硬件和性能隔离解决方案我们希望为攻击者和受害者找到一组可以打破性能隔离的工作负载组合我们需要检查不同的受害者工作负载的完整性因为不同的受害者工作负载对不同微架构资源的耗尽很敏感我们的测试套件必须是通用的我们将使用它来测试不同上的各种性能隔离解决方案这意味着我们不能依赖特定供应商的工具和功能例如另外不同的具有不同数量的微架构资源现有的性能隔离解决方案可能只能减轻对特定资源的争用为此我们构建了来系统地测试和评估性能隔离解决方案针对四种类型的资源网卡带宽带宽网卡和网卡缓存对于每种类型的资源我们设计具有不同类型行为例如控制的合成工作负载以耗尽该资源更具体地说我们使用不同的操作码例如通过长消息耗尽我们通过环回流量和特定消息模式耗尽带宽来自关键发现我们用昂贵的数据关键发现小消息或错误处理行为关键发现耗尽我们通过密集的控制关键发现和广泛的数据访问来耗尽不同类型的缓存我们改变参数例如连接类型的一些综合工作负载更具包容性总共包括个攻击者合成工作负载个用于个用于个用于个用于缓存和个合成受害者工作负载许多攻击者工作负载无法使用现有流量引擎直接生成因此我们扩展了的流量引擎据我们所知是最灵活的引擎来生成这些合成流量包括灵活的控制动词工作负载和错误处理工作负载的框架还可以轻松地允许运行真实应用程序作为额外的受害者工作负载目前包含两个实际应用程序包括基准测试和基于的键值存储基准测试包含和等工作负载请注意我们可以将任何应用程序集成到中我们从测试套件中详尽地测试了所有受害者攻击者工作负载对一个关键问题是如何定义违反性能隔离的行为我们对违规的定义取决于具体的隔离解决方案使用用户指定的来计算启用隔离时的预期性能结果将实际性能与预期性能进行比较以识别违规行为例如现有的性能隔离方案大多只提供带宽保证因此这些隔离解决方案的预期性能是有保证的带宽我们假设应用程序单独运行时会消耗的带宽在任何攻击者工作负载下该应用程序的带宽应至少为其中是容忍级别越低意味着隔离越严格我们用一个例子来演示这个定义是如何工作的假设攻击者和受害者配置为共享相同的网络并且我们将设置为如果受害者单独运行时可以达到那么在攻击者的工作负载下它应该能够至少达到如果受害者单独运行时只能达到则其消耗的带宽不应小于在实践中我们发现现有的商用性能隔离方案都是带宽保证或者可以转化为带宽保证我们在第节中使用此定义来表示性能隔离违规并将设置为我们使用测试台来评估现有的性能隔离解决方案测试台中有两台服务器每台服务器均配备一个服务器配备通过连接到服务器连接到交换机我们使用内核版本是对于内核驱动程序和动词库均来自固件版本为我们还在上进行了所有实验结果相似我们评估了供应商提供的种不同的隔离解决方案和之前的工作单独的硬件流量类别云运营商可以为不同的租户设置单独的将带宽和数据包缓冲区分开以强制执行性能隔离现代通常只有个流量类别这意味着当我们想要在物理服务器中托管超过个租户时我们无法使用虽然技术是为硬件虚拟化而设计的但它为不同的租户提供了独立的虚拟功能和一些独立的资源实际上实现了一定程度的性能隔离一种基于软件的性能隔离解决方案在用户空间库中实现数据速率限制和节奏以强制执行性能隔离这意味着没有安全性恶意应用程序可以轻松绕过用户空间库尽管的软件架构并不针对多租户公共云环境但我们仍然使用来评估其隔离策略例如其基于令牌的算法的效果我们还评估了上述解决方案的所有可能组合不幸的是虽然我们有一个带有和的测试台但我们没有启用它们基于硬件的隔离机制也不支持或驱动程序因此我们无法对或进行相同的评估根据的类型和耗尽的资源我们将产生的工作负载分为组我们将的错误处理与和区分开来因为它们会导致的不同行为并且我们观察到一些隔离解决方案例如对这些行为提供了不同程度的隔离我们首先看一下提供的基于硬件的隔离机制对于我们启用两个虚拟功能并为受害租户和攻击者租户分配一个我们还启用基于的速率限制器并将每个租户的最大带宽限制为这是公共多租户环境的典型公平共享设置鉴于这种因此我们将的隔离违规定义为攻击者将受害者消耗的带宽以每秒位数表示减少到小于其中为和是受害者在没有受到攻击的情况下的带宽对于我们为每个租户分配一个专用的例如受害者独占使用攻击者独占使用我们将和配置为均等共享带宽和缓冲区用于存储数据包与缓存不同因此的违规定义与的违规定义相同表的前三行显示了以及它们的组合提供的隔离效果不幸的是我们发现和都无法对的微架构资源提供足够的隔离例如通过控制或数据耗尽的缓存可以成功影响共置受害者的应用程序即使和已启用关键原因是和都只是隔离架构资源例如链路带宽并没有限制单个租户的缓存使用因此能够使用耗尽缓存例如缓存的攻击者工作负载其他应用程序会遭受严重的缓存缺失从而导致性能下降此外我们发现虽然主要针对虚拟化但它确实强制执行了一些隔离特别是对于如果没有启用性能隔离机制错误处理可能会导致暂停甚至挂起共置应用程序使用错误不会影响在其他上运行的租户然而和的类似异常处理过程仍然违反了的隔离性由于的黑匣子性质我们不知道这种差异的根本原因我们最好的猜测是的的某些部分例如处理由不同的隔离而其他部分则没有很好地隔离这些基于硬件的解决方案也无法很好地隔离带宽我们观察到攻击者可以消耗大量带宽并减少受害者的可用带宽然后我们评估基于软件的解决方案不是为公共云设计的需要租户合作例如使用修改后的库当然可以通过绕过修改后的库来打破其隔离但这将违背测试的目的因此我们要求的所有流量受害者和攻击者都经过修改后的驱动程序并由控制此外仅支持最新驱动程序即上有限类型的数据因此我们限制应用程序仅使用支持的操作码旨在为每个租户提供公平份额的资源我们只设置了两个租户因此我们简单地将违规定义为受害者的带宽小于类似于的定义我们还测试了和的组合如表所示确实提供了一些隔离但程度有限例如将的请求率即执行吞吐量纳入其隔离考虑范围因此它使用来控制每个租户的请求率并成功防止单个租户发布大量请求耗尽然而当攻击者不断发布在上触发错误处理的请求时其隔离性就会被破坏原因是这些错误是由检测和处理的而不受的控制另外没有考虑缓存和因此攻击者租户仍然可以耗尽缓存和带宽并导致其他租户遭受过多的缓存未命中或可用带宽较低的问题值得注意的是这些解决方案已经为架构资源例如带宽提供了或多或少可容忍的隔离包含一组仅争夺带宽的工作负载在启用这些解决方案时我们没有看到这些工作负载出现此类违规情况但是忽略微架构资源使得这些解决方案不足以满足真正的公有云部署接下来我们在更大的测试台上进行实验以研究在使用最先进的性能隔离解决方案时微架构资源耗尽如何影响实际应用程序工作负载我们在基于的实现和基于的键值存储上使用工作负载作为两个真正的受害者应用程序我们的测试平台由四台物理服务器组成每台服务器均配备一个其他设置与相同受害应用程序在所有四台服务器上运行其虚拟机攻击者租户控制两个虚拟机每个虚拟机位于不同的服务器上我们以这种方式设置测试床来模拟真实的多租户环境因为攻击者可能没有与所有受害者的虚拟机共置的虚拟机然而我们的结果表明受害者虚拟机子集中违反性能隔离已经足以大幅降低实际分布式应用程序的整体端到端性能对于保护机制我们启用或来为集体通信应用程序提供隔离对于基于的我们仅启用这是因为仅支持最新驱动程序上的高性能但基于的利用进行通信我们使用测试套件中的四种类型的攻击者来演示我们的结果攻击是基线我们使用标准来设置一个需要带宽的应用程序它使用个每个保留个未完成的写入请求以使链路带宽饱和启用速率限制器时消耗约攻击不针对任何微架构资源攻击耗尽带宽它在个内核上运行个并保留个未完成的写入请求它还消耗近链路带宽低于但会导致超过带宽消耗这使得受害者只剩下大约的可用带宽即小于的可用网络带宽缓存攻击耗尽缓存它在个内核上运行个使用个每个仅保留一个未完成请求该攻击者会造成严重的缓存未命中并且仅使用低于的链路带宽即攻击使暂停它在单核上运行并保留个未完成的请求它的接收方不会发出任何接收请求因此必须处理许多接收未就绪异常它消耗低于和低于我们首先测试基于的工作负载是一种广泛应用于分布式深度学习训练的集体通信操作它聚合所有工作人员的向量并将结果传播回所有工作人员我们在每台主机上设置个工作线程总共个来运行缓冲区大小设置为我们连续运行并记录执行率每秒操作数没有任何隔离机制和干扰的原始速率如图中最左边的条所示无攻击栏表示启用这些隔离解决方案的效果启用后率下降一个可能的原因是使用填充层来实施发送方准入控制与基于硬件的解决方案相比这会带来额外的性能开销由于工作负载仅使用不到一半的带宽因此其受到攻击的性能至少应为其中为是其在没有任何攻击的情况下的性能然后我们可以根据受害者应消耗的带宽计算每个隔离解决方案的违规阈值的结果如图所示水平红线显示违规阈值红线下方的条表示隔离违规的应用的比的应用低这意味着的违规阈值也降低了我们首先观察到攻击仅导致设置的性能下降可以忽略不计并且也在容忍范围内实现了带宽隔离目标然后我们观察到所有和攻击都成功违反了或提供的隔离例如攻击可导致的应用程序性能下降的应用程序性能下降攻击的影响更为显着的工作负载性能下降了一半以上的工作负载性能下降了近一半我们观察到攻击是最强大的它可以通过耗尽来直接停止应用程序我们使用同一组攻击者来测试基于的我们使用基于的的默认设置例如密钥大小和线程数我们在一台物理服务器中设置键值服务器并在不同的物理服务器中设置三个客户端我们将一台攻击者虚拟机与键值服务器并置将另一台攻击者虚拟机与其中一个客户端并置我们收集所有客户端的执行率以每秒请求数表示和延迟服务器仅使用且小于因此我们将隔离违规定义为与违规相同图和图显示了速率和延迟结果或多或少地在容差范围内实现了带宽隔离目标我们发现所有微架构资源耗尽攻击都成功地违反了与攻击者虚拟机共置的客户端的隔离与工作负载类似攻击者会停止整个键值存储系统更糟糕的是它甚至会暂停未与攻击者虚拟机共置的客户端这是因为我们停止了键值服务器另一个观察结果是基于的的性能受到缓存耗尽攻击的损害但程度非常有限一个可能的原因是利用传输不需要像那样多的连接元数据因此对内部高速缓存未命中不太敏感此外我们发现对耗尽更加敏感这可能是由于其请求大小较小根据我们的重要发现相对较小的请求会导致更多额外的带宽消耗我们从实际应用结果中得到了一些高层次的结论要点以微架构资源为目标很容易违反性能隔离如果我们把当作一个黑匣子那么打破性能隔离是相当困难的攻击针对的是带宽资源我们观察到现有的所有解决方案都提供了良好的保护然而一旦我们了解了有关如何工作的更多细节例如潜在的微架构资源打破隔离就变得很简单我们的攻击非常有效例如缓存攻击仅需要和攻击以更少的带宽和请求率阻止受害者请注意这些攻击仅针对公开披露的微架构组件要点应用程序对资源争用的敏感度是不同的即使对于相同的攻击应用程序的端到端性能下降也可能有很大不同应用程序对缓存耗尽更敏感而更容易受到耗尽的影响要点分布式应用程序需要在每台服务器上进行性能隔离对于这两个应用程序攻击者都只有两台虚拟机但为什么即使应用程序跨四台机器运行应用程序级性能也会大幅下降许多现代分布式系统的性能通常受到系统中一些最慢的工作线程的限制例如在中每次迭代都需要所有的同步因此我们对一两个工人的攻击可能会减慢整个过程我们的评估表明所有现有方法都无法提供性能隔离我们现在分析这些解决方案的基本限制以及我们可能实现的一些潜在改进和独立的这些基于硬件的解决方案已经提供了一些硬件资源隔离例如硬件队列和上的数据包缓冲区理论上供应商应该能够将更多硬件隔离功能集成到这些解决方案中例如为不同的静态分离或分区缓存可以帮助为构建更好的隔离机制然而这些硬件修改是不平凡的并且很难应用于现有硬件供应商通常将这些新功能与他们的新硬件产品一起发布因此云供应商无法在现有硬件中使用这些功能提供修改后的用户空间库并使用发送者准入控制来强制所有租户公平共享带宽和执行速率不适用于多租户云因为它的策略不可强制执行恶意应用程序可以轻松绕过修改后的用户库抛开安全方面不谈值得一问的是像这样的纯软件解决方案在理论上是否可以支持性能隔离我们对这个问题没有直接的答案但我们相信这是一个有趣的未来研究方向我们认为由于以下原因这可能相当困难首先在没有硬件支持的情况下跟踪和控制租户占用了多少缓存是一项挑战其次建立的定量资源消耗模型具有挑战性最后错误处理被深度集成到硬件中并且对软件来说是不透明的不幸的是我们的结果表明现有的性能隔离解决方案都不够我们根据我们的主要发现分析了现有隔离解决方案的失败并为未来潜在的性能隔离工作提出了一些设计指南这些指南也可能有助于应用程序开发人员在多租户环境下编写更好的应用程序需要隔离的硬件支持像这样的软件方法有一个常见的问题它们仅监控架构级别的指标例如延迟带宽和请求率它们无法检测微架构资源例如缓存中的争用更不用说管理和公平共享这些资源了我们相信未来的性能隔离解决方案将必须利用硬件支持类似于现代虚拟机管理程序如何使用英特尔资源导向技术来监控和管理对最后一级缓存和内存的访问公开了几个有用的硬件计数器但它们仍然不够例如我们只能观察缓存未命中但无法管理缓存访问或为不同租户拆分缓存需要一个间接层意味着数据的内核旁路这可实现低延迟并减少开销那么应该在哪里强制执行性能隔离呢我们相信未来的性能隔离解决方案将需要或软件中的间接层在用户态库如中设置执行点是行不通的因为它缺乏安全性相反软件间接可以采用类似微内核的设计其中一组核心在单独的保护域中运行隔离逻辑性能隔离应该在这样一个同时接管控制和数据的中央控制器中强制执行应用程序的程序员编译器和库支持未来的性能隔离解决方案发明后应用程序可能也需要修改如果未来的性能隔离解决方案需要对微架构资源进行严格划分则意味着每个应用程序可使用的微架构资源有限并可能导致性能大幅下降应用程序使用的微架构资源量也可能有所不同取决于同一服务器或其他配置上有多少其他租户构建高性能应用程序需要程序员编译器和应用程序库付出额外的努力才能有效地使用这些有限的资源对于缓存这些努力发生在二十年前的学术界性能隔离损坏的影响我们的评估表明恶意租户可能会导致其他租户的性能急剧下降甚至陷入困境此外损坏的性能隔离会暴露恶意用户进行旁路攻击的漏洞由于租户可以影响同一主机上其他人的性能因此它可以设置侧通道来泄漏受害节点的访问模式或通过影响主机的性能来传递信息因此性能隔离是安全公共云的一项关键功能如今云供应商应使用哪种性能隔离解决方案一个好消息是据我们所知目前没有任何云供应商使用商用来为支持的虚拟机提供分区主机资源要租用支持的虚拟机客户必须租用整个物理机这意味着目前我们根本不需要性能隔离解决方案因为只运行单个租户的流量为了推进的多租户使用我们认为性能隔离仍然是一个主要障碍在成熟的性能隔离解决方案准备就绪至少可以通过我们的测试套件之前不应启用多租户对其他内核绕过主机网络架构的通用性我们的测试套件设计基于接口该接口是特定的然而我们相信我们的方法应该可以推广到其他内核旁路架构例如中发现违反性能隔离的情况因为这些实现通常需要在设计的部分中使用类似的机制当今的行业趋势是将功能卸载到硬件加速器例如将拥塞控制和可靠的消息传递转移到硬件中硬件中的微架构资源对于提供这些卸载的功能至关重要关注这些微架构资源以实现性能隔离将变得越来越重要中的微架构资源微架构资源的存在在网络社区中是众所周知的并且许多研究集中在如何设计应用程序以规避由于这些资源而导致的某些性能异常例如和避免使用可靠连接来减轻上下文缓存缺失以获得更好的可扩展性和以分时方式复用可靠连接以缓解可扩展性问题等人研究的行为并提供编写高效程序的指南不幸的是这些工作只关注优化应用程序以充分利用中的有限资源然而公有云提供商无法控制第三方租户的应用程序对性能异常进行了系统的搜索异常大多是由于微架构资源超额认购造成的不过由于只专注于第一方流量因此它只是在正常操作的基础上构建了一个搜索空间因此它只考虑正常的数据而无法发现与其他类型行为相关的发现例如第节中的关键发现和基本上不包含在的搜索空间中因为没有考虑控制错误处理和昂贵的原子动词总的来说之前的作品更多地从以下角度出发应用程序开发人员我们的工作是从公共云提供商的角度来看的一个补充方面这些微架构资源如何影响性能隔离这要求我们具有微架构资源意识并查看所有类型的行为包括控制和错误处理因为我们需要处理行为不当甚至恶意的租户其他性能隔离解决方案为上的数据包处理和带宽提供隔离这使得延迟受限的工作负载不会受到带宽受限的工作负载的影响隔离基于的中的资源与它们相比我们的工作重点是上的相关资源其他上下文中的性能隔离性能隔离问题不仅限于网卡其他服务器硬件组件也存在这个问题并且他们已经有了相应的解决方案缓存和内存带宽存在多种分区技术网络结构中的网络带宽也是隔离以及交换机处理管道的重要资源是一种很有前景的网络技术可在数据中心网络中实现低延迟和高效率为了在多租户环境中启用性能隔离是一个重要的属性并且由于微架构资源例如缓存处理单元的存在带来了新的挑战我们提出了一个关于不同操作如何使用这些资源的操作模型使用此模型我们创建了这是第一个评估性能隔离解决方案的测试套件我们的结果表明现有的性能隔离解决方案都无法针对试图耗尽这些微架构资源的工作负载提供足够的隔离我们的研究结果得到了最大的供应商之一的认可和复制我们相信构建可用的性能隔离解决方案将是一场持久战',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-27 19:29:21',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="疼了也不哭" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg"><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">疼了也不哭</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/album/"><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/6e2a005e8a5c5e0fe2e128513f24d401.png" target="_blank" rel="external nofollow noopener noreferrer"><img class="post-qr-code-img" alt="微信" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/6e2a005e8a5c5e0fe2e128513f24d401.png"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/910bd7f9f005abb6f667fb24d4f8a4ca.png" target="_blank" rel="external nofollow noopener noreferrer"><img class="post-qr-code-img" alt="支付宝" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/910bd7f9f005abb6f667fb24d4f8a4ca.png"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ElasticSearch/" style="font-size: 1.05rem;">ElasticSearch<sup>2</sup></a><a href="/tags/Go%E5%AE%9E%E8%B7%B5/" style="font-size: 1.05rem;">Go实践<sup>3</sup></a><a href="/tags/Go%E7%AC%94%E8%AE%B0/" style="font-size: 1.05rem;">Go笔记<sup>1</sup></a><a href="/tags/JVM%E5%AE%9E%E7%8E%B0/" style="font-size: 1.05rem;">JVM实现<sup>3</sup></a><a href="/tags/JVM%E7%AC%94%E8%AE%B0/" style="font-size: 1.05rem;">JVM笔记<sup>5</sup></a><a href="/tags/LLVM/" style="font-size: 1.05rem;">LLVM<sup>1</sup></a><a href="/tags/PITest/" style="font-size: 1.05rem;">PITest<sup>1</sup></a><a href="/tags/leetcode/" style="font-size: 1.05rem;">leetcode<sup>5</sup></a><a href="/tags/%E4%BB%A5%E5%A4%AA%E5%B8%81/" style="font-size: 1.05rem;">以太币<sup>1</sup></a><a href="/tags/%E4%BD%9C%E4%B8%9A/" style="font-size: 1.05rem;">作业<sup>7</sup></a><a href="/tags/%E5%89%91%E6%8C%87Offer/" style="font-size: 1.05rem;">剑指Offer<sup>1</sup></a><a href="/tags/%E5%8A%A0%E5%AF%86%E7%AD%BE%E5%90%8D/" style="font-size: 1.05rem;">加密签名<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 1.05rem;">复习<sup>1</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/" style="font-size: 1.05rem;">移动互联网技术<sup>1</sup></a><a href="/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" style="font-size: 1.05rem;">论文精读<sup>1</sup></a><a href="/tags/%E9%80%BB%E8%BE%91%E5%AD%A6/" style="font-size: 1.05rem;">逻辑学<sup>1</sup></a></div></div><hr></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">14</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li></ul></div><hr></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>论文精读</span></a></span></div></div><h1 class="post-title" itemprop="name headline">论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-12-27T11:19:24.000Z" title="发表于 2023-12-27 19:19:24">2023-12-27</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-12-27T11:29:21.249Z" title="更新于 2023-12-27 19:29:21">2023-12-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">16.6k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>52分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为北京"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>北京</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewbox="0 24 150 28" preserveaspectratio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"/></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"/><use href="#gentle-wave" x="48" y="3"/><use href="#gentle-wave" x="48" y="5"/><use href="#gentle-wave" x="48" y="7"/></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2/2023/12/27/016f5ad177596f6d9a899a5c5e23710a.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://gaoyubo.cn/blogs/undefined.html"><header><a href="/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" tabindex="-1" itemprop="url">论文精读</a><h1 id="CrawlerTitle" itemprop="name headline">论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">疼了也不哭</span><time itemprop="dateCreated datePublished" datetime="2023-12-27T11:19:24.000Z" title="发表于 2023-12-27 19:19:24">2023-12-27</time><time itemprop="dateCreated datePublished" datetime="2023-12-27T11:29:21.249Z" title="更新于 2023-12-27 19:29:21">2023-12-27</time></header><h2 id="abstract">Abstract</h2>
+<p>近年来，RDMA 在云中得到广泛采用，加速第一方工作负载并通过释放 CPU
+周期来节省成本。现在，云提供商正在努力在通用来宾虚拟机中支持
+RDMA，以使第三方工作负载受益。为此，云提供商必须提供强大的性能隔离，以便一个租户的
+RDMA 工作负载不会对另一租户的 RDMA
+性能产生不利影响。尽管在公有云中的网络性能隔离方面做出了很多努力，但我们发现
+RDMA 由于其复杂的 NIC 微架构资源（例如 NIC
+缓存）而带来了独特的挑战。</p>
+<p>在本文中，我们旨在系统地了解RNIC微架构资源对性能隔离的影响。
+我们提出了一个模型来表示 RDMA 操作如何使用 RNIC 资源。
+使用此模型，我们开发了一个测试套件来评估 RDMA 性能隔离解决方案。
+我们的测试套件可以打破各种场景下的所有现有解决方案。
+我们的结果得到了最大的 RDMA NIC 供应商之一的认可和复制。
+最后，根据测试结果，我们总结了设计未来 RDMA
+性能隔离解决方案的新见解。</p>
+<h2 id="introduction">1 Introduction</h2>
+<p>在共享计算基础设施上复用来自不同租户的工作负载开启了现代云计算时代。全球云基础设施收入已超过4000亿美元，预计未来十年将增长至1万亿美元左右[7]。</p>
+<p>众所周知，租户的工作负载不同，共享计算资源可能会导致不可预测的应用程序性能干扰
+[12, 18, 66] 和隐私泄露 [32,
+39]。这推动了大量研究关注云中的性能隔离，特别是对于具有严格服务级别目标的性能关键型应用程序[11,12,18,41,63,66,70]。实践中的最新技术也取得了显着的进步：CPU
+供应商甚至实现了硬件机制来控制和隔离 CPU 缓存
+[20]。随着时间的推移，通过共享资源的侧通道正在被修复[39]。</p>
+<p>在本文中，我们访问一种特定的硬件设备：RDMA NIC (RNIC)。 RDMA
+将网络堆栈从操作系统内核卸载到 NIC
+硬件，以提供高吞吐量和超低处理延迟，并且 CPU 开销接近于零。 RDMA
+已大规模部署在数据中心中，以提高性能并释放 CPU 内核以用于存储和 ML
+等第一方工作负载 [14,17,38,51]。
+现在，云提供商正在努力在通用来宾虚拟机中支持
+RDMA，以使第三方工作负载受益。 为此，云提供商必须为共享同一 RNIC
+的租户提供强大的性能隔离。</p>
+<p>人们已经做出了许多努力来提高公共云中的网络性能隔离，特别关注带宽和数据包处理能力[3,15,16,25,34,62,64]。
+然而，由于其独特且复杂的NIC微架构资源（例如NIC缓存和处理单元），RDMA带来了新的挑战。
+学术界已经知道它们的存在和对性能的影响 [29, 33]。
+为了避免性能异常，开发人员精心设计 RDMA 系统，以避免耗尽这些微架构资源
+[5,9,10,27,30,50,61]。
+我们的研究是从不同的角度进行的：我们从公有云供应商的角度来研究这些微架构资源如何影响
+RDMA 性能隔离。
+云供应商不了解和控制租户的RDMA应用程序，租户可以以任意方式使用RNIC微架构资源。</p>
+<p>为了证明 RNIC
+微架构资源对性能隔离的重大影响，我们测试了最先进的方法：使用具有分离硬件流量类别
+(HW TC) 的 SR-IOV。 SR-IOV 和 HW TC 都是商用 RNIC 上可用的硬件机制。 HW
+TC 在 RNIC 中利用多个硬件队列（通常是 8
+个队列）。我们可以分配每个租户应用程序使用一个队列。 我们使用
+ib_write_bw（Perftest [56] 中的标准 RDMA
+带宽测试工具）在两个虚拟机之间运行一个受害者流量。
+每个虚拟机位于不同的服务器上，这两个服务器都配备了 100 Gbps NVIDIA
+ConnectX-5 RNIC。 图 1 显示了带宽。 带宽测试达到80Gbps。
+我们在每台服务器上启动一个虚拟机来代表攻击者（即有错误或恶意的租户应用程序），并启用性能隔离以向受害者和攻击者授予总带宽的一半。
+受害者流量减少至 50 Gbps，这是预期的。 然而，当我们开始精心设计的只有 1
+Gbps 的攻击者流量来故意耗尽 RNIC 微架构资源之一时，受害者立即下降到 2
+Gbps，违反了性能隔离保证（即为受害者保证 50 Gbps 的网络带宽） 。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/592ba88395ae2e3d681f7f37cda3bc05.png" alt="image-20231227192213847">
+<figcaption aria-hidden="true">image-20231227192213847</figcaption>
+</figure>
+<p>我们开发了一组实验来研究不同类型的 RDMA 操作如何使用 RNIC
+微架构资源。
+我们的实验得出了一些有趣的发现，包括：（1）异常或错误处理会暂停 RNIC
+的pipelines并导致其他租户的性能急剧下降。 (2) 控制
+verbs导致缓存未命中，严重增加并损害其他租户的性能。 (3) 数据
+verbs耗尽不同类型的微架构资源并违反性能隔离。
+据我们所知，我们是第一个系统研究所有类型的操作和异常对 RDMA
+微架构资源消耗的影响的。</p>
+<p>我们利用这些发现创建 RDMA 操作模型来描述 RDMA
+操作动作与消耗的微架构资源之间的关系。
+我们的模型使我们能够了解如何耗尽每个 RNIC 资源。
+使用该操作模型，我们创建了第一个测试套件Husky，以系统地测试和评估RNIC性能隔离解决方案。
+不幸的是，在商用 RNIC 上运行我们的测试套件揭示了坏消息：目前没有可以提供
+RNIC 性能隔离的解决方案。 我们已经向三大 RNIC 供应商 NVIDIA、Chelsio 和
+Intel 报告了我们的所有发现。 我们的结果得到了最大 RDMA NIC 制造商之一
+NVIDIA 的完全重现和认可。
+最后，我们提出了关于如何构建未来性能隔离解决方案的新见解。
+我们希望这些见解能够有益于未来的 RNIC 设计和 RDMA 软件开发。</p>
+<p>本文做出以下贡献：</p>
+<ul>
+<li>我们确定了 RDMA 操作和 RNIC
+微架构资源之间的多种交互，包括错误处理和控制操作的先前未知的影响。</li>
+<li>我们引入第一个RDMA操作模型来描述RNIC 微架构资源在操作动作（标准 RDMA
+编程 API）中如何消耗，以及为什么这些微架构资源会影响性能隔离。</li>
+<li>我们构建了第一个测试套件来系统地测试和评估 RNIC 性能隔离解决方案。
+我们表明现有的性能隔离解决方案都无法通过我们的测试套件。 Husky
+测试套件可从 <a href="https://link.zhihu.com/?target=https%3A//github.com/host-bench/husky" rel="external nofollow noopener noreferrer" target="_blank">GitHub
+- host-bench/husky: Benchmark Suite for RDMA Performance Isolation</a>
+获取。</li>
+</ul>
+<p>这项工作表明，在公有云中为 RDMA 提供性能隔离比人们想象的要困难得多。
+未来的RDMA性能隔离解决方案必须有更高的标准：应仔细考虑RNIC微架构资源并通过系统基准进行评估。</p>
+<h2 id="background-and-motivation">2 Background and Motivation</h2>
+<p>我们首先介绍公有云中网络性能隔离的背景知识。
+然后我们介绍了RDMA并讨论了RDMA网络性能隔离带来的新挑战。</p>
+<h3 id="network-performance-isolation-in-the-public-cloud">2.1 Network
+Performance Isolation in the Public Cloud</h3>
+<p>云中的租户主要造成两类网络资源的争用。
+第一个最明显的问题是网络结构中的带宽。
+为了缓解租户之间的带宽争用，第一项工作 [58,60,62]
+静态地限制每个租户的带宽。
+另一条工作线[1,3,4,6,16,24,25,37,58,59,68]为每个租户提供最低带宽保证，并允许租户使用空闲带宽容量。
+第二种类型的资源是终端主机处的数据包处理资源。
+每个数据包的处理成本取决于许多因素，例如缓存未命中和要执行的操作。
+最近，PicNIC [34] 为此类软件数据包处理提供了隔离。
+人们还利用专门的硬件来实现相同的目标[64]。</p>
+<p>值得注意的是，网络性能隔离与网络虚拟化有很大不同。
+网络虚拟化编排网络资源，为每个租户提供独立网络的错觉。
+租户不应影响另一个租户的网络连接。
+网络虚拟化的目标是实现低开销[19,31,57]。
+相比之下，网络性能隔离侧重于如何管理资源争用，以确保租户能够获得有保证的性能。</p>
+<h3 id="rdma-overview">2.2 RDMA Overview</h3>
+<p>RDMA 允许 NIC 直接在线路和应用程序内存之间传输数据。 网络协议在 NIC
+中实现。 图 2 展示了 RDMA 工作流程的概述。 它将标准 RDMA
+编程接口（也成为verbs）分为两类：控制verbs和数据verbs。
+应用程序首先需要调用几个控制动作来分配必要的对象，例如队列对（QP）和完成队列（CQ），以建立可靠连接（RC）、不可靠连接（UC）或不可靠数据报（
+UD）传输端点。 然后应用程序需要注册一个内存区域（MR）。
+这种注册实质上是固定主机DRAM中的内存并获得从虚拟地址到物理地址的映射，这使得RNIC能够直接读取或写入该内存区域。
+所有这些控制verbs均按以下过程进行处理：RDMA
+的用户空间库和内核驱动程序处理动作请求，生成请求命令，将命令放入协商命令队列中，然后按响
+RNIC 的门铃（例如，内存映射寄存器）。 RNIC
+从命令队列中取出命令，对其进行处理，并将响应推回到队列中。
+然后驱动程序处理响应并将对象返回给应用程序。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/31544af7db823b4242e80d0813881d60.png" alt="image-20231227192154243">
+<figcaption aria-hidden="true">image-20231227192154243</figcaption>
+</figure>
+<p>经过上述初始化后，应用程序就可以开始本地和远程内存之间的数据传输了。
+应用程序可以使用多种类型的操作，例如 SEND/RECV、WRITE、READ 和 ATOMIC。
+我们将这些操作命名为数据verbs。
+为了发出数据verbs，应用程序通常将请求发送到其发送队列，并通过用户空间库敲响
+RNIC 的门铃。
+然后RNIC解析该请求，从主机存储器读取数据，将数据分段成数据包，并传输数据包。
+此过程绕过内核。 不同类型的请求的处理存在一定的差异。 例如，对于
+SEND/RECV 消息，接收方应在发送方发出 SEND 请求之前发布足够的 RECV 请求。
+否则，传入的 SEND 请求可能会被丢弃或需要重传，因为接收方 RNIC
+缺乏接收请求来处理它们，这称为接收未就绪 (RNR) 错误。
+对于向/从远程端写入/读取数据或执行原子操作，发送方应指定正确的远程虚拟地址和内存键。
+无效地址或错误密钥将触发内存保护错误并导致 QP 转换为错误状态。</p>
+<h3 id="why-rdma-performance-isolation-is-hard">2.3 Why RDMA Performance
+Isolation is Hard?</h3>
+<p>如上所示，RDMA将许多主机网络功能卸载到RNIC，RNIC具有许多不可见的硬件组件，并且每个组件都可能单独成为性能瓶颈。
+图 3 显示了商用 RNIC 的硬件组件。 我们根据 NVIDIA 的公开文档绘制此图
+[44,46,48]。 除了数据包缓冲区（TX/RX Buffer）之外，RNIC
+还具有多个处理单元（PU）和多种类型的内部缓存。
+每个内部缓存用于存储特定类型的元数据。 例如，在 NVIDIA RNIC
+中，互连上下文内存 (ICM) 缓存存储 QP 上下文；
+内存转换表（MTT）和内存保护表（MPT）存储内存地址转换和保护信息的条目；
+工作队列条目 (WQE) 缓存存储预取的发送 WQE 和发布的接收 WQE。
+由于这些缓存源自设计需求，其他 RNIC 也包含类似的组件。 基于 CPU
+硬件的类比，我们将这些 RNIC 硬件组件命名为微架构资源。 CPU
+的设计符合标准指令集架构（例如 ARM、x86），但 CPU
+设计人员可以做出微架构级别的决策，例如缓存的级别和缓存大小。 RNIC
+是相似的，因为 RNIC 供应商必须为 RDMA
+应用程序开发人员提供相同的编程接口，但供应商可以决定这些微架构级别的细节，例如
+RNIC 缓存。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/9eeab0a09202886436b51caee2dee6d2.png" alt="image-20231227192239930">
+<figcaption aria-hidden="true">image-20231227192239930</figcaption>
+</figure>
+<p>之前的许多工作已经确定了这些微架构资源对 RDMA
+应用程序性能的一些影响。 例如，[5,29,50]发现RNIC缓存QP上下文。 QP
+上下文缓存未命中可能会触发 RNIC 的额外 PCIe 往返行程，以从主机 DRAM
+获取上下文，从而降低应用程序性能。 例如，200 个连接可能会导致 NVIDIA
+ConnectX-3 NIC 上的请求率下降 90% [5]。
+然而，这些努力是从应用程序开发人员的角度研究微架构资源。
+在性能下降之后，他们识别瓶颈资源，寻求更有效的方法来使用数据动作，并相应地修改他们的应用程序。</p>
+<p>然而，在公共云中，云供应商无法控制租户的应用程序。
+因此，租户可以按照自己的意愿甚至恶意地使用 RNIC 的微架构资源。
+因此，从云供应商的角度来看，我们需要了解大多数（如果不是全部）RDMA
+动作的微架构资源消耗，而不仅仅是常见的数据动作。
+只有掌握了这些知识，我们才能正确地将 RNIC
+的微架构资源分配给不同的租户，以提供可预测的性能。</p>
+<h2 id="rnic-microarchitecture-resources">3 RNIC Microarchitecture
+Resources</h2>
+<p>在本节中，我们将介绍我们目前所知的所有 RNIC 微架构资源的研究。
+先前的工作已经确定了几种特定形式的资源争用。
+但我们的目标是系统地研究所有可能类型的资源争用。
+对于每个微架构资源，我们研究三类 RDMA 操作如何消耗它：(1)
+为应用程序分配对象的控制verbs（例如 ibv_create_qp），(2)
+启动数据传输的数据verbs（例如，ibv_post_send），以及
+(3)异常处理操作，处理异常或错误（例如，RNR错误）。
+由于篇幅限制，我们首先介绍一些对 RNIC 性能隔离具有重大影响的关键发现。
+之后，我们总结了其他几个发现。 我们在附录 B 中详细分析了 NVIDIA
+对这些调查结果的回应。</p>
+<h3 id="methodology">3.1 Methodology</h3>
+<p>我们的研究结果围绕如何通过标准 RDMA 编程 API verbs 接口 [21] 耗尽
+RNIC 微架构资源。
+对于每个关键发现，我们都通过具体设置进行演示，其中包括受害者工作负载和攻击者工作负载。
+尽管我们使用术语“攻击者”，但攻击者租户不会通过漏洞对其他租户进行未经授权的访问。
+相反，攻击者只是发出标准 RDMA verbs的普通 RDMA 应用程序。
+每个租户有一个客户端和一台服务器。
+受害者和攻击者的客户端位于同一台物理机上，共享同一个RNIC。
+受害者和攻击者的服务器位于不同的物理服务器上。
+在测量过程中，我们没有启用任何隔离机制。 我们将在第 5
+节中研究现有的性能隔离解决方案。</p>
+<p>我们重点关注受害者和攻击者之间通过耗尽微架构资源而造成的性能干扰。
+我们首先仅运行受害者，以使链路带宽容量（每秒位数）或 RNIC
+的最大请求速率（每秒请求数）达到饱和。
+然后我们启动攻击者并测量受害者和攻击者的两个指标。
+如果不存在微架构资源争用，则两个租户的性能指标之和应符合规范中 RNIC
+的限制。 现代 RNIC 指定其带宽容量和请求速率限制。
+如果两个租户的性能指标之和低于两个指定的限制，我们将其归因于微架构资源的争用。
+例如，假设没有攻击者，受害者可以达到 100 Gbps。 然而，对于 X Gbps
+攻击者，受害者会降低至 Y Gbps，并且 X +Y &lt;
+100。我们还假设总请求速率低于 RNIC 规范。
+在这种情况下，我们得出结论，某些微架构资源出现瓶颈。
+除非另有说明，流量均使用 RC 连接。</p>
+<p>我们测试了四种类型的 100 Gbps RNIC：NVIDIA ConnectX-5 EN 和
+ConnectX-6 Dx、Chelsio T62100-LPCR 和 Intel E810。 NVIDIA NIC 运行
+RoCE，Chelsio NIC 运行 iWARP。 Intel E810 同时支持 RoCE 和
+iWARP，但我们目前仅测试其 RoCE 实现。 RoCE 和 iWARP
+是在基于以太网的网络上运行 RDMA 的两种标准方法。
+我们的测试床由两台服务器组成，每台服务器都配备一个 RNIC，两个 RNIC 通过
+100 Gbps 交换机连接。 对于 NVIDIA RNIC，我们可以通过其网络适配器管理工具
+NEO-Host [44] 访问其硬件计数器，例如缓存未命中计数器。
+这些硬件计数器使我们能够查明哪个资源被超额认购。 例如，当 ICM
+缓存未命中计数器随着特定应用程序工作负载而快速增加时，我们了解到该工作负载大量使用此缓存，导致其超额订阅。
+由于其他 RNIC 不公开此类计数器，因此我们根据其他 RNIC
+的端到端性能指标（例如带宽）对其进行实验。</p>
+<h3 id="nic-caches">3.2 NIC Caches</h3>
+<p>我们知道RNIC至少有三种类型的缓存，如图3所示。RNIC在这些缓存中存储多种类型的元数据以加速请求处理，例如ICM缓存中的QP上下文。
+先前的工作已经识别出一些由具有特定模式的数据动词引起的 RNIC
+缓存争用问题。 例如，同时在许多 RC QP
+上传输小消息以及对大量内存区域的随机访问可能会导致某些类型的严重缓存未命中（例如，ICM
+和MTT/MPT）[29, 53]。 ScaleRPC [5] 发现这种可扩展性问题可以使 WRITE
+请求率降低 90%。
+除了这些众所周知的问题之外，我们还观察到一种新的、甚至更严重的耗尽缓存的方法：</p>
+<p><strong>主要发现#1：控制动词可能导致过多的缓存未命中和性能急剧下降。</strong>
+控制verbs（例如 ibv_reg_mr）用于创建和销毁 MR 和 QP
+等对象，数据verbs将使用这些对象来传输数据。
+据我们所知，还没有关于控制verbs如何消耗 RNIC 微架构资源的研究。
+我们发现控制verbs很容易触发过多的缓存未命中，从而降低带宽和请求率。</p>
+<p>我们通过 NVIDIA ConnectX-5 RNIC 上的简单实验证明了这一发现。
+我们让受害租户使用 6 个core，每个core 16 个连接，发出 512B WRITE
+请求，以耗尽 RNIC 的带宽容量（即 100 Gbps）。 结果如表1所示。
+受害者可以达到 96.6 Gbps，MTT 缓存未命中率为 17.2%。
+在这样的缓存未命中率下，受害者仍然可以实现线速率，因为 QP 复用和 RNIC
+管道设计可以在一定程度上掩盖缓存未命中的开销。
+我们让单线程攻击者在受害者的发送方使用 ibv_reg_mr （每秒约 5K
+注册）继续注册内存区域 (MR)。
+在这种情况下，受害者的带宽几乎不受影响，保持在 95.9
+Gbps，丢失率略有上升至 22.9%。
+然而，如果攻击者不断注销MR，我们可以看到对受害者的显着影响：缓存未命中率增加到49.1%，带宽下降到48
+Gbps。
+如此高的缓存未命中率下的开销变得很大并且不再能够被RNIC处理管道屏蔽。
+值得注意的是，攻击者不需要发出任何数据动词，因此攻击者根本不消耗网络带宽或请求速率。
+幸运的是，我们观察到这种干扰在接收器侧可以忽略不计。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/633cbb39359c8ccacdb2f2f2eae99547.png" alt="image-20231227192300990">
+<figcaption aria-hidden="true">image-20231227192300990</figcaption>
+</figure>
+<p>与数据verbs相比，我们发现控制verbs更容易造成性能干扰。
+溢出的缓存资源，我们需要启动足够的动态数据verbs并强制它们随机访问大量对象（例如，MR）。
+例如，在 NVIDIA ConnectX-5 RNIC 上，我们发现需要 6 个线程才能以 96 个 QP
+访问超过 18K MR，从而导致严重的 MTT 缓存未命中，导致带宽下降 40.1%。
+我们相信，由于 RNIC
+供应商不断增加片上缓存资源，由数据verbs引起的缓存未命中将变得不那么严重。
+相反，控制verbs通过其特殊语义影响缓存资源，而不是简单地消耗它们，因此控制verbs的影响可能很难减轻。
+例如，我们推测MR注销可能会使整个MTT/MPT缓存失效，以避免访问过时的MR。
+这会导致访问其他 MR 时缓存未命中。 我们还在 Chelsio 和 Intel NIC
+上进行了相同的实验，我们观察到了类似的结果。</p>
+<h3 id="processing-units">3.3 Processing Units</h3>
+<p>RNIC 有多个处理单元 (PU) 来处理动词verbs。
+由于缺乏公共可用的计数器来监控 PU
+的状态，我们使用请求率作为衡量不同动词如何消耗 PU 的指标。
+我们总结了以下两个主要发现：</p>
+<p><strong>主要发现#2：不同数据verbs之间的性能干扰取决于verbs的复杂性。</strong>
+不同的数据verbs有不同的复杂性。
+简单的verbs，如发送和读取，仅在机器之间复制数据。 复杂动词（例如
+fetch_and_add）以原子方式将 64 位值添加到远程地址的内存中。 此操作利用
+PCIe 功能（例如，读取-修改-写入事务），并且还可能获取目标地址的锁定。
+这些复杂的verbs消耗更多的PU资源，导致请求率较低[29]。
+我们的新发现是，资源消耗的这种差异还可以通过资源耗尽开辟一条新的性能干扰途径：当受害者与大量使用复杂verbs的攻击者共处一地时，受害者的性能可能会受到严重影响。</p>
+<p>为了理解这种效果，我们首先测量与其他数据verbs竞争时的数据verbs请求率。
+我们从 NVIDIA 100 Gbps ConnectX-5 RNIC 开始。
+我们为每个测试设置两个工作负载，每个工作负载在 8 个专用 CPU 核心上运行 8
+个 QP，以使 RNIC 的速率达到饱和。 为了避免 RNIC
+严重的缓存未命中，我们总共只使用 128 个 QP 和 16 个 MR。 我们在所有 PU
+测试中观察到缓存未命中率低于 1%。 为了避免达到带宽容量限制，我们使用 8B
+作为所有数据verbs的请求大小。
+我们首先使用特定类型的数据verbs设置一个工作负载（受害者），然后使用不同类型的数据verbs设置攻击者工作负载。
+我们在图 4 中显示了他们的请求率结果。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/f3d74017aa094c38b35a0082ccfab7b8.png" alt="image-20231227192323351">
+<figcaption aria-hidden="true">image-20231227192323351</figcaption>
+</figure>
+<p>我们的第一个结论是，除了 ATOMIC 操作 [29] 之外，READ 操作也比
+SEND/RECV 和 WRITE 更昂贵。 当它们单独运行时（作为受害者流量），FAA 和
+CAS 仅分别达到 5.2 Mrps 和 4.8 Mrps。 READ 达到约 60 Mrps。
+SEND和WRITE可以达到90Mrps以上。</p>
+<p>第二个也是更重要的一点是，数据verbs操作的不同组合之间的争用行为可能会有所不同。
+例如，当受害者单独运行 READ 工作负载时，它可以达到 60 Mrps。
+如果攻击者运行 CAS 工作负载，受害者的请求率立即降至 3 Mrps。
+如果攻击者运行 READ 工作负载，受害者的请求率只会下降到 30 Mrps。
+这意味着复杂verbs（例如
+CAS）可能会消耗更多资源，并影响其他并置动词工作负载。
+我们要强调的一个非直观行为是，如果攻击者在此设置下运行 SEND 或 WRITE
+工作负载，则运行 FAA 或 CAS 的受害者的请求率实际上会增加。</p>
+<p>我们还在100 Gbps Chelsio T62100-LP-CR
+RNIC上进行了类似的测试，结果如图5所示。该iWARP RNIC不支持ATOMIC操作。
+我们观察到，与 RoCE RNIC 相比，iWARP RNIC
+对所有类型数据verbs的请求率较低，这与之前的研究结果相匹配 [8,49,71]。
+我们发现 Chelsio 的 RNIC 上数据verbs之间的争用也各不相同。 例如，具有
+WRITE 工作负载的受害者可以在没有干扰的情况下达到 4.76 Mrps。
+攻击者可以导致受害者的 SEND 工作负载请求率下降 55.0%，READ 工作负载下降
+73.1%。 具体模式与 NVIDIA RNIC
+不同，但这个结果仍然证明了我们的关键发现：不同数据verbs的 PU
+开销有所不同。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/5bf0961f5d63b7f70dde54b48d8a411c.png" alt="image-20231227192340084">
+<figcaption aria-hidden="true">image-20231227192340084</figcaption>
+</figure>
+<p><strong>主要发现#3：错误处理可能会导致 RNIC
+处理单元停顿并挂起所有应用程序</strong>。 RNIC
+需要处理几种类型的错误，包括传输超时（响应方未发送 ACK 或
+NACK）、接收未就绪 (RNR)
+错误（响应方没有足够的接收请求来接收到达的发送请求）、本地或
+远程保护错误（发布的请求未引用有效的本地或远程内存区域）和本地操作错误（操作码在错误类型的
+QP 上操作）。 处理这些错误需要 RNIC 处理单元的资源，并且 RNIC
+处理某些错误的成本可能很高。</p>
+<p>在 NVIDIA ConnectX-5 和 ConnectX-6 RNIC 上，我们发现处理 RNR
+错误可能会完全停止 RNIC 处理单元。 对于受害者，我们使用 Perftest [56]
+在单个 QP 上保留 128 个未完成的 64KB 写入请求，以使带宽容量饱和。
+对于攻击者来说，我们只使用单个 QP（即表中的 SEND
+应用程序）来仅保留一个正在进行的 4KB SEND 请求，以消耗少量带宽。 如表 2
+所示，如果 SEND
+应用程序正常生成流量（例如，响应者发出足够的接收请求），它会消耗 4 Gbps
+带宽，而受害者的带宽仅下降约 3.5 Gbps。
+然而，当SEND应用程序触发RNR错误时（例如，响应方没有发布任何接收请求），SEND应用程序和受害者都会停止。
+我们在两个方向上测试此 RNR 误差并看到相同的结果。
+原因是RNR接收方的RNIC被停顿，RNIC甚至无法处理ACK包。
+因此，即使受害者向相反方向发送流量，他们也会陷入停滞。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/cfdad9363d0a59c3f469355aa8ce1fb8.png" alt="image-20231227192358484">
+<figcaption aria-hidden="true">image-20231227192358484</figcaption>
+</figure>
+<p>我们使用 Intel 和 Chelsio NIC 进行相同的实验。 我们观察到，在 Intel
+E810 的数据传输过程中，受害者的 QP 连接也会意外终止。
+幸运的是，我们没有看到 Chelsio T62100-LP-CR 出现此类 RNR 问题。
+我们最好的猜测是，iWARP 是在 TCP
+之上设计的，旨在在有损结构上运行，因此它可能具有更有效的错误处理机制。</p>
+<h3 id="pcie-bandwidth">3.4 PCIe Bandwidth</h3>
+<p>RNIC 连接到 PCIe 控制器，并使用 PCIe 通道从 CPU 传输数据或向 CPU
+传输数据。 之前的几项工作已经研究了 PCIe 对网络堆栈的影响 [29,34,52]。
+基于现有的 PCIe 模型，我们进一步研究 RDMA verbs如何消耗甚至耗尽 PCIe
+带宽。 之前的工作已经确定了 RDMA 环回流量如何耗尽 PCIe 带宽 [26, 33]。
+因此，我们关注正常的 RDMA TX 和 RX 流量。 为了传输 RDMA 消息，PCIe
+引入了以下类型的额外字节：(1) 用于敲响 RNIC 上门铃的
+MMIO（64B，取决于缓存行大小），(2) 工作队列元素 (WQE)（36B 或
+64B），（3）PCIe 协议开销（例如，TLP
+标头），以及（4）由缓存未命中触发的额外 PCIe 操作。 我们对 PCIe
+带宽的主要观察是：</p>
+<p><strong>主要发现#4：只有当请求大小在特定范围内时，PCIe
+带宽才会成为瓶颈。</strong> 我们只需要一个租户来证明这一重要发现。
+我们在 NVIDIA 100 Gbps ConnectX-5 RNIC 上运行实验。 PCIe 带宽容量为 128
+Gbps (PCIe Gen 3.0 x16)。 我们在 6 个核心上使用 96 个 QP 来饱和 PCIe TX
+带宽。 每个 QP 保留 256 个未完成的 WRITE 请求。
+我们改变请求大小，并通过读取 RNIC 计数器来收集 NIC 和 PCIe 带宽消耗。
+结果如图 6 所示。我们首先观察到，当有效负载较小时，商品 RNIC 可以通过在
+WQE 中嵌入小消息来减轻 WQE 开销。
+如绿色矩形所示，当请求大小小于28B时，增加请求大小不会导致更多的PCIe带宽消耗，因为有效负载与WQE嵌入在相同的MMIO操作中。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/28ce7162a8d8a7552d6867ca0d0a8aed.png" alt="image-20231227192420506">
+<figcaption aria-hidden="true">image-20231227192420506</figcaption>
+</figure>
+<p>我们的第二个观察结果是，只有当请求的有效负载大小在特定范围内时，PCIe
+TX 带宽才可能成为瓶颈。 原因是短请求在耗尽 PCIe
+带宽之前首先受到请求速率的限制，而大请求始终受到 RNIC 带宽容量的限制。
+我们通过理论 PCIe 消耗模型证实了这一观察结果，并提出了两个具体示例。
+我们假设网络 MTU 为 4096B，每个 PCIe 事务的最大有效负载为 128B（最大化
+PCIe 开销的最差设置）。 TLP 开销取决于实现[52]，我们假设它为 20B，这是
+PCIe 3.0 设备的典型大小。 传输 29 字节的消息将消耗最多 127
+个网络字节和至少 189 个 PCIe 字节 [29, 69]。 因此，要使链路带宽（100
+Gbps）饱和，我们至少需要148.8 Gbps的PCIe带宽，这远大于PCIe
+3.0x16的容量。 附录A包括详细的计算。
+我们的测量表明，实际消耗可能更高，如图 6 所示。PCIe RX 带宽（即 RNIC
+到主机）的消耗模型与 TX 的消耗模型类似。
+此外，过多的缓存未命中还可能由于大量 PCIe 读取来获取元数据而导致 PCIe
+带宽消耗较高。
+然而，在大多数情况下，大量的缓存未命中首先会减慢RNIC的执行速度（例如，引入额外的延迟），因此PCIe带宽的消耗较少。
+在我们对缓存未命中的测量中，我们没有观察到 PCIe TX 带宽耗尽的情况。</p>
+<p>理论模型和我们的实验结果都表明 PCIe
+带宽可能成为瓶颈，但仅限于特定的请求大小范围。</p>
+<h3 id="other-findings">3.5 Other findings</h3>
+<p>我们还有其他一些有趣的发现。 限于篇幅，我们在这里只简单介绍一下。
+然而，我们确实使用这些发现来指导我们在第 4 节中的测试套件设计。</p>
+<p><strong>其他发现#1：数据verbs争夺不同的 RNIC 缓存</strong>。
+我们使用不同的数据verbs进行可扩展性测试，并观察不同类型的缓存争用。
+例如，大量发出READ和WRITE的RC QP将主要导致ICM缓存未命中。 大量发出
+SEND/RECV 请求的 UD QP 或许多发出 ATOMIC 请求的 RC QP 可能会导致严重的
+RECV WQE 缓存未命中。
+这一观察结果表明，数据verbs以不同的方式争夺缓存，类似于 RNIC PU
+上的争用。</p>
+<p><strong>其他发现 #2：跨多个对象（QP、CQ、MR）的大范围访问会导致 ICM
+缓存未命中。</strong>
+可扩展性问题已经得到了充分研究，但我们的测量揭示了新的观察结果。
+除了QP和MR之外，ICM缓存中还存储了完成队列（CQ）的上下文。 因此，访问大量
+CQ 也会触发严重的 ICM 缓存未命中。
+此外，分配大量这些对象并不一定会导致严重的 ICM 缓存未命中。
+跨对象的大范围访问（即较差的局部性）是触发严重 ICM
+缓存未命中和性能下降的关键。</p>
+<p><strong>其他发现#3：控制verbs的影响受到其核心参与的限制。</strong>
+我们观察到所有控制verbs首先由内核驱动程序处理，从而导致昂贵的上下文切换。
+这些控制verbs的执行速率通常由内核而不是 RNIC 处理来限制。
+因此，控制verbs对耗尽 RNIC PU 的影响有限。 然而，正如我们的主要发现#1
+所示，它们仍然会导致严重的性能干扰，并通过触发严重的缓存未命中来影响其他应用程序。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/6d133373d78dfc8a2a358bcab071af38.png" alt="image-20231227192518298">
+<figcaption aria-hidden="true">image-20231227192518298</figcaption>
+</figure>
+<h3 id="the-resource-consumption-model">3.6 The Resource Consumption
+Model</h3>
+<p>我们在图 7 所示的 RDMA
+操作模型中总结了我们的发现。该模型描述了verbs操作大量消耗的微架构资源。
+请注意，verbs操作还可以使用我们的实验未捕获的其他微架构资源。
+这是因为这些资源的使用率较低，不会导致资源争用。
+该模型是定性的：我们不会尝试了解确切的资源使用情况，因为我们无法了解专有的
+RNIC 硬件。
+例如，我们知道某种流量模式可以触发某种类型的缓存未命中，但我们不知道缓存的总大小或操作消耗了多少缓存。
+即便如此，我们证明这个模型足够强大，足以让我们创建第一个 RNIC
+性能隔离测试套件，并且它可以捕获可以破坏现有性能隔离解决方案的各种工作负载。</p>
+<h2 id="the-husky-test-suite">4 The Husky Test Suite</h2>
+<p>在了解不同的 RDMA
+操作如何使用这些微架构资源后，我们可以设计一个测试套件来评估性能隔离解决方案。
+我们的目标如下：给定 RNIC
+硬件和性能隔离解决方案，我们希望为攻击者和受害者找到一组可以打破性能隔离的工作负载组合。
+我们需要检查不同的受害者工作负载的完整性，因为不同的受害者工作负载对不同微架构资源的耗尽很敏感。</p>
+<p>我们的测试套件必须是通用的：我们将使用它来测试不同 RNIC 上的各种 RNIC
+性能隔离解决方案。 这意味着我们不能依赖特定供应商的工具和功能，例如
+Mellanox Neo-Host [44]。 另外，不同的RNIC具有不同数量的微架构资源。
+现有的性能隔离解决方案可能只能减轻对特定资源的争用。</p>
+<p>为此，我们构建了Husky来系统地测试和评估RNIC性能隔离解决方案。
+Husky针对四种类型的资源：网卡带宽、PCIe带宽、网卡PU和网卡缓存。
+对于每种类型的资源，我们设计具有不同类型行为（例如控制verbs）的合成工作负载以耗尽该资源。
+更具体地说，我们使用不同的操作码（例如，WRITE）通过长消息耗尽 NIC BW；
+我们通过环回流量和特定消息模式耗尽 PCIe 带宽（来自关键发现 #4）；
+我们用昂贵的数据verbs（关键发现#2）、小消息或错误处理行为（关键发现#3）耗尽NIC
+PU；
+我们通过密集的控制verbs（关键发现#1）和广泛的数据verbs访问来耗尽不同类型的
+RNIC 缓存。 我们改变参数（例如，连接类型)的一些综合工作负载更具包容性。
+Husky 总共包括 52 个攻击者合成工作负载（6 个用于 NIC BW、4 个用于 PCIe
+BW、14 个用于 NIC PU、28 个用于 NIC 缓存）和 20 个合成受害者工作负载。
+许多攻击者工作负载无法使用现有 RDMA 流量引擎直接生成。 因此，我们扩展了
+Collie [33] 的流量引擎（据我们所知是最灵活的引擎）来生成这些合成 RDMA
+流量，包括灵活的控制动词工作负载和错误处理工作负载。</p>
+<p>Husky
+的框架还可以轻松地允许运行真实应用程序作为额外的受害者工作负载。 Husky
+目前包含两个实际应用程序，包括 OSU 基准测试 [54] 和基于 eRPC 的 Masstree
+键值存储 [27, 40]。 OSU 基准测试包含 allreduce 和 allgather 等工作负载。
+请注意，我们可以将任何 RDMA 应用程序集成到 Husky 中。
+我们从测试套件中详尽地测试了所有（受害者、攻击者）工作负载对。</p>
+<p>一个关键问题是如何定义违反性能隔离的行为。
+我们对违规的定义取决于具体的隔离解决方案。 Husky
+使用用户指定的verbs来计算启用隔离时的预期性能结果。 Husky
+将实际性能与预期性能进行比较，以识别违规行为。
+例如，现有的性能隔离方案大多只提供带宽保证。
+因此，这些隔离解决方案的预期性能是有保证的带宽 Bg。
+我们假设应用程序单独运行时会消耗 Ba 的带宽。
+在任何攻击者工作负载下，该应用程序的带宽应至少为(1−α)min(Ba,Bg)，其中 α
+是容忍级别。 α 越低意味着隔离越严格。
+我们用一个例子来演示这个定义是如何工作的：假设攻击者和受害者配置为共享相同的
+100 Gbps 网络，并且我们将 α 设置为 25%。 如果受害者单独运行时可以达到 60
+Gbps，那么在攻击者的工作负载下，它应该能够至少达到 (1 − 25%)min(60,50) =
+37.5 Gbps。 如果受害者单独运行时只能达到10
+Gbps，则其消耗的带宽不应小于(1−25%)min(10,50) = 7.5 Gbps。
+在实践中，我们发现现有的商用RNIC性能隔离方案都是带宽保证或者可以转化为带宽保证。
+我们在第 5 节中使用此定义来表示性能隔离违规，并将 α 设置为 25%。</p>
+<h2 id="evaluation">5 Evaluation</h2>
+<p>我们使用 NVIDIA 测试台来评估现有的 RDMA 性能隔离解决方案。
+测试台中有两台服务器，每台服务器均配备一个 100 Gbps NVIDIA ConnectX5
+RNIC。 服务器配备Intel Xeon Gold 5215 CPU，RNIC通过PCIe 3.0
+x16连接到服务器。 RNIC 连接到 100 Gbps NVIDIA 交换机。 我们使用Ubuntu
+20.04，内核版本是5.11。 对于 NVIDIA NIC，内核驱动程序和动词库均来自
+5.4-OFED。 固件版本为16.31.1014。 我们还在 NVIDIA ConnectX-6 RNIC
+上进行了所有实验，结果相似。</p>
+<p>我们评估了 RNIC 供应商提供的 3 种不同的隔离解决方案和之前的工作：(1)
+NVIDIA 单独的硬件流量类别 (HW TC)。
+云运营商可以为不同的租户设置单独的TC，将RNIC带宽和数据包缓冲区分开[47]以强制执行性能隔离。
+现代 RNIC 通常只有 8 个流量类别。
+这意味着当我们想要在物理服务器中托管超过 8 个租户时，我们无法使用 HW
+TC。 (2) NVIDIA SR-IOV。
+虽然SR-IOV技术是为硬件虚拟化而设计的，但它为不同的租户提供了独立的虚拟功能和一些独立的资源，实际上实现了一定程度的性能隔离[45]。
+(3) Justitia，一种基于软件的性能隔离解决方案[71]。 Justitia 在 RDMA
+用户空间库中实现数据verbs速率限制和节奏，以强制执行性能隔离。 这意味着
+Justitia 没有安全性：恶意应用程序可以轻松绕过用户空间库。
+尽管Justitia的软件架构并不针对多租户公共云环境，但我们仍然使用Husky来评估其隔离策略（例如其基于令牌的算法）的效果。
+我们还评估了上述解决方案的所有可能组合。 不幸的是，虽然我们有一个带有
+Chelsio T62100-LP-CR 和 Intel E810 NIC
+的测试台，但我们没有启用它们基于硬件的隔离机制。 Justitia 也不支持
+Chelsio 或 Intel 驱动程序。 因此，我们无法对 Chelsio 或 Intel NIC
+进行相同的评估。</p>
+<h3 id="testing-existing-performance-isolation-solutions">5.1 Testing
+Existing Performance Isolation Solutions</h3>
+<p>根据verbs的类型和耗尽的资源，我们将 Husky 产生的工作负载分为 6 组。
+我们将 RC 的错误处理与 UD 和 UC 区分开来，因为它们会导致 RNIC PU
+的不同行为，并且我们观察到一些隔离解决方案（例如 SR-IOV）对这些 PU
+行为提供了不同程度的隔离。</p>
+<p>我们首先看一下NVIDIA提供的基于硬件的隔离机制。 对于 NVIDIA
+SR-IOV，我们启用两个虚拟功能 (VF)，并为受害租户和攻击者租户分配一个 VF。
+我们还启用基于VF的速率限制器，并将每个租户的最大TX带宽限制为50
+Gbps，这是公共多租户环境的典型公平共享设置。 鉴于这种</p>
+<p>因此，我们将 NVIDIA SR-IOV
+的隔离违规定义为攻击者将受害者消耗的带宽（以每秒位数表示）减少到小于
+(1−α)min(50,Ba)，其中 α 为 25
+%和Ba是受害者在没有受到攻击的情况下的带宽。 对于 NVIDIA HW
+TC，我们为每个租户分配一个专用的 TC。 例如，受害者独占使用 TC
+0，攻击者独占使用 TC 3。我们将 TC 0 和 TC 3 配置为均等共享 RNIC 带宽和
+NIC 缓冲区（用于存储数据包，与缓存不同）。 因此，NVIDIA HW TC
+的违规定义与 NVIDIA SR-IOV 的违规定义相同。</p>
+<p>表 3 的前三行显示了 SR-IOV、HW TC 以及它们的组合提供的隔离效果。
+不幸的是，我们发现 SR-IOV 和 HW TC 都无法对 RNIC
+的微架构资源提供足够的隔离。 例如，通过控制verbs或数据verbs耗尽 RNIC
+的缓存，Husky 可以成功影响共置受害者的应用程序，即使 SR-IOV 和HW TC
+已启用。 关键原因是SR-IOV和HW
+TC都只是隔离架构资源（例如链路带宽），并没有限制单个租户的缓存使用。
+因此，Husky 能够使用耗尽 RNIC 缓存（例如 MTT/MPT
+缓存）的攻击者工作负载。
+其他应用程序会遭受严重的缓存缺失，从而导致性能下降。
+此外，我们发现虽然SRIOV主要针对虚拟化，但它确实强制执行了一些隔离，特别是对于RNIC
+PU。 如果没有启用性能隔离机制，RC RNR 错误处理可能会导致 RNIC PU
+暂停，甚至挂起共置应用程序。 使用 SR-IOV，RC RNR 错误不会影响在其他 VF
+上运行的租户。
+然而，UD和UC的类似RNR异常处理过程仍然违反了SR-IOV的隔离性。 由于 RNIC
+的黑匣子性质，我们不知道这种差异的根本原因。 我们最好的猜测是，RNIC 的
+PU 的某些部分（例如，处理 RC RNR）由不同的 VF
+隔离，而其他部分则没有很好地隔离。
+这些基于硬件的解决方案也无法很好地隔离 PCIe 带宽。
+我们观察到攻击者可以消耗大量 PCIe 带宽并减少受害者的可用带宽。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/342c99b8e94036ebf8f360ec1f0929fe.png" alt="image-20231227192545915">
+<figcaption aria-hidden="true">image-20231227192545915</figcaption>
+</figure>
+<p>然后我们评估基于软件的解决方案 Justitia。 Justitia
+不是为公共云设计的，需要租户合作（例如，使用修改后的 RDMA 库）。 Husky
+当然可以通过绕过修改后的库来打破其隔离，但这将违背测试 Justitia 的目的。
+因此，我们要求 Husky 的所有流量（受害者和攻击者）都经过 Justitia
+修改后的驱动程序并由 Justitia 控制。 此外，Justitia
+仅支持最新驱动程序（即
+mlx5）上有限类型的数据verbs，因此我们限制应用程序仅使用 Justitia
+支持的操作码。 Justitia 旨在为每个租户提供公平份额的 NIC 资源。
+我们只设置了两个租户，因此我们简单地将 Justitia
+违规定义为受害者的带宽小于 (1−α)min(Ba,50)，类似于 SR-IOV 的定义。
+我们还测试了 Justitia 和 HW TC 的组合。</p>
+<p>如表 3 所示，Justitia 确实提供了一些 PU 隔离，但程度有限。
+例如，Justitia 将 RNIC 的请求率（即执行吞吐量）纳入其隔离考虑范围。
+因此，它使用pacer来控制每个租户的请求率，并成功防止单个租户发布大量请求耗尽PU。
+然而，当攻击者不断发布在 RNIC
+上触发错误处理的请求时，其隔离性就会被破坏。 原因是这些错误是由 RNIC
+检测和处理的，而 RNIC 不受 Justitia 的控制。
+另外，Justitia没有考虑缓存和PCIe。 因此，攻击者租户仍然可以耗尽 RNIC
+缓存和 PCIe 带宽，并导致其他租户遭受过多的缓存未命中或可用 PCIe
+带宽较低的问题。</p>
+<p>值得注意的是，这些解决方案已经为架构资源（例如 NIC
+带宽）提供了或多或少可容忍的隔离。 Husky 包含一组仅争夺 NIC
+带宽的工作负载，在启用这些解决方案时，我们没有看到这些工作负载出现此类违规情况。但是，忽略微架构资源使得这些解决方案不足以满足真正的公有云部署。</p>
+<h3 id="impact-for-real-applications">5.2 Impact for Real
+Applications</h3>
+<p>接下来，我们在更大的测试台上进行实验，以研究在使用最先进的性能隔离解决方案时，微架构资源耗尽如何影响实际应用程序工作负载。
+我们在基于 RDMA 的 MPI 实现 [55] 和基于 eRPC 的 Masstree（键值存储）[27,
+40] 上使用 allreduce 工作负载 [54] 作为两个真正的受害者应用程序。
+我们的测试平台由四台物理服务器组成。 每台服务器均配备一个 100 Gbps
+NVIDIA ConnectX-5 RNIC。 其他设置与§5.1相同。
+受害应用程序在所有四台服务器上运行其虚拟机。
+攻击者租户控制两个虚拟机，每个虚拟机位于不同的服务器上。
+我们以这种方式设置测试床来模拟真实的多租户环境，因为攻击者可能没有与所有受害者的虚拟机共置的虚拟机。
+然而，我们的结果表明，受害者虚拟机子集中违反性能隔离已经足以大幅降低实际分布式应用程序的整体端到端性能。</p>
+<p>对于保护机制，我们启用 SR-IOV + HW TC 或 Justitia + HW TC
+来为集体通信应用程序提供隔离。 对于基于 eRPC 的 Masstree，我们仅启用
+SR-IOV + HW TC。 这是因为 Justitia 仅支持最新 NVIDIA 驱动程序上的高性能
+RDMA WRITE，但基于 eRPC 的 Masstree 利用 UD SEND/RECV 进行通信。</p>
+<p>我们使用 Husky 测试套件中的四种类型的攻击者来演示我们的结果：（1）BW
+攻击是基线。 我们使用标准 Perftest [56] ib_write_bw
+来设置一个需要带宽的应用程序。 它使用 16 个 RC QP，每个 QP 保留 128
+个未完成的 1 MB 写入请求，以使链路带宽饱和（启用速率限制器时消耗约 50
+Gbps）。 BW 攻击不针对任何微架构资源。 (2) PCIe攻击耗尽PCIe TX带宽。
+它在 6 个内核上运行 36 个 RC QP，并保留 128 个未完成的 257 B 写入请求。
+它还消耗近 50 Gbps 链路带宽（低于 20 Mrps），但会导致超过 73 Gbps PCIe
+TX 带宽消耗。 这使得受害者只剩下大约 50 Gbps 的可用 PCIe TX 带宽（即小于
+50 Gbps 的可用网络带宽）。 (3)缓存攻击耗尽RNIC缓存。 它在 6 个内核上运行
+1536 个 RC QP，使用 12288 个 MR，每个 QP 仅保留一个 256 B 未完成请求。
+该攻击者会造成严重的缓存未命中，并且仅使用低于 7 Gbps 的链路带宽（即 3
+Mrps）。 (4) PU攻击使RNIC PU暂停。 它在单核上运行 1 UC QP，并保留 128
+个未完成的 SEND/RECV 请求。 它的接收方不会发出任何接收请求，因此RNIC
+必须处理许多接收未就绪异常。 它消耗低于 0.5 Gbps 和低于 0.5 Mrps。</p>
+<p>我们首先测试基于 RDMA 的 allreduce 工作负载。
+Allreduce是一种广泛应用于分布式深度学习训练的集体通信操作。
+它聚合所有工作人员的向量并将结果传播回所有工作人员。
+我们在每台主机上设置 2 个工作线程（总共 8 个）来运行 allreduce。
+allreduce 缓冲区大小设置为 1 MB。我们连续运行 allreduce
+并记录执行率（每秒allreduce 操作数）。
+没有任何隔离机制和干扰的原始速率如图中最左边的条所示。
+无攻击栏表示启用这些隔离解决方案的效果。 启用 Justitia 后，allreduce
+率下降 38.5%。 一个可能的原因是 Justitia
+使用填充层（pacer）来实施发送方准入控制，与基于硬件的解决方案相比，这会带来额外的性能开销。
+由于 allreduce 工作负载仅使用不到一半的 NIC 带宽（23
+Gbps），因此其受到攻击的性能至少应为 (1−α)Pa，其中 α 为 25%，Pa
+是其在没有任何攻击的情况下的性能。
+然后，我们可以根据受害者应消耗的带宽计算每个隔离解决方案的违规阈值。</p>
+<p>allreduce 的结果如图 8 所示。水平红线显示违规阈值。
+红线下方的条表示隔离违规。 Justitia + HW TC 的应用的 Pa 比 SR-IOV + HW
+TC 的应用低 38.5%。 这意味着 Justitia + HW TC 的违规阈值也降低了 38.5%。
+我们首先观察到，BW 攻击仅导致 SRIOV + HW TC 设置的性能下降可以忽略不计。
+并且Justitia + HW TC也在容忍范围内实现了带宽隔离目标。
+然后我们观察到所有 PCIe、Cache 和 PU 攻击都成功违反了 Justitia + HW TC
+或 SR-IOV + HW TC 提供的隔离。 例如，PCIe攻击可导致SR-IOV + HW
+TC的allreduce应用程序性能下降27.3%，Justitia + HW
+TC的allreduce应用程序性能下降42.1%。 Cache攻击的影响更为显着。 Justitia
++ HW TC 的 Allreduce 工作负载性能下降了一半以上 (71.3%)，SR-IOV + HW TC
+的 Allreduce 工作负载性能下降了近一半。 我们观察到 PU 攻击是最强大的。
+它可以通过耗尽 RNIC PU 来直接停止 allreduce 应用程序。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/1c0ad740cf924e83c369e02bd54c3b41.png" alt="image-20231227192605602">
+<figcaption aria-hidden="true">image-20231227192605602</figcaption>
+</figure>
+<p>我们使用同一组攻击者来测试基于 eRPC 的 Masstree。 我们使用基于 eRPC
+的 Masstree 的默认设置（例如密钥大小和线程数）。
+我们在一台物理服务器中设置键值服务器，并在不同的物理服务器中设置三个客户端。
+我们将一台攻击者虚拟机与键值服务器并置，将另一台攻击者虚拟机与其中一个客户端并置。
+我们收集所有客户端的执行率（以每秒 GET 请求数表示）和延迟。 Masstree
+服务器仅使用 14 Mrps 且小于 20 Gbps，因此我们将隔离违规定义为与
+allreduce 违规相同。 图 9 和图 10 显示了 GET 速率和延迟结果。 SR-IOV +
+HW TC 或多或少地在容差范围内实现了带宽隔离目标。
+我们发现所有微架构资源耗尽攻击都成功地违反了与攻击者虚拟机共置的客户端的隔离。
+与 allreduce 工作负载类似，PU 攻击者会停止整个键值存储系统。
+更糟糕的是，它甚至会暂停未与攻击者虚拟机共置的客户端。
+这是因为我们停止了键值服务器。</p>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/ac8801e680bf7005233adb5f9df5b77a.png" alt="image-20231227192626300">
+<figcaption aria-hidden="true">image-20231227192626300</figcaption>
+</figure>
+<figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/2023/12/27/8e764071f06b8bf5ec54a59651fc4930.png" alt="image-20231227192641445">
+<figcaption aria-hidden="true">image-20231227192641445</figcaption>
+</figure>
+<p>另一个观察结果是，基于 eRPC 的 Masstree
+的性能受到缓存耗尽攻击的损害，但程度非常有限。 一个可能的原因是 eRPC
+利用 UD 传输。 UD QP 不需要像 RC QP 那样多的连接元数据，因此对 RNIC
+内部高速缓存未命中不太敏感。 此外，我们发现 Masstree 对 PCIe
+耗尽更加敏感。 这可能是由于其请求大小较小。
+根据我们的重要发现#4，相对较小的请求会导致更多额外的 PCIe TX
+带宽消耗。</p>
+<p>我们从实际应用结果中得到了一些高层次的结论。</p>
+<p><strong>要点#1：以微架构资源为目标很容易违反性能隔离。</strong>
+如果我们把RNIC当作一个黑匣子，那么打破性能隔离是相当困难的。
+BW攻击针对的是带宽资源，我们观察到现有的所有解决方案都提供了良好的保护。
+然而，一旦我们了解了有关 RNIC
+如何工作的更多细节（例如，潜在的微架构资源），打破隔离就变得很简单。
+我们的攻击非常有效。 例如，缓存攻击仅需要 7 Gbps 和 3 Mrps。 PU
+攻击以更少的带宽和请求率阻止受害者。
+请注意，这些攻击仅针对公开披露的微架构组件。</p>
+<p><strong>要点#2：应用程序对资源争用的敏感度是不同的</strong>。
+即使对于相同的攻击，应用程序的端到端性能下降也可能有很大不同。 allreduce
+应用程序对缓存耗尽更敏感，而 Masstree 更容易受到 PCIe 耗尽的影响。</p>
+<p><strong>要点#3：分布式应用程序需要在每台服务器上进行性能隔离。</strong>
+对于这两个应用程序，攻击者都只有两台虚拟机，但为什么即使应用程序跨四台机器运行，应用程序级性能也会大幅下降？
+许多现代分布式系统的性能通常受到系统中一些最慢的工作线程的限制。
+例如，在allreduce中，每次迭代都需要所有worker的同步。
+因此，我们对一两个工人的攻击可能会减慢整个 allreduce 过程。</p>
+<h3 id="analysis-for-existing-solutions">5.3 Analysis for Existing
+Solutions</h3>
+<p>我们的评估表明，所有现有方法都无法提供 RDMA
+性能隔离。我们现在分析这些解决方案的基本限制以及我们可能实现的一些潜在改进。</p>
+<p><strong>SR-IOV 和独立的 HW TC</strong>。
+这些基于硬件的解决方案已经提供了一些硬件资源隔离（例如，硬件队列和 NIC
+上的数据包缓冲区）。 理论上，RNIC
+供应商应该能够将更多硬件隔离功能集成到这些解决方案中。
+例如，为不同的VF静态分离NIC
+PU或分区NIC缓存可以帮助为SR-IOV构建更好的隔离机制。
+然而，这些硬件修改是不平凡的，并且很难应用于现有硬件。
+RNIC供应商通常将这些新功能与他们的新硬件产品一起发布。
+因此，云供应商无法在现有硬件中使用这些功能。</p>
+<p><strong>Justitia</strong>。 Justitia
+提供修改后的用户空间库，并使用发送者准入控制来强制所有租户公平共享带宽和执行速率。
+Justitia
+不适用于多租户云，因为它的策略不可强制执行：恶意应用程序可以轻松绕过修改后的用户库。
+抛开安全方面不谈，值得一问的是，像 Justitia
+这样的纯软件解决方案在理论上是否可以支持 RDMA 性能隔离。</p>
+<p>我们对这个问题没有直接的答案，但我们相信这是一个有趣的未来研究方向。
+我们认为，由于以下原因，这可能相当困难。
+首先，在没有硬件支持的情况下，跟踪和控制租户占用了多少缓存是一项挑战。
+其次，建立verbs的定量资源消耗模型具有挑战性。 最后，错误处理被深度集成到
+RDMA NIC 硬件中，并且对软件来说是不透明的。</p>
+<h2 id="guidelines">6 Guidelines</h2>
+<p>不幸的是，我们的结果表明，现有的 RNIC 性能隔离解决方案都不够。
+我们根据我们的主要发现分析了现有隔离解决方案的失败，并为未来潜在的 RDMA
+性能隔离工作提出了一些设计指南。 这些指南也可能有助于 RDMA
+应用程序开发人员在多租户环境下编写更好的 RDMA 应用程序。</p>
+<p><strong>需要隔离的硬件支持</strong>。 像 Justitia [71]
+这样的软件方法有一个常见的问题。
+它们仅监控架构级别的指标，例如延迟、带宽和请求率。
+它们无法检测微架构资源（例如缓存）中的争用，更不用说管理和公平共享这些资源了。
+我们相信，未来的性能隔离解决方案将必须利用硬件支持，类似于现代虚拟机管理程序如何使用英特尔资源导向技术（RDT）来监控和管理对最后一级缓存和内存的访问。
+NVIDIA RNIC 公开了几个有用的硬件计数器，但它们仍然不够。
+例如，我们只能观察缓存未命中，但无法管理缓存访问或为不同租户拆分缓存。</p>
+<p><strong>需要一个间接层。</strong> RDMA 意味着数据verbs的内核旁路。
+这可实现低延迟并减少 CPU 开销。 那么应该在哪里强制执行性能隔离呢？
+我们相信，未来的性能隔离解决方案将需要 NIC 或软件中的间接层。 在用户态
+RDMA 库（如 Justitia）中设置执行点是行不通的，因为它缺乏安全性。
+相反，软件间接可以采用类似微内核的设计，其中一组核心在单独的保护域中运行隔离逻辑[43]。
+RDMA
+性能隔离应该在这样一个同时接管控制verbs和数据verbs的中央控制器中强制执行。</p>
+<p><strong>RDMA 应用程序的程序员、编译器和库支持。</strong>
+未来的性能隔离解决方案发明后，应用程序可能也需要修改。
+如果未来的性能隔离解决方案需要对微架构资源进行严格划分，则意味着每个应用程序可使用的微架构资源有限，并可能导致性能大幅下降。
+应用程序使用的微架构资源量也可能有所不同（取决于同一服务器或其他配置上有多少其他租户）。
+构建高性能 RDMA
+应用程序需要程序员、编译器和应用程序库付出额外的努力才能有效地使用这些有限的资源。
+对于 CPU 缓存，这些努力发生在二十年前的学术界 [35,36,42]。</p>
+<h2 id="discussion">7 Discussion</h2>
+<p><strong>RDMA 性能隔离损坏的影响</strong>。
+我们的评估表明，恶意租户可能会导致其他租户的性能急剧下降甚至陷入困境。
+此外，损坏的性能隔离会暴露恶意用户进行旁路攻击的漏洞。
+由于租户可以影响同一主机上其他人的性能，因此它可以设置侧通道来泄漏受害节点的访问模式或通过影响主机的性能来传递信息[65]。
+因此，RDMA 性能隔离是安全 RDMA 公共云的一项关键功能。</p>
+<p><strong>如今云供应商应使用哪种 RDMA 性能隔离解决方案？</strong>
+一个好消息是，据我们所知，目前没有任何云供应商使用商用 RNIC 来为支持
+RDMA 的虚拟机提供分区主机资源。 要租用支持 RDMA
+的虚拟机，客户必须租用整个物理机。
+这意味着目前我们根本不需要RNIC性能隔离解决方案，因为RNIC只运行单个租户的流量。
+为了推进 RNIC
+的多租户使用，我们认为性能隔离仍然是一个主要障碍，在成熟的性能隔离解决方案准备就绪（至少可以通过我们的测试套件）之前，不应启用多租户。</p>
+<p><strong>对其他内核绕过主机网络架构的通用性。</strong>
+我们的测试套件设计基于 verbs 接口，该接口是 RDMA 特定的。
+然而，我们相信我们的方法应该可以推广到其他内核旁路架构（例如 DPDK
+[13]、1RMA [64]）中发现违反性能隔离的情况，因为这些实现通常需要在设计的
+DMA 部分中使用类似 RDMA 的机制。
+当今的行业趋势是将功能卸载到硬件加速器。 例如，RDMA
+将拥塞控制和可靠的消息传递转移到硬件中。
+硬件中的微架构资源对于提供这些卸载的功能至关重要。
+关注这些微架构资源以实现性能隔离将变得越来越重要。</p>
+<h2 id="related-work">8 Related Work</h2>
+<p>RNIC 中的微架构资源。 RNIC
+微架构资源的存在在网络社区中是众所周知的，并且许多研究集中在如何设计
+RDMA 应用程序以规避由于这些资源而导致的某些 RNIC 性能异常。 例如，HERD
+[28]、FaSST [30] 和 eRPC [27] 避免使用 RDMA 可靠连接来减轻 QP
+上下文缓存缺失，以获得更好的可扩展性。 ScaleRPC [5] 和 Flock [50]
+以分时方式复用可靠连接，以缓解可扩展性问题。 Kalia等人。
+[29]研究RNIC的PCIe行为并提供编写高效 RDMA 程序的指南。
+不幸的是，这些工作只关注优化应用程序以充分利用 RNIC 中的有限资源。
+然而，公有云提供商无法控制第三方租户的应用程序。 Collie
+[33]对RDMA性能异常进行了系统的搜索，异常大多是由于微架构资源超额认购造成的。
+不过，由于Collie只专注于第一方流量，因此它只是在正常操作的基础上构建了一个搜索空间。
+因此，它只考虑正常的数据verbs，而无法发现与其他类型行为相关的发现。</p>
+<p>例如，第 3 节中的关键发现 #1、#2 和 #3 基本上不包含在 Collie
+的搜索空间中，因为 Collie 没有考虑控制verbs、错误处理和昂贵的原子动词。
+总的来说，之前的作品更多地从以下角度出发：</p>
+<p>应用程序开发人员。
+我们的工作是从公共云提供商的角度来看的一个补充方面：这些微架构资源如何影响性能隔离。
+这要求我们具有微架构资源意识，并查看所有类型的 RDMA
+行为，包括控制verbs和错误处理，因为我们需要处理行为不当甚至恶意的租户。</p>
+<p>其他 NIC 性能隔离解决方案。 PicNIC [34] 为 NIC
+上的数据包处理和带宽提供隔离。
+这使得延迟受限的工作负载不会受到带宽受限的工作负载的影响。 FairNIC [15]
+隔离基于 SoC 的 SmartNIC 中的资源。
+与它们相比，我们的工作重点是NIC上的RDMA相关资源。</p>
+<p>其他上下文中的性能隔离。 性能隔离问题不仅限于网卡。
+其他服务器硬件组件也存在这个问题，并且他们已经有了相应的解决方案。 CPU
+缓存 [11, 20] 和内存带宽 [22] 存在多种分区技术。
+网络结构中的网络带宽也是隔离 [1, 3, 4, 6, 16, 24, 25, 37, 58–60, 62, 68]
+以及交换机处理管道的重要资源 [67]。</p>
+<h2 id="conclusion">9 Conclusion</h2>
+<p>RDMA 是一种很有前景的网络技术，可在数据中心网络中实现低延迟和高 CPU
+效率。
+为了在多租户环境中启用RDMA，性能隔离是一个重要的属性，并且由于微架构资源（例如，RNIC缓存、处理单元）的存在，RDMA
+NIC（RNIC）带来了新的挑战。 我们提出了一个关于不同 RDMA
+操作如何使用这些资源的 RNIC 操作模型。 使用此模型，我们创建了
+Husky，这是第一个评估 RNIC 性能隔离解决方案的测试套件。
+我们的结果表明，现有的 RNIC
+性能隔离解决方案都无法针对试图耗尽这些微架构资源的工作负载提供足够的隔离。
+我们的研究结果得到了最大的 RDMA NIC 供应商之一的认可和复制。
+我们相信构建可用的RNIC性能隔离解决方案将是一场持久战。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg" title="头像" alt="头像"></a><div class="post-copyright__author_name">疼了也不哭</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://gaoyubo.cn/blogs/undefined.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://gaoyubo.cn/blogs/undefined.html')">论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/6e2a005e8a5c5e0fe2e128513f24d401.png" target="_blank" rel="external nofollow noopener noreferrer"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/6e2a005e8a5c5e0fe2e128513f24d401.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/910bd7f9f005abb6f667fb24d4f8a4ca.png" target="_blank" rel="external nofollow noopener noreferrer"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/910bd7f9f005abb6f667fb24d4f8a4ca.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://gaoyubo.cn/blogs/undefined.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation&amp;url=https://gaoyubo.cn/blogs/undefined.html&amp;pic=https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2/2023/12/27/016f5ad177596f6d9a899a5c5e23710a.png" rel="external nofollow noopener noreferrer"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gaoyubo.cn" target="_blank">疼了也不哭</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>论文精读<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2/2023/12/27/016f5ad177596f6d9a899a5c5e23710a.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/blogs/30a55ce7.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">国科大-逻辑与批判性思维</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://blog-gyb.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%BE%AE%E4%BF%A1%E6%90%9C%E4%B8%80%E6%90%9C.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://blog-gyb.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%BE%AE%E4%BF%A1%E6%90%9C%E4%B8%80%E6%90%9Cback.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-number">2.</span> <span class="toc-text">1 Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-and-motivation"><span class="toc-number">3.</span> <span class="toc-text">2 Background and Motivation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#network-performance-isolation-in-the-public-cloud"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 Network
+Performance Isolation in the Public Cloud</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rdma-overview"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 RDMA Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#why-rdma-performance-isolation-is-hard"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 Why RDMA Performance
+Isolation is Hard?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rnic-microarchitecture-resources"><span class="toc-number">4.</span> <span class="toc-text">3 RNIC Microarchitecture
+Resources</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#methodology"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 Methodology</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nic-caches"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 NIC Caches</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#processing-units"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 Processing Units</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pcie-bandwidth"><span class="toc-number">4.4.</span> <span class="toc-text">3.4 PCIe Bandwidth</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#other-findings"><span class="toc-number">4.5.</span> <span class="toc-text">3.5 Other findings</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-resource-consumption-model"><span class="toc-number">4.6.</span> <span class="toc-text">3.6 The Resource Consumption
+Model</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-husky-test-suite"><span class="toc-number">5.</span> <span class="toc-text">4 The Husky Test Suite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#evaluation"><span class="toc-number">6.</span> <span class="toc-text">5 Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#testing-existing-performance-isolation-solutions"><span class="toc-number">6.1.</span> <span class="toc-text">5.1 Testing
+Existing Performance Isolation Solutions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#impact-for-real-applications"><span class="toc-number">6.2.</span> <span class="toc-text">5.2 Impact for Real
+Applications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#analysis-for-existing-solutions"><span class="toc-number">6.3.</span> <span class="toc-text">5.3 Analysis for Existing
+Solutions</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#guidelines"><span class="toc-number">7.</span> <span class="toc-text">6 Guidelines</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#discussion"><span class="toc-number">8.</span> <span class="toc-text">7 Discussion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#related-work"><span class="toc-number">9.</span> <span class="toc-text">8 Related Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">10.</span> <span class="toc-text">9 Conclusion</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blogs/undefined.html" title="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2/2023/12/27/016f5ad177596f6d9a899a5c5e23710a.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation"></a><div class="content"><a class="title" href="/blogs/undefined.html" title="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation">论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation</a><time datetime="2023-12-27T11:19:24.000Z" title="发表于 2023-12-27 19:19:24">2023-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/30a55ce7.html" title="国科大-逻辑与批判性思维"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-逻辑与批判性思维"></a><div class="content"><a class="title" href="/blogs/30a55ce7.html" title="国科大-逻辑与批判性思维">国科大-逻辑与批判性思维</a><time datetime="2023-12-20T16:46:27.000Z" title="发表于 2023-12-21 00:46:27">2023-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/cbe60a4d.html" title="ElasticSearch-2"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/ES1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ElasticSearch-2"></a><div class="content"><a class="title" href="/blogs/cbe60a4d.html" title="ElasticSearch-2">ElasticSearch-2</a><time datetime="2023-12-19T13:15:56.000Z" title="发表于 2023-12-19 21:15:56">2023-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/ec021f50.html" title="算法设计与分析-Linear Programming"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法设计与分析-Linear Programming"></a><div class="content"><a class="title" href="/blogs/ec021f50.html" title="算法设计与分析-Linear Programming">算法设计与分析-Linear Programming</a><time datetime="2023-12-14T11:08:00.000Z" title="发表于 2023-12-14 19:08:00">2023-12-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/52ef5bf7.html" title="ElasticSearch-1"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/ES1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ElasticSearch-1"></a><div class="content"><a class="title" href="/blogs/52ef5bf7.html" title="ElasticSearch-1">ElasticSearch-1</a><time datetime="2023-12-12T13:17:45.000Z" title="发表于 2023-12-12 21:17:45">2023-12-12</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="/673354892@qq.com" title="Email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/gaoyubo2" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg" size="50px"><a class="deal_link" target="_blank" rel="external nofollow noopener noreferrer" href="https://space.bilibili.com/372204786/" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" target="_blank" rel="external nofollow noopener noreferrer" href="https://v.douyin.com/i8kKMenW/" title="抖音"><i class="anzhiyufont anzhiyu-icon-tiktok"></i></a></div><div class="copyright">&copy;2020 - 2023 By 疼了也不哭</div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">6</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="external nofollow noopener noreferrer" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/album/"><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ElasticSearch/" style="font-size: 0.88rem;">ElasticSearch<sup>2</sup></a><a href="/tags/Go%E5%AE%9E%E8%B7%B5/" style="font-size: 0.88rem;">Go实践<sup>3</sup></a><a href="/tags/Go%E7%AC%94%E8%AE%B0/" style="font-size: 0.88rem;">Go笔记<sup>1</sup></a><a href="/tags/JVM%E5%AE%9E%E7%8E%B0/" style="font-size: 0.88rem;">JVM实现<sup>3</sup></a><a href="/tags/JVM%E7%AC%94%E8%AE%B0/" style="font-size: 0.88rem;">JVM笔记<sup>5</sup></a><a href="/tags/LLVM/" style="font-size: 0.88rem;">LLVM<sup>1</sup></a><a href="/tags/PITest/" style="font-size: 0.88rem;">PITest<sup>1</sup></a><a href="/tags/leetcode/" style="font-size: 0.88rem;">leetcode<sup>5</sup></a><a href="/tags/%E4%BB%A5%E5%A4%AA%E5%B8%81/" style="font-size: 0.88rem;">以太币<sup>1</sup></a><a href="/tags/%E4%BD%9C%E4%B8%9A/" style="font-size: 0.88rem;">作业<sup>7</sup></a><a href="/tags/%E5%89%91%E6%8C%87Offer/" style="font-size: 0.88rem;">剑指Offer<sup>1</sup></a><a href="/tags/%E5%8A%A0%E5%AF%86%E7%AD%BE%E5%90%8D/" style="font-size: 0.88rem;">加密签名<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 0.88rem;">复习<sup>1</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/" style="font-size: 0.88rem;">移动互联网技术<sup>1</sup></a><a href="/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" style="font-size: 0.88rem;">论文精读<sup>1</sup></a><a href="/tags/%E9%80%BB%E8%BE%91%E5%AD%A6/" style="font-size: 0.88rem;">逻辑学<sup>1</sup></a></div></div><hr></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Tt2yKI8TpkxMniyxFfGh8FX6-gzGzoHsz',
+      appKey: '5oQifQ5aHzJHGp2AUh22jSe3',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.cbd.int/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
