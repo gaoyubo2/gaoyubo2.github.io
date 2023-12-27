@@ -6,7 +6,7 @@
   <link href="https://gaoyubo.cn/atom.xml" rel="self"/>
   
   <link href="https://gaoyubo.cn/"/>
-  <updated>2023-12-27T11:43:54.170Z</updated>
+  <updated>2023-12-27T12:28:30.887Z</updated>
   <id>https://gaoyubo.cn/</id>
   
   <author>
@@ -21,14 +21,14 @@
     <link href="https://gaoyubo.cn/blogs/f9d8a226.html"/>
     <id>https://gaoyubo.cn/blogs/f9d8a226.html</id>
     <published>2023-12-27T11:19:24.000Z</published>
-    <updated>2023-12-27T11:43:54.170Z</updated>
+    <updated>2023-12-27T12:28:30.887Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;/h2&gt;
+    <summary type="html">&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
 &lt;p&gt;近年来，&lt;code&gt;RDMA&lt;/code&gt;
 在云中得到广泛采用，加速第一方工作负载并通过释放</summary>
         
