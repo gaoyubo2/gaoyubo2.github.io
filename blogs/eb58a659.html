@@ -1,0 +1,575 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>国科大-区块链技术-区块链各种共识机制的对比分析 | 疼了也不哭</title><meta name="keywords" content="作业,共识机制"><meta name="author" content="疼了也不哭"><meta name="copyright" content="疼了也不哭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="国科大-区块链技术-区块链各种共识机制的对比分析"><meta name="application-name" content="国科大-区块链技术-区块链各种共识机制的对比分析"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#ffffff"><meta property="og:type" content="article"><meta property="og:title" content="国科大-区块链技术-区块链各种共识机制的对比分析"><meta property="og:url" content="https://gaoyubo.cn/blogs/eb58a659.html"><meta property="og:site_name" content="疼了也不哭"><meta property="og:description" content="一. 引言 区块链技术作为一种分布式账本技术，其核心是共识机制，它确保了网络中的节点能就交易状态达成一致。本文将对主要的共识机制进行概述，并详细分析BFT类共识在公链中的应用挑战及其可能的解决方案。 1.1 PoW（工作量证明） 定义 Proof of Work（PoW）是一种共识机制，要"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png"><meta property="article:author" content="疼了也不哭"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png"><meta name="description" content="一. 引言 区块链技术作为一种分布式账本技术，其核心是共识机制，它确保了网络中的节点能就交易状态达成一致。本文将对主要的共识机制进行概述，并详细分析BFT类共识在公链中的应用挑战及其可能的解决方案。 1.1 PoW（工作量证明） 定义 Proof of Work（PoW）是一种共识机制，要"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://gaoyubo.cn/blogs/eb58a659"><link rel="preconnect" href="//cdn.cbd.int"><meta name="google-site-verification" content="xxx"><meta name="baidu-site-verification" content="code-xxx"><meta name="msvalidate.01" content="xxx"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 设计开发一条龙","🏃 脚踏实地行动派","👆🏻 专注Java开发"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 疼了也不哭","link":"链接: ","source":"来源: 疼了也不哭","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '疼了也不哭',
+  title: '国科大-区块链技术-区块链各种共识机制的对比分析',
+  postAI: '',
+  pageFillDescription: '一. 引言, 1.1 PoW（工作量证明）, 定义, 过程, 优势, 缺点, 1.2 PoS（权益证明）, 定义, 过程, 优势, 缺点, 1.3 DPoS（委托权益证明）, 定义, 过程, 优势, 缺点, 1.4 BFT（拜占庭容错）, 1.4.1 经典BFT, 定义, 过程, 优势, 缺点, 1.4.2 异步BFT, 定义, 过程, 优势, 缺点, 1. 性能问题, 困难：, 原因：, 克服方法：, 2. 去中心化程度, 困难：, 原因：, 克服方法：, 3. 共识节点的选取, 困难：, 原因：, 克服方法：, 三、 解决共识机制的其他方案, 1. 结合其他共识机制, 方法：, 优势：, 缺点：, 具体操作：, 2. 分片技术, 方法：, 优势：, 缺点：, 具体操作：, 3. 硬件和网络优化, 方法：, 优势：, 缺点：, 具体操作：, 结论一引言区块链技术作为一种分布式账本技术其核心是共识机制它确保了网络中的节点能就交易状态达成一致本文将对主要的共识机制进行概述并详细分析类共识在公链中的应用挑战及其可能的解决方案工作量证明定义是一种共识机制要求网络中的节点通过解决数学难题来证明它们对网络有贡献过程难题生成网络提供一个目标值使得通过哈希函数计算得到的哈希值小于该目标值节点计算节点矿工通过不断尝试不同的输入计算哈希值直到找到一个小于目标值的哈希值新块添加第一个找到正确哈希值的节点有权添加新块到区块链并获得奖励优势安全性高攻击者需要控制全网以上的算力才能攻击网络缺点能源消耗大网络中的矿工需要大量计算导致高能耗竞争激烈导致大型矿池垄断可能导致中心化问题权益证明定义是一种共识机制通过证明持有数字货币的数量来获取记账权过程持币者投票持有数字货币的节点股东根据持有数量被选中生成新块选中概率持有更多货币的节点有更高的概率被选中权益越大新块生成选中的节点有权生成新块优势能源效率高不需要解决复杂的数学难题减少了能源消耗促使长期持有长期持有货币的节点有更高的概率被选中鼓励长期投资缺点权益集中部分持币者可能会积累更多货币导致权益中心化和寡头垄断问题攻击者需控制大量货币攻击者只需控制大量货币就能影响网络委托权益证明定义是的改进版本通过选举代表节点出块提高网络效率过程节点选举持币者通过投票选举代表节点代表生成块被选中的代表节点负责生成新块和决策投票权益持币者投票数量越多代表权益越大优势提高网络效率通过代表节点生成块提高了系统的处理能力增加民主性持币者通过投票参与网络治理缺点选举过程可能导致权益中心化部分持币者可能对代表节点选择较为被动拜占庭容错经典定义是一种通过节点间相互达成一致意见的方式来保证网络安全性的共识机制过程消息传递节点通过相互传递消息来达成一致多数同意要求超过的节点同意才能进行下一轮决策优势高度安全对拜占庭错误有强容错性缺点性能相对较低需要多轮消息传递影响性能异步定义异步是的改进版本减少了对节点同步的要求提高了系统的吞吐量过程消息传递与经典相比对消息传递次数和同步要求有所减少优势提高系统吞吐量降低了对同步的依赖提高了整体吞吐量缺点引入异步性增加复杂性设计和实现上相对复杂二类共识在公链中的困难与克服方法详细分析性能问题困难类共识机制在公链中面临的主要困难之一是性能问题这表现为交易处理速度相对较慢难以满足公链高吞吐量的需求原因在去中心化的公链网络中节点数量庞大每个节点都需要参与多轮的消息传递和复杂的协议以达成共识这导致了交互的开销较大影响了整体性能在类共识中节点需要经过多轮的投票和确认才能达成一致这增加了交易确认的时间限制了系统的处理速度克服方法为了解决类共识机制的性能问题引入异步机制是一种可行的方法异步减少了对同步的需求从而提高了系统的整体吞吐量在异步中节点无需等待其他节点的确认可以更加灵活地进行操作提高了并发性和响应速度通过引入异步公链可以更好地适应高并发的交易场景减少交易确认时间从而提高整体性能然而需要注意的是引入异步性也可能增加设计和实现的复杂性需要在系统设计中平衡性能和复杂性的关系去中心化程度困难在公链中去中心化程度被视为一个重要的目标然而共识在实现高性能的同时可能会牺牲一些去中心化特性造成困难原因类算法通常依赖于少数节点的投票以迅速达成共识这样的设计可能导致权力集中当掌握共识节点的极少数节点受到攻击被恶意操控整个系统的安全性可能会受到威胁克服方法为了克服在去中心化方面的困难可以考虑结合其他共识机制如引入或结合引入机制通过数字货币持有量来确定节点的记账权可以在一定程度上增加去中心化持有更多货币的节点拥有更大的记账权但需要注意避免权益过于集中结合结合机制通过解决工作量证明难题的方式来选取共识节点可以进一步增加去中心化注重计算工作避免了过于依赖持币量的问题通过权衡不同机制的优势可以设计一个更加平衡的共识协议既能维持高性能又能保持足够的去中心化从而解决在去中心化方面的困难需要注意的是这种设计需要综合考虑各种因素并在实际应用中进行合理的权衡共识节点的选取困难在公链中选择可信的共识节点是一项具有挑战性的任务因为公链面临更多来自恶意攻击的可能性原因开放性公链的开放性使其容易受到各种攻击包括拒绝服务攻击恶意节点投票等攻击风险恶意节点可能试图操纵共识过程损害系统的安全性和可信度克服方法引入随机性引入随机性的选举机制使共识节点的选取更为难以预测这样可以降低操纵节点选举的风险增加系统的抗攻击性其他选举机制探索其他创新的选举机制例如基于声望贡献度或历史表现的评估以更全面地评估节点的信誉和可信度严格的身份验证和监控实施严格的节点身份验证机制确保只有具备足够信誉和安全性的节点才能参与共识同时实施有效的监控机制及时发现和应对潜在的恶意行为三解决共识机制的其他方案结合其他共识机制方法结合其他高效的共识机制例如结合和以在平衡性能和去中心化方面取得优势优势提高去中心化程度结合可以提高整体去中心化程度通过解决数学难题的方式选取记账节点避免了权益集中的问题增加了系统的公平性加速交易确认机制能够快速达成共识结合可以在一定程度上加速交易确认过程用于选取共识节点用于确认交易充分发挥各自的优势缺点引入多种共识机制会增加系统的复杂性需要仔细设计和调整不同机制的协同工作以确保系统的整体稳定性和安全性具体操作选取共识节点利用机制选取共识节点通过解决数学难题的方式确保节点的选择具有随机性和公平性交易确认选取的节点使用机制进行交易确认以快速达成共识提高整体交易处理速度协同工作设计合理的协议和算法确保和两种机制能够有效协同工作互相弥补不足达到平衡性能和去中心化的目标分片技术方法将公链采用分片技术将整个链分割为多个分片每个分片采用类共识机制优势提高整体性能分片技术能够提高整体性能因为每个分片内的节点数量相对较少减小了节点间的通信开销从而提高了整体吞吐量并行处理不同分片的共识过程可以并行进行加速交易确认速度每个分片的共识过程相对独立避免了整个网络的单点瓶颈问题缺点引入复杂性引入分片技术会增加系统的复杂性需要有效的分片管理和跨分片的协同工作分片之间的通信和同步需要精心设计以确保系统的一致性和安全性跨分片交互在需要跨分片交互的情况下可能引入额外的延迟和开销需要设计有效的跨分片通信机制以平衡各个分片之间的协同工作具体操作分片设计合理划分公链为多个分片可以根据地理位置功能等因素进行划分确保每个分片内的节点数量适中独立共识每个分片内部采用类共识机制进行独立的共识确保分片内的交易能够快速确认跨分片通信对于需要跨分片交互的情况设计高效的跨分片通信协议确保数据一致性和安全性动态调整根据网络负载和需求动态调整分片数量和大小以适应不同的网络状况硬件和网络优化方法通过优化硬件设备和网络架构以降低消息传递延迟和提高处理速度优势减少通信延迟通过优化硬件和网络可以有效减少节点之间的通信延迟提高信息传递的效率提高整体性能优化后的硬件和网络架构能够提高整体系统的性能使得共识过程更加迅速和高效缺点较大投资硬件和网络的优化可能需要较大的投资包括更新硬件设备升级网络基础设施等这可能带来一定的成本压力局限性硬件和网络优化虽然可以提高系统的整体性能但可能无法完全解决共识机制本身的性能问题一些共识过程可能仍然受制于算法复杂性和节点之间的协作需求具体操作硬件更新考虑使用更高性能的硬件设备例如更快速的处理器更大内存容量等以提高节点的计算能力网络升级升级网络基础设施采用更高带宽更低延迟的网络连接减少节点间通信的时间分布式存储考虑采用分布式存储技术优化数据读写速度提高系统的整体吞吐量负载均衡实施负载均衡策略确保各个节点的负载分布均衡避免出现性能瓶颈结论区块链共识机制在不同场景下有不同的适用性类共识在私链和联盟链中表现出色但在公链中面临一些挑战通过引入分片技术结合其他共识机制以及硬件和网络的优化可以克服在公链中的困难在选择共识机制时需要综合考虑性能去中心化程度和安全性等因素以满足特定应用场景的需求随着区块链技术的发展可能会涌现更多创新的共识机制进一步提升区块链系统的性能和可扩展性',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-30 14:42:05',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="疼了也不哭" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg"><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">疼了也不哭</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/album/"><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/6e2a005e8a5c5e0fe2e128513f24d401.png" target="_blank" rel="external nofollow noopener noreferrer"><img class="post-qr-code-img" alt="微信" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/6e2a005e8a5c5e0fe2e128513f24d401.png"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/910bd7f9f005abb6f667fb24d4f8a4ca.png" target="_blank" rel="external nofollow noopener noreferrer"><img class="post-qr-code-img" alt="支付宝" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/910bd7f9f005abb6f667fb24d4f8a4ca.png"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ElasticSearch/" style="font-size: 1.05rem;">ElasticSearch<sup>2</sup></a><a href="/tags/Go%E5%AE%9E%E8%B7%B5/" style="font-size: 1.05rem;">Go实践<sup>3</sup></a><a href="/tags/Go%E7%AC%94%E8%AE%B0/" style="font-size: 1.05rem;">Go笔记<sup>1</sup></a><a href="/tags/JVM%E5%AE%9E%E7%8E%B0/" style="font-size: 1.05rem;">JVM实现<sup>3</sup></a><a href="/tags/JVM%E7%AC%94%E8%AE%B0/" style="font-size: 1.05rem;">JVM笔记<sup>5</sup></a><a href="/tags/LLVM/" style="font-size: 1.05rem;">LLVM<sup>1</sup></a><a href="/tags/PITest/" style="font-size: 1.05rem;">PITest<sup>1</sup></a><a href="/tags/leetcode/" style="font-size: 1.05rem;">leetcode<sup>5</sup></a><a href="/tags/%E4%BB%A5%E5%A4%AA%E5%B8%81/" style="font-size: 1.05rem;">以太币<sup>1</sup></a><a href="/tags/%E4%BD%9C%E4%B8%9A/" style="font-size: 1.05rem;">作业<sup>8</sup></a><a href="/tags/%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6/" style="font-size: 1.05rem;">共识机制<sup>1</sup></a><a href="/tags/%E5%89%91%E6%8C%87Offer/" style="font-size: 1.05rem;">剑指Offer<sup>1</sup></a><a href="/tags/%E5%8A%A0%E5%AF%86%E7%AD%BE%E5%90%8D/" style="font-size: 1.05rem;">加密签名<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 1.05rem;">复习<sup>1</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/" style="font-size: 1.05rem;">移动互联网技术<sup>1</sup></a><a href="/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" style="font-size: 1.05rem;">论文精读<sup>3</sup></a><a href="/tags/%E9%80%BB%E8%BE%91%E5%AD%A6/" style="font-size: 1.05rem;">逻辑学<sup>1</sup></a></div></div><hr></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">14</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li></ul></div><hr></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/" itemprop="url">国科大课程</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E4%BD%9C%E4%B8%9A/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>作业</span></a><a class="article-meta__tags" href="/tags/%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>共识机制</span></a></span></div></div><h1 class="post-title" itemprop="name headline">国科大-区块链技术-区块链各种共识机制的对比分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-12-28T13:33:29.000Z" title="发表于 2023-12-28 21:33:29">2023-12-28</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-12-30T06:42:05.004Z" title="更新于 2023-12-30 14:42:05">2023-12-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3.4k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为北京"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>北京</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewbox="0 24 150 28" preserveaspectratio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"/></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"/><use href="#gentle-wave" x="48" y="3"/><use href="#gentle-wave" x="48" y="5"/><use href="#gentle-wave" x="48" y="7"/></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://gaoyubo.cn/blogs/eb58a659.html"><header><a class="post-meta-categories" href="/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/" itemprop="url">国科大课程</a><a href="/tags/%E4%BD%9C%E4%B8%9A/" tabindex="-1" itemprop="url">作业</a><a href="/tags/%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6/" tabindex="-1" itemprop="url">共识机制</a><h1 id="CrawlerTitle" itemprop="name headline">国科大-区块链技术-区块链各种共识机制的对比分析</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">疼了也不哭</span><time itemprop="dateCreated datePublished" datetime="2023-12-28T13:33:29.000Z" title="发表于 2023-12-28 21:33:29">2023-12-28</time><time itemprop="dateCreated datePublished" datetime="2023-12-30T06:42:05.004Z" title="更新于 2023-12-30 14:42:05">2023-12-30</time></header><h1 id="一.-引言">一. 引言</h1>
+<p>区块链技术作为一种分布式账本技术，其核心是共识机制，它确保了网络中的节点能就交易状态达成一致。本文将对主要的共识机制进行概述，并详细分析BFT类共识在公链中的应用挑战及其可能的解决方案。</p>
+<h2 id="pow工作量证明">1.1 PoW（工作量证明）</h2>
+<h3 id="定义">定义</h3>
+<p>Proof of
+Work（PoW）是一种共识机制，要求网络中的节点通过解决数学难题来证明它们对网络有贡献。</p>
+<h3 id="过程">过程</h3>
+<ol type="1">
+<li>难题生成：
+网络提供一个目标值，使得通过哈希函数计算得到的哈希值小于该目标值。</li>
+<li>节点计算：
+节点（矿工）通过不断尝试不同的输入，计算哈希值，直到找到一个小于目标值的哈希值。</li>
+<li>新块添加：
+第一个找到正确哈希值的节点有权添加新块到区块链，并获得奖励。</li>
+</ol>
+<h3 id="优势">优势</h3>
+<ul>
+<li>安全性高： 攻击者需要控制全网51%以上的算力才能攻击网络。</li>
+</ul>
+<h3 id="缺点">缺点</h3>
+<ul>
+<li>能源消耗大： PoW网络中的矿工需要大量计算，导致高能耗。</li>
+<li>竞争激烈： 导致大型矿池垄断，可能导致中心化问题。</li>
+</ul>
+<h2 id="pos权益证明">1.2 PoS（权益证明）</h2>
+<h3 id="定义-1">定义</h3>
+<p>Proof of
+Stake（PoS）是一种共识机制，通过证明持有数字货币的数量来获取记账权。</p>
+<h3 id="过程-1">过程</h3>
+<ol type="1">
+<li><strong>持币者投票：</strong>
+持有数字货币的节点（股东）根据持有数量被选中生成新块。</li>
+<li><strong>选中概率：</strong>
+持有更多货币的节点有更高的概率被选中，权益越大。</li>
+<li><strong>新块生成：</strong> 选中的节点有权生成新块。</li>
+</ol>
+<h3 id="优势-1">优势</h3>
+<ul>
+<li><strong>能源效率高：</strong>
+不需要解决复杂的数学难题，减少了能源消耗。</li>
+<li><strong>促使长期持有：</strong>
+长期持有货币的节点有更高的概率被选中，鼓励长期投资。</li>
+</ul>
+<h3 id="缺点-1">缺点</h3>
+<ul>
+<li><strong>权益集中：</strong>
+部分持币者可能会积累更多货币，导致权益中心化和寡头垄断问题。</li>
+<li><strong>攻击者需控制大量货币：</strong>
+攻击者只需控制大量货币就能影响网络。</li>
+</ul>
+<h2 id="dpos委托权益证明">1.3 DPoS（委托权益证明）</h2>
+<h3 id="定义-2">定义</h3>
+<p>Delegated Proof of
+Stake（DPoS）是PoS的改进版本，通过选举代表节点出块，提高网络效率。</p>
+<h3 id="过程-2">过程</h3>
+<ol type="1">
+<li><strong>节点选举：</strong> 持币者通过投票选举代表节点。</li>
+<li><strong>代表生成块：</strong>
+被选中的代表节点负责生成新块和决策。</li>
+<li><strong>投票权益：</strong> 持币者投票数量越多，代表权益越大。</li>
+</ol>
+<h3 id="优势-2">优势</h3>
+<ul>
+<li><strong>提高网络效率：</strong>
+通过代表节点生成块，提高了系统的处理能力。</li>
+<li><strong>增加民主性：</strong> 持币者通过投票参与网络治理。</li>
+</ul>
+<h3 id="缺点-2">缺点</h3>
+<ul>
+<li><strong>选举过程可能导致权益中心化：</strong>
+部分持币者可能对代表节点选择较为被动。</li>
+</ul>
+<h2 id="bft拜占庭容错">1.4 BFT（拜占庭容错）</h2>
+<h3 id="经典bft">1.4.1 经典BFT</h3>
+<h4 id="定义-3">定义</h4>
+<p>Byzantine Fault
+Tolerance（BFT）是一种通过节点间相互达成一致意见的方式来保证网络安全性的共识机制。</p>
+<h4 id="过程-3">过程</h4>
+<ol type="1">
+<li><strong>消息传递：</strong> 节点通过相互传递消息来达成一致。</li>
+<li><strong>多数同意：</strong>
+要求超过2/3的节点同意才能进行下一轮决策。</li>
+</ol>
+<h4 id="优势-3">优势</h4>
+<ul>
+<li><strong>高度安全：</strong> 对拜占庭错误有强容错性。</li>
+</ul>
+<h4 id="缺点-3">缺点</h4>
+<ul>
+<li><strong>性能相对较低：</strong> 需要多轮消息传递，影响性能。</li>
+</ul>
+<h3 id="异步bft">1.4.2 异步BFT</h3>
+<h4 id="定义-4">定义</h4>
+<p>异步BFT是BFT的改进版本，减少了对节点同步的要求，提高了系统的吞吐量。</p>
+<h4 id="过程-4">过程</h4>
+<ol type="1">
+<li><strong>消息传递：</strong>
+与经典BFT相比，对消息传递次数和同步要求有所减少。</li>
+</ol>
+<h4 id="优势-4">优势</h4>
+<ul>
+<li><strong>提高系统吞吐量：</strong>
+降低了对同步的依赖，提高了整体吞吐量。</li>
+</ul>
+<h4 id="缺点-4">缺点</h4>
+<ul>
+<li><strong>引入异步性增加复杂性：</strong> 设计和实现上相对复杂。</li>
+</ul>
+<h1 id="二.-bft类共识在公链中的困难与克服方法详细分析">二.
+BFT类共识在公链中的困难与克服方法详细分析</h1>
+<h3 id="性能问题">1. 性能问题</h3>
+<h4 id="困难">困难：</h4>
+<p>BFT类共识机制在公链中面临的主要困难之一是性能问题。这表现为交易处理速度相对较慢，难以满足公链高吞吐量的需求。</p>
+<h4 id="原因">原因：</h4>
+<p>在去中心化的公链网络中，节点数量庞大，每个节点都需要参与多轮的消息传递和复杂的协议以达成共识。这导致了交互的开销较大，影响了整体性能。在BFT类共识中，节点需要经过多轮的投票和确认才能达成一致，这增加了交易确认的时间，限制了系统的处理速度。</p>
+<h4 id="克服方法">克服方法：</h4>
+<p>为了解决BFT类共识机制的性能问题，引入异步BFT机制是一种可行的方法。异步BFT减少了对同步的需求，从而提高了系统的整体吞吐量。在异步BFT中，节点无需等待其他节点的确认，可以更加灵活地进行操作，提高了并发性和响应速度。</p>
+<p>通过引入异步BFT，公链可以更好地适应高并发的交易场景，减少交易确认时间，从而提高整体性能。然而，需要注意的是，引入异步性也可能增加设计和实现的复杂性，需要在系统设计中平衡性能和复杂性的关系。</p>
+<h3 id="去中心化程度">2. 去中心化程度</h3>
+<h4 id="困难-1">困难：</h4>
+<p>在公链中，去中心化程度被视为一个重要的目标，然而，BFT共识在实现高性能的同时可能会牺牲一些去中心化特性，造成困难。</p>
+<h4 id="原因-1">原因：</h4>
+<p>BFT类算法通常依赖于少数节点的投票，以迅速达成共识。这样的设计可能导致权力集中，当掌握共识节点的极少数节点受到攻击、被恶意操控，整个系统的安全性可能会受到威胁。</p>
+<h4 id="克服方法-1">克服方法：</h4>
+<p>为了克服BFT在去中心化方面的困难，可以考虑结合其他共识机制，如引入Proof
+of Stake（PoS）或Proof of Work（PoW）。</p>
+<ul>
+<li><strong>结合PoS：</strong>
+引入PoS机制，通过数字货币持有量来确定节点的记账权，可以在一定程度上增加去中心化。持有更多货币的节点拥有更大的记账权，但需要注意避免权益过于集中。</li>
+<li><strong>结合PoW：</strong>
+结合PoW机制，通过解决工作量证明难题的方式来选取共识节点，可以进一步增加去中心化。PoW注重计算工作，避免了过于依赖持币量的问题。</li>
+</ul>
+<p>通过权衡不同机制的优势，可以设计一个更加平衡的共识协议，既能维持高性能，又能保持足够的去中心化，从而解决BFT在去中心化方面的困难。需要注意的是，这种设计需要综合考虑各种因素，并在实际应用中进行合理的权衡。</p>
+<h3 id="共识节点的选取">3. 共识节点的选取</h3>
+<h4 id="困难-2">困难：</h4>
+<p>在公链中选择可信的共识节点是一项具有挑战性的任务，因为公链面临更多来自恶意攻击的可能性。</p>
+<h4 id="原因-2">原因：</h4>
+<ol type="1">
+<li><strong>开放性：</strong>
+公链的开放性使其容易受到各种攻击，包括拒绝服务攻击、恶意节点投票等。</li>
+<li><strong>攻击风险：</strong>
+恶意节点可能试图操纵共识过程，损害系统的安全性和可信度。</li>
+</ol>
+<h4 id="克服方法-2">克服方法：</h4>
+<ol type="1">
+<li><strong>引入随机性：</strong>
+引入随机性的选举机制，使共识节点的选取更为难以预测。这样可以降低操纵节点选举的风险，增加系统的抗攻击性。</li>
+<li><strong>其他选举机制：</strong>
+探索其他创新的选举机制，例如基于声望、贡献度或历史表现的评估，以更全面地评估节点的信誉和可信度。</li>
+<li><strong>严格的身份验证和监控：</strong>
+实施严格的节点身份验证机制，确保只有具备足够信誉和安全性的节点才能参与共识。同时，实施有效的监控机制，及时发现和应对潜在的恶意行为。</li>
+</ol>
+<h1 id="三-解决共识机制的其他方案">三、 解决共识机制的其他方案</h1>
+<h3 id="结合其他共识机制">1. 结合其他共识机制</h3>
+<h4 id="方法">方法：</h4>
+<p>结合其他高效的共识机制，例如结合Proof of
+Work（PoW）和BFT，以在平衡性能和去中心化方面取得优势。</p>
+<h4 id="优势-5">优势：</h4>
+<ol type="1">
+<li><strong>提高去中心化程度：</strong>
+结合PoW可以提高整体去中心化程度。PoW通过解决数学难题的方式选取记账节点，避免了权益集中的问题，增加了系统的公平性。</li>
+<li><strong>加速交易确认：</strong>
+BFT机制能够快速达成共识，结合PoW可以在一定程度上加速交易确认过程。PoW用于选取共识节点，BFT用于确认交易，充分发挥各自的优势。</li>
+</ol>
+<h4 id="缺点-5">缺点：</h4>
+<p>引入多种共识机制会增加系统的复杂性，需要仔细设计和调整不同机制的协同工作，以确保系统的整体稳定性和安全性。</p>
+<h4 id="具体操作">具体操作：</h4>
+<ol type="1">
+<li><strong>选取共识节点：</strong>
+利用PoW机制选取共识节点，通过解决数学难题的方式确保节点的选择具有随机性和公平性。</li>
+<li><strong>交易确认：</strong>
+选取的节点使用BFT机制进行交易确认，以快速达成共识，提高整体交易处理速度。</li>
+<li><strong>协同工作：</strong>
+设计合理的协议和算法，确保PoW和BFT两种机制能够有效协同工作，互相弥补不足，达到平衡性能和去中心化的目标。</li>
+</ol>
+<h3 id="分片技术">2. 分片技术</h3>
+<h4 id="方法-1">方法：</h4>
+<p>将公链采用分片技术，将整个链分割为多个分片，每个分片采用BFT类共识机制。</p>
+<h4 id="优势-6">优势：</h4>
+<ol type="1">
+<li><strong>提高整体性能：</strong>
+分片技术能够提高整体性能，因为每个分片内的节点数量相对较少，减小了节点间的通信开销，从而提高了整体吞吐量。</li>
+<li><strong>并行处理：</strong>
+不同分片的共识过程可以并行进行，加速交易确认速度。每个分片的共识过程相对独立，避免了整个网络的单点瓶颈问题。</li>
+</ol>
+<h4 id="缺点-6">缺点：</h4>
+<ol type="1">
+<li><strong>引入复杂性：</strong>
+引入分片技术会增加系统的复杂性，需要有效的分片管理和跨分片的协同工作。分片之间的通信和同步需要精心设计，以确保系统的一致性和安全性。</li>
+<li><strong>跨分片交互：</strong>
+在需要跨分片交互的情况下，可能引入额外的延迟和开销。需要设计有效的跨分片通信机制，以平衡各个分片之间的协同工作。</li>
+</ol>
+<h4 id="具体操作-1">具体操作：</h4>
+<ol type="1">
+<li><strong>分片设计：</strong>
+合理划分公链为多个分片，可以根据地理位置、功能等因素进行划分，确保每个分片内的节点数量适中。</li>
+<li><strong>独立共识：</strong>
+每个分片内部采用BFT类共识机制进行独立的共识，确保分片内的交易能够快速确认。</li>
+<li><strong>跨分片通信：</strong>
+对于需要跨分片交互的情况，设计高效的跨分片通信协议，确保数据一致性和安全性。</li>
+<li><strong>动态调整：</strong>
+根据网络负载和需求动态调整分片数量和大小，以适应不同的网络状况。</li>
+</ol>
+<h3 id="硬件和网络优化">3. 硬件和网络优化</h3>
+<h4 id="方法-2">方法：</h4>
+<p>通过优化硬件设备和网络架构，以降低消息传递延迟和提高处理速度。</p>
+<h4 id="优势-7">优势：</h4>
+<ol type="1">
+<li><strong>减少通信延迟：</strong>
+通过优化硬件和网络，可以有效减少节点之间的通信延迟，提高信息传递的效率。</li>
+<li><strong>提高整体性能：</strong>
+优化后的硬件和网络架构能够提高整体系统的性能，使得共识过程更加迅速和高效。</li>
+</ol>
+<h4 id="缺点-7">缺点：</h4>
+<ol type="1">
+<li><strong>较大投资：</strong>
+硬件和网络的优化可能需要较大的投资，包括更新硬件设备、升级网络基础设施等，这可能带来一定的成本压力。</li>
+<li><strong>局限性：</strong>
+硬件和网络优化虽然可以提高系统的整体性能，但可能无法完全解决共识机制本身的性能问题。一些共识过程可能仍然受制于算法复杂性和节点之间的协作需求。</li>
+</ol>
+<h4 id="具体操作-2">具体操作：</h4>
+<ol type="1">
+<li><strong>硬件更新：</strong>
+考虑使用更高性能的硬件设备，例如更快速的处理器、更大内存容量等，以提高节点的计算能力。</li>
+<li><strong>网络升级：</strong>
+升级网络基础设施，采用更高带宽、更低延迟的网络连接，减少节点间通信的时间。</li>
+<li><strong>分布式存储：</strong>
+考虑采用分布式存储技术，优化数据读写速度，提高系统的整体吞吐量。</li>
+<li><strong>负载均衡：</strong>
+实施负载均衡策略，确保各个节点的负载分布均衡，避免出现性能瓶颈。</li>
+</ol>
+<h1 id="结论">结论</h1>
+<p>区块链共识机制在不同场景下有不同的适用性。BFT类共识在私链和联盟链中表现出色，但在公链中面临一些挑战。通过引入分片技术、结合其他共识机制以及硬件和网络的优化，可以克服BFT在公链中的困难。在选择共识机制时，需要综合考虑性能、去中心化程度和安全性等因素，以满足特定应用场景的需求。随着区块链技术的发展，可能会涌现更多创新的共识机制，进一步提升区块链系统的性能和可扩展性。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg" title="头像" alt="头像"></a><div class="post-copyright__author_name">疼了也不哭</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://gaoyubo.cn/blogs/eb58a659.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://gaoyubo.cn/blogs/eb58a659.html')">国科大-区块链技术-区块链各种共识机制的对比分析</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/6e2a005e8a5c5e0fe2e128513f24d401.png" target="_blank" rel="external nofollow noopener noreferrer"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/6e2a005e8a5c5e0fe2e128513f24d401.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/910bd7f9f005abb6f667fb24d4f8a4ca.png" target="_blank" rel="external nofollow noopener noreferrer"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/910bd7f9f005abb6f667fb24d4f8a4ca.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://gaoyubo.cn/blogs/eb58a659.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=国科大-区块链技术-区块链各种共识机制的对比分析&amp;url=https://gaoyubo.cn/blogs/eb58a659.html&amp;pic=https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" rel="external nofollow noopener noreferrer"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gaoyubo.cn" target="_blank">疼了也不哭</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E4%BD%9C%E4%B8%9A/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>作业<span class="tagsPageCount">8</span></a><a class="post-meta__box__tags" href="/tags/%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>共识机制<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/blogs/39d967e6.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">国科大-计算机网络读书报告</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/blogs/ec021f50.html" title="算法设计与分析-Linear Programming"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-12-14</div><div class="title">算法设计与分析-Linear Programming</div></div></a></div><div><a href="/blogs/8b85a768.html" title="算法设计与分析-Greedy"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-11-27</div><div class="title">算法设计与分析-Greedy</div></div></a></div><div><a href="/blogs/67a23ec8.html" title="算法设计与分析-Dynamic Programming"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-11-26</div><div class="title">算法设计与分析-Dynamic Programming</div></div></a></div><div><a href="/blogs/6e5f3213.html" title="国科大-软件测试与分析-插桩和变异测试"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-11-13</div><div class="title">国科大-软件测试与分析-插桩和变异测试</div></div></a></div><div><a href="/blogs/dba06f9e.html" title="国科大-区块链技术作业2"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-11-04</div><div class="title">国科大-区块链技术作业2</div></div></a></div><div><a href="/blogs/9ad5026b.html" title="国科大-区块链技术-加密签名"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-26</div><div class="title">国科大-区块链技术-加密签名</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://blog-gyb.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%BE%AE%E4%BF%A1%E6%90%9C%E4%B8%80%E6%90%9C.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://blog-gyb.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%BE%AE%E4%BF%A1%E6%90%9C%E4%B8%80%E6%90%9Cback.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80.-%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">一. 引言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pow%E5%B7%A5%E4%BD%9C%E9%87%8F%E8%AF%81%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 PoW（工作量证明）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF"><span class="toc-number">1.1.3.</span> <span class="toc-text">优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">1.1.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pos%E6%9D%83%E7%9B%8A%E8%AF%81%E6%98%8E"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 PoS（权益证明）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="toc-number">1.2.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dpos%E5%A7%94%E6%89%98%E6%9D%83%E7%9B%8A%E8%AF%81%E6%98%8E"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 DPoS（委托权益证明）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-2"><span class="toc-number">1.3.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bft%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 BFT（拜占庭容错）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8bft"><span class="toc-number">1.4.1.</span> <span class="toc-text">1.4.1 经典BFT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B-3"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-3"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-3"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5bft"><span class="toc-number">1.4.2.</span> <span class="toc-text">1.4.2 异步BFT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-4"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B-4"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-4"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-4"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">缺点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C.-bft%E7%B1%BB%E5%85%B1%E8%AF%86%E5%9C%A8%E5%85%AC%E9%93%BE%E4%B8%AD%E7%9A%84%E5%9B%B0%E9%9A%BE%E4%B8%8E%E5%85%8B%E6%9C%8D%E6%96%B9%E6%B3%95%E8%AF%A6%E7%BB%86%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">二.
+BFT类共识在公链中的困难与克服方法详细分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 性能问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%B0%E9%9A%BE"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">困难：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0"><span class="toc-number">2.0.1.2.</span> <span class="toc-text">原因：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%8B%E6%9C%8D%E6%96%B9%E6%B3%95"><span class="toc-number">2.0.1.3.</span> <span class="toc-text">克服方法：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E7%A8%8B%E5%BA%A6"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 去中心化程度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%B0%E9%9A%BE-1"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">困难：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0-1"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">原因：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%8B%E6%9C%8D%E6%96%B9%E6%B3%95-1"><span class="toc-number">2.0.2.3.</span> <span class="toc-text">克服方法：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E8%AF%86%E8%8A%82%E7%82%B9%E7%9A%84%E9%80%89%E5%8F%96"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 共识节点的选取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%B0%E9%9A%BE-2"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">困难：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0-2"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">原因：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%8B%E6%9C%8D%E6%96%B9%E6%B3%95-2"><span class="toc-number">2.0.3.3.</span> <span class="toc-text">克服方法：</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-%E8%A7%A3%E5%86%B3%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">三、 解决共识机制的其他方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88%E5%85%B6%E4%BB%96%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 结合其他共识机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-5"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">优势：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-5"><span class="toc-number">3.0.1.3.</span> <span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C"><span class="toc-number">3.0.1.4.</span> <span class="toc-text">具体操作：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%89%87%E6%8A%80%E6%9C%AF"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 分片技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1"><span class="toc-number">3.0.2.1.</span> <span class="toc-text">方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-6"><span class="toc-number">3.0.2.2.</span> <span class="toc-text">优势：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-6"><span class="toc-number">3.0.2.3.</span> <span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C-1"><span class="toc-number">3.0.2.4.</span> <span class="toc-text">具体操作：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E5%92%8C%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. 硬件和网络优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2"><span class="toc-number">3.0.3.1.</span> <span class="toc-text">方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-7"><span class="toc-number">3.0.3.2.</span> <span class="toc-text">优势：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-7"><span class="toc-number">3.0.3.3.</span> <span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C-2"><span class="toc-number">3.0.3.4.</span> <span class="toc-text">具体操作：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text">结论</span></a></li></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blogs/eb58a659.html" title="国科大-区块链技术-区块链各种共识机制的对比分析"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-区块链技术-区块链各种共识机制的对比分析"></a><div class="content"><a class="title" href="/blogs/eb58a659.html" title="国科大-区块链技术-区块链各种共识机制的对比分析">国科大-区块链技术-区块链各种共识机制的对比分析</a><time datetime="2023-12-28T13:33:29.000Z" title="发表于 2023-12-28 21:33:29">2023-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/39d967e6.html" title="国科大-计算机网络读书报告"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-计算机网络读书报告"></a><div class="content"><a class="title" href="/blogs/39d967e6.html" title="国科大-计算机网络读书报告">国科大-计算机网络读书报告</a><time datetime="2023-12-27T14:29:45.000Z" title="发表于 2023-12-27 22:29:45">2023-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/f9d8a226.html" title="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation"></a><div class="content"><a class="title" href="/blogs/f9d8a226.html" title="论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation">论文精读-Understanding RDMA Microarchitecture Resources for Performance Isolation</a><time datetime="2023-12-27T14:29:45.000Z" title="发表于 2023-12-27 22:29:45">2023-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/f9d8a226.html" title="论文翻译-Understanding RDMA Microarchitecture Resources for Performance Isolation"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2/2023/12/27/016f5ad177596f6d9a899a5c5e23710a.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文翻译-Understanding RDMA Microarchitecture Resources for Performance Isolation"></a><div class="content"><a class="title" href="/blogs/f9d8a226.html" title="论文翻译-Understanding RDMA Microarchitecture Resources for Performance Isolation">论文翻译-Understanding RDMA Microarchitecture Resources for Performance Isolation</a><time datetime="2023-12-27T11:19:24.000Z" title="发表于 2023-12-27 19:19:24">2023-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blogs/30a55ce7.html" title="国科大-逻辑与批判性思维"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/gklogo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国科大-逻辑与批判性思维"></a><div class="content"><a class="title" href="/blogs/30a55ce7.html" title="国科大-逻辑与批判性思维">国科大-逻辑与批判性思维</a><time datetime="2023-12-20T16:46:27.000Z" title="发表于 2023-12-21 00:46:27">2023-12-21</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="/673354892@qq.com" title="Email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/gaoyubo2" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/gaoyubo2/image/img/%E4%B8%AA%E4%BA%BA/2023/12/15/7f534649c6c914c21a00a982027e14d2.jpeg" size="50px"><a class="deal_link" target="_blank" rel="external nofollow noopener noreferrer" href="https://space.bilibili.com/372204786/" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" target="_blank" rel="external nofollow noopener noreferrer" href="https://v.douyin.com/i8kKMenW/" title="抖音"><i class="anzhiyufont anzhiyu-icon-tiktok"></i></a></div><div class="copyright">&copy;2020 - 2024 By 疼了也不哭</div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="external nofollow noopener noreferrer" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/album/"><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ElasticSearch/" style="font-size: 0.88rem;">ElasticSearch<sup>2</sup></a><a href="/tags/Go%E5%AE%9E%E8%B7%B5/" style="font-size: 0.88rem;">Go实践<sup>3</sup></a><a href="/tags/Go%E7%AC%94%E8%AE%B0/" style="font-size: 0.88rem;">Go笔记<sup>1</sup></a><a href="/tags/JVM%E5%AE%9E%E7%8E%B0/" style="font-size: 0.88rem;">JVM实现<sup>3</sup></a><a href="/tags/JVM%E7%AC%94%E8%AE%B0/" style="font-size: 0.88rem;">JVM笔记<sup>5</sup></a><a href="/tags/LLVM/" style="font-size: 0.88rem;">LLVM<sup>1</sup></a><a href="/tags/PITest/" style="font-size: 0.88rem;">PITest<sup>1</sup></a><a href="/tags/leetcode/" style="font-size: 0.88rem;">leetcode<sup>5</sup></a><a href="/tags/%E4%BB%A5%E5%A4%AA%E5%B8%81/" style="font-size: 0.88rem;">以太币<sup>1</sup></a><a href="/tags/%E4%BD%9C%E4%B8%9A/" style="font-size: 0.88rem;">作业<sup>8</sup></a><a href="/tags/%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6/" style="font-size: 0.88rem;">共识机制<sup>1</sup></a><a href="/tags/%E5%89%91%E6%8C%87Offer/" style="font-size: 0.88rem;">剑指Offer<sup>1</sup></a><a href="/tags/%E5%8A%A0%E5%AF%86%E7%AD%BE%E5%90%8D/" style="font-size: 0.88rem;">加密签名<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 0.88rem;">复习<sup>1</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/" style="font-size: 0.88rem;">移动互联网技术<sup>1</sup></a><a href="/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" style="font-size: 0.88rem;">论文精读<sup>3</sup></a><a href="/tags/%E9%80%BB%E8%BE%91%E5%AD%A6/" style="font-size: 0.88rem;">逻辑学<sup>1</sup></a></div></div><hr></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Tt2yKI8TpkxMniyxFfGh8FX6-gzGzoHsz',
+      appKey: '5oQifQ5aHzJHGp2AUh22jSe3',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.cbd.int/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
