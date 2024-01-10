@@ -29,15 +29,6 @@ function getBrowserInfo() {
 }
 
 var clustrmapsScriptContent = '<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=243&t=n&d=ZK6ZxX0n7UkTgDHG19-IlHSQfFiUGP1SAJMk1pmxZLQ&co=2d78ad&cmo=3acc3a&cmn=ff5353&ct=ffffff"></script>';
+// var clustrmapsScriptContent = '<script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=ZK6ZxX0n7UkTgDHG19-IlHSQfFiUGP1SAJMk1pmxZLQ"></script>';
 
-// Create a new div element
-var divElement = document.createElement('div');
-
-// Set the innerHTML of the new div with the clustrmapsScriptContent
-divElement.innerHTML = clustrmapsScriptContent;
-
-// Apply additional styles to the new div
-divElement.style.left = '-24px';
-
-// Append the new div to the element with id 'visitor-container'
-document.getElementById('visitor-container').appendChild(divElement);
+document.getElementById('visitor-container').innerHTML = clustrmapsScriptContent
