@@ -4,7 +4,6 @@ fetch('https://api.gmit.vip/Api/UserInfo').then(data=>data.json()).then(data=>{
     html += '欢迎来自 ' + '<span class="visitor_location">' + data.data.location + '</span>' + ' 的小伙伴！'
     html += '</br>'
     html += '访问IP：' + '<span class="visitor_ip">' + data.data.ip + '</span>'
-    html += 'data：' + '<span class="visitor_ip">' + data.data + '</span>'
     html += '</div>'
     document.getElementById('visitor-container').innerHTML = html
 }).catch(function(error) {
