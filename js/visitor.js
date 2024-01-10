@@ -28,10 +28,16 @@ function getBrowserInfo() {
     }
 }
 
-let html = '<style>.visitor_location{color:#cb4c46;font-weight:bold;}.visitor_ip{color:#2d80c2;font-weight:bold;}</style>'
-    html += '<div class="visitor">'
-    html += '欢迎来自 ' + '<span class="visitor_location">' + returnCitySN["cname"] + '</span>' + ' 的小伙伴！'
-    html += '</br>'
-    html += '访问IP：' + '<span class="visitor_ip">' + returnCitySN["cip"] + '</span>'
-    html += '</div>'
-    document.getElementById('visitor-container').innerHTML = html
+var clustrmapsScriptContent = '<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=243&t=n&d=ZK6ZxX0n7UkTgDHG19-IlHSQfFiUGP1SAJMk1pmxZLQ&co=2d78ad&cmo=3acc3a&cmn=ff5353&ct=ffffff"></script>';
+
+// Create a new div element
+var divElement = document.createElement('div');
+
+// Set the innerHTML of the new div with the clustrmapsScriptContent
+divElement.innerHTML = clustrmapsScriptContent;
+
+// Apply additional styles to the new div
+divElement.style.left = '-24px';
+
+// Append the new div to the element with id 'visitor-container'
+document.getElementById('visitor-container').appendChild(divElement);
