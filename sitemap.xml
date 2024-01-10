@@ -65,6 +65,15 @@
   </url>
   
   <url>
+    <loc>https://gaoyubo.cn/blogs/de1bedad.html</loc>
+    
+    <lastmod>2023-12-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://gaoyubo.cn/blogs/30a55ce7.html</loc>
     
     <lastmod>2023-12-24</lastmod>
@@ -138,15 +147,6 @@
   
   <url>
     <loc>https://gaoyubo.cn/blogs/8ae1f4ca.html</loc>
-    
-    <lastmod>2023-12-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://gaoyubo.cn/blogs/de1bedad.html</loc>
     
     <lastmod>2023-12-15</lastmod>
     
@@ -426,14 +426,14 @@
   </url>
   
   <url>
-    <loc>https://gaoyubo.cn/tags/%E5%89%91%E6%8C%87Offer/</loc>
+    <loc>https://gaoyubo.cn/tags/Go%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2024-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://gaoyubo.cn/tags/Go%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://gaoyubo.cn/tags/%E5%89%91%E6%8C%87Offer/</loc>
     <lastmod>2024-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -447,7 +447,7 @@
   </url>
   
   <url>
-    <loc>https://gaoyubo.cn/tags/%E5%8A%A0%E5%AF%86%E7%AD%BE%E5%90%8D/</loc>
+    <loc>https://gaoyubo.cn/tags/%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6/</loc>
     <lastmod>2024-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -468,6 +468,13 @@
   </url>
   
   <url>
+    <loc>https://gaoyubo.cn/tags/%E5%8A%A0%E5%AF%86%E7%AD%BE%E5%90%8D/</loc>
+    <lastmod>2024-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://gaoyubo.cn/tags/%E5%A4%8D%E4%B9%A0/</loc>
     <lastmod>2024-01-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -476,6 +483,13 @@
   
   <url>
     <loc>https://gaoyubo.cn/tags/%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2024-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gaoyubo.cn/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/</loc>
     <lastmod>2024-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -497,20 +511,6 @@
   
   <url>
     <loc>https://gaoyubo.cn/tags/%E9%80%BB%E8%BE%91%E5%AD%A6/</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://gaoyubo.cn/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://gaoyubo.cn/tags/%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6/</loc>
     <lastmod>2024-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -540,14 +540,14 @@
   </url>
   
   <url>
-    <loc>https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://gaoyubo.cn/categories/Go/</loc>
     <lastmod>2024-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://gaoyubo.cn/categories/Go/</loc>
+    <loc>https://gaoyubo.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2024-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
