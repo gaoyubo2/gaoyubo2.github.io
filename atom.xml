@@ -101,33 +101,6 @@
   </entry>
   
   <entry>
-    <title>国科大-计算机网络读书报告</title>
-    <link href="https://gaoyubo.cn/blogs/39d967e6.html"/>
-    <id>https://gaoyubo.cn/blogs/39d967e6.html</id>
-    <published>2023-12-27T14:29:45.000Z</published>
-    <updated>2024-01-07T08:15:57.541Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1</summary>
-        
-      
-    
-    
-    
-    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
-    
-    <category term="计算机网络" scheme="https://gaoyubo.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-    
-    <category term="论文精读" scheme="https://gaoyubo.cn/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
     <title>论文翻译-Understanding RDMA Microarchitecture Resources for Performance Isolation</title>
     <link href="https://gaoyubo.cn/blogs/f9d8a226.html"/>
     <id>https://gaoyubo.cn/blogs/f9d8a226.html</id>
@@ -194,17 +167,17 @@
     <link href="https://gaoyubo.cn/blogs/ec021f50.html"/>
     <id>https://gaoyubo.cn/blogs/ec021f50.html</id>
     <published>2023-12-14T11:08:00.000Z</published>
-    <updated>2023-12-16T09:08:04.087Z</updated>
+    <updated>2024-01-11T15:18:54.329Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;question1&quot;&gt;Question1&lt;/h1&gt;
+    <summary type="html">&lt;p&gt;（2024.1.11更新）复习资料：https://pan.baidu.com/s/1YX4piG3nqevJwrqgJXN1Qw?pwd=1sty&lt;/p&gt;
+&lt;h1 id=&quot;question1&quot;&gt;Question1&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;You want to determine the quantities x1, x2, ..., xn of n different
-foods, each</summary>
+&lt;p&gt;You</summary>
         
       
     
@@ -269,17 +242,15 @@ foods, each</summary>
     <link href="https://gaoyubo.cn/blogs/8b85a768.html"/>
     <id>https://gaoyubo.cn/blogs/8b85a768.html</id>
     <published>2023-11-26T17:44:41.000Z</published>
-    <updated>2023-12-14T12:02:46.476Z</updated>
+    <updated>2024-01-11T13:56:32.328Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;一commando-war&quot;&gt;一、Commando War&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;There is a war and it doesn’t look very promising for your country.
-Now it’s</summary>
+    <summary type="html">&lt;p&gt;（2024.1.11更新）复习资料：https://pan.baidu.com/s/1YX4piG3nqevJwrqgJXN1Qw?pwd=1sty&lt;/p&gt;
+&lt;h1 id=&quot;一commando-war&quot;&gt;一、Commando</summary>
         
       
     
@@ -299,17 +270,15 @@ Now it’s</summary>
     <link href="https://gaoyubo.cn/blogs/67a23ec8.html"/>
     <id>https://gaoyubo.cn/blogs/67a23ec8.html</id>
     <published>2023-11-26T13:57:55.000Z</published>
-    <updated>2023-12-14T12:02:41.083Z</updated>
+    <updated>2024-01-11T15:18:57.154Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;一money-robbing&quot;&gt;一、Money Robbing&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A robber is planning to rob houses along a street. Each house has a
-certain</summary>
+    <summary type="html">&lt;p&gt;（2024.1.11更新）复习资料：https://pan.baidu.com/s/1YX4piG3nqevJwrqgJXN1Qw?pwd=1sty&lt;/p&gt;
+&lt;h1 id=&quot;一money-robbing&quot;&gt;一、Money</summary>
         
       
     
@@ -533,6 +502,39 @@ II&lt;/a&gt;&lt;/h3&gt;
     
     
     <category term="JVM笔记" scheme="https://gaoyubo.cn/tags/JVM%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国科大-软件测试与分析-插桩和变异测试</title>
+    <link href="https://gaoyubo.cn/blogs/6e5f3213.html"/>
+    <id>https://gaoyubo.cn/blogs/6e5f3213.html</id>
+    <published>2023-11-13T07:12:08.000Z</published>
+    <updated>2023-11-26T09:10:59.558Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;说明&quot;&gt;说明&lt;/h1&gt;
+&lt;p&gt;报告包含Part1和Part2两部分，对应作业的Part1和Part2&lt;/p&gt;
+&lt;p&gt;Part1的文件代码在当前目录的&lt;code&gt;Part1文件夹&lt;/code&gt;中，额外添加了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;```txt</summary>
+        
+      
+    
+    
+    
+    <category term="国科大课程" scheme="https://gaoyubo.cn/categories/%E5%9B%BD%E7%A7%91%E5%A4%A7%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="作业" scheme="https://gaoyubo.cn/tags/%E4%BD%9C%E4%B8%9A/"/>
+    
+    <category term="PITest" scheme="https://gaoyubo.cn/tags/PITest/"/>
+    
+    <category term="LLVM" scheme="https://gaoyubo.cn/tags/LLVM/"/>
     
   </entry>
   
